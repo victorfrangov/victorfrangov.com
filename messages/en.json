@@ -77,6 +77,7 @@
   "running": {
     "title": { "line1": "CURRENT", "line2": "PROJECTS" },
     "intro": "As a full-stack developer, I focus on creating efficient solutions using modern technologies. From idea to prototype to deployment, I bring projects to life with clean code and best practices.",
+    "description": "Test",
     "cta": "Let's discuss",
     "repo": {
       "noDescription": "No description available",

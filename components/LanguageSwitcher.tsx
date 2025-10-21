@@ -1,8 +1,10 @@
 "use client"
 
-import { Globe } from "lucide-react"
-import { useLocale } from "next-intl"
-import { usePathname, useRouter } from "next-intl/navigation"
+import {Globe} from "lucide-react"
+import {useLocale} from "next-intl"
+import {createNavigation} from "next-intl/navigation"
+
+const {useRouter, usePathname} = createNavigation()
 
 export function LanguageSwitcher() {
   const router = useRouter()
@@ -12,7 +14,7 @@ export function LanguageSwitcher() {
 
   return (
     <button
-      onClick={() => router.replace(pathname, { locale: next })}
+      onClick={() => router.replace(pathname, {locale: next})}
       className="flex items-center gap-2 px-3 py-1.5 border border-white/20 hover:border-white/40 transition-colors rounded"
       aria-label="Switch language"
     >

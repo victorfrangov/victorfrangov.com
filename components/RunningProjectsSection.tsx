@@ -54,7 +54,7 @@ export default async function RunningProjectsSection() {
               href="#contact"
               className="inline-flex items-center gap-2 border border-border px-4 sm:px-6 py-2 sm:py-3 hover:bg-accent hover:text-accent-foreground transition-colors"
             >
-              {t("common.cta.letsDiscuss")} <ArrowRight className="w-4 h-4" />
+              {t("running.cta")} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default async function RunningProjectsSection() {
                   </Link>
                 </div>
                 <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                  {repo.description || t("running.noDescription")}
+                  {repo.description || t("running.repo.noDescription")}
                 </p>
                 <div className="flex items-center justify-between">
                   {repo.language && (
@@ -91,7 +91,7 @@ export default async function RunningProjectsSection() {
                       rel="noopener noreferrer"
                       className="text-xs flex items-center gap-1 hover:text-accent-foreground"
                     >
-                      {t("common.live")} <ExternalLink className="w-3 h-3" />
+                      {t("running.repo.live")} <ExternalLink className="w-3 h-3" />
                     </Link>
                   )}
                 </div>

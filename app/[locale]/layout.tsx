@@ -5,6 +5,7 @@ import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { NextIntlClientProvider } from "next-intl"
 import { notFound } from "next/navigation"
+import { setRequestLocale } from "next-intl/server"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -25,6 +26,8 @@ export default async function RootLayout({
   children: React.ReactNode
   params: { locale: string }
 }) {
+  // setRequestLocale(locale)
+
   let messages
   try {
     messages = (await import(`@/messages/${locale}.json`)).default
