@@ -1,0 +1,140 @@
+{
+  "brand": {
+    "name": "Victor."
+  },
+  "nav": {
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "main": {
+    "hero": {
+      "greeting": "(HELLO, I'M VICTOR FRANGOV)",
+      "title": {
+        "line1": "FULL STACK",
+        "emphasis": "developer",
+        "line2": "& STUDENT"
+      },
+      "headshotAlt": "Victor Frangov headshot",
+      "subtitle": {
+        "line1": "Currently studying Computer Science at EPFL in Switzerland, passionate about creating modern and performant applications.",
+        "line2": "Transforming ideas into elegant digital solutions with expertise in full-stack development."
+      },
+      "cta": "Let's collaborate"
+    }
+  },
+  "featured": {
+    "title": { "line1": "FEATURED", "line2": "WORK" },
+    "intro": "From automated deployment scripts to full-stack web applications and data analysis projects, my portfolio showcases a blend of technical expertise and problem-solving skills.",
+    "cta": "Let's create",
+    "categories": [
+      {
+        "title": "FRONTEND DEVELOPMENT",
+        "description": "Building modern, responsive interfaces with React, TypeScript, and Tailwind CSS"
+      },
+      {
+        "title": "BACKEND DEVELOPMENT",
+        "description": "Creating robust APIs and server solutions with Node.js, Python, and PostgreSQL"
+      },
+      {
+        "title": "SYSTEM ADMINISTRATION",
+        "description": "Automating deployments with Bash & PowerShell, managing server setups"
+      },
+      {
+        "title": "DATA ANALYSIS",
+        "description": "Processing and analyzing data with Python, pandas, and visualization libraries"
+      }
+    ],
+    "expertise": {
+      "title": { "line1": "MY TECHNICAL", "line2": "EXPERTISE" },
+      "intro": "Leveraging modern technologies and frameworks to deliver efficient, scalable solutions. Quick learner with a structured approach to problem-solving.",
+      "cta": "Start a project",
+      "items": [
+        {
+          "title": "FRONTEND",
+          "descriptions": [
+            "React, TypeScript, JavaScript for modern web interfaces.",
+            "HTML5, CSS3, Tailwind CSS for responsive design."
+          ]
+        },
+        {
+          "title": "BACKEND",
+          "descriptions": [
+            "Node.js and Python for server-side development.",
+            "PostgreSQL, Supabase, REST APIs for data management."
+          ]
+        },
+        {
+          "title": "TOOLS & DEVOPS",
+          "descriptions": [
+            "Git, GitHub, VS Code for version control and development.",
+            "Bash, PowerShell, Linux for automation and system administration."
+          ]
+        }
+      ]
+    }
+  },
+  "running": {
+    "title": { "line1": "CURRENT", "line2": "PROJECTS" },
+    "intro": "As a full-stack developer, I focus on creating efficient solutions using modern technologies. From idea to prototype to deployment, I bring projects to life with clean code and best practices.",
+    "cta": "Let's discuss",
+    "repo": {
+      "noDescription": "No description available",
+      "live": "Live"
+    },
+    "empty": {
+      "message": "Check out my projects on GitHub",
+      "cta": "Visit GitHub"
+    }
+  },
+  "contact": {
+    "title": { "line1": "LET'S", "line2": "CONNECT" },
+    "about": {
+      "name": "Victor Frangov",
+      "description": "Computer Science student at EPFL with a passion for technology and problem-solving. Originally from Montréal, Canada, currently studying in Switzerland. I'm always interested in collaborating on innovative projects and learning new technologies."
+    },
+    "info": {
+      "location": {
+        "label": "Location",
+        "value": "Lausanne, Switzerland",
+        "note": "Originally from Montréal, Canada"
+      },
+      "touch": {
+        "label": "Get in Touch",
+        "value": "Available for collaboration and opportunities"
+      }
+    },
+    "social": { "github": "GitHub", "linkedin": "LinkedIn" },
+    "skills": {
+      "title": "Technical Skills",
+      "frontend": {
+        "label": "Frontend",
+        "items": "React, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS"
+      },
+      "backend": {
+        "label": "Backend",
+        "items": "Node.js, Python, PostgreSQL, Supabase, REST APIs"
+      },
+      "tools": {
+        "label": "Tools & DevOps",
+        "items": "Git, GitHub, VS Code, Bash, PowerShell, Linux"
+      }
+    },
+    "footer": {
+      "navigation": {
+        "title": "Navigation",
+        "items": { "work": "Work", "projects": "Projects", "contact": "Contact" }
+      },
+      "expertise": {
+        "title": "Expertise",
+        "items": ["Frontend Dev", "Backend Dev", "System Admin", "Data Analysis"]
+      },
+      "connect": {
+        "title": "Connect",
+        "items": { "linkedin": "LinkedIn", "github": "GitHub", "website": "Website" }
+      },
+      "legal": { "privacy": "Privacy Policy", "terms": "Terms of Service" },
+      "copyright": "© 2025 Victor Frangov. All rights reserved."
+    }
+  }
+}

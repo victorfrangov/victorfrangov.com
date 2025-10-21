@@ -1,0 +1,25 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+exports.id = "_rsc_messages_fr_json";
+exports.ids = ["_rsc_messages_fr_json"];
+exports.modules = {
+
+/***/ "(rsc)/./messages/fr.json":
+/*!**************************!*\
+  !*** ./messages/fr.json ***!
+  \**************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"brand":{"name":"Victor."},"nav":{"work":"Travaux","about":"À propos","contact":"Contact"},"main":{"hero":{"greeting":"(BONJOUR, JE SUIS VICTOR FRANGOV)","title":{"line1":"FULL STACK","emphasis":"développeur","line2":"& ÉTUDIANT"},"headshotAlt":"Photo de Victor Frangov","subtitle":{"line1":"Actuellement étudiant en informatique à l\'EPFL en Suisse, passionné par la création d\'applications modernes et performantes.","line2":"Transformer des idées en solutions numériques élégantes avec une expertise full‑stack."},"cta":"Collaborons"}},"featured":{"title":{"line1":"PROJETS","line2":"MIS EN AVANT"},"intro":"Des scripts de déploiement automatisés aux applications web full‑stack et projets d\'analyse de données, mon portfolio reflète une expertise technique et une approche orientée solution.","cta":"Créons ensemble","categories":[{"title":"DÉVELOPPEMENT FRONTEND","description":"Interfaces modernes et réactives avec React, TypeScript et Tailwind CSS"},{"title":"DÉVELOPPEMENT BACKEND","description":"APIs robustes et services avec Node.js, Python et PostgreSQL"},{"title":"ADMINISTRATION SYSTÈME","description":"Automatisation des déploiements avec Bash & PowerShell, gestion des serveurs"},{"title":"ANALYSE DE DONNÉES","description":"Traitement et analyse avec Python, pandas et bibliothèques de visualisation"}],"expertise":{"title":{"line1":"MON EXPERTISE","line2":"TECHNIQUE"},"intro":"Exploiter des technologies modernes pour livrer des solutions efficaces et scalables. Esprit d\'apprentissage rapide et approche structurée de la résolution de problèmes.","cta":"Démarrer un projet","items":[{"title":"FRONTEND","descriptions":["React, TypeScript, JavaScript pour des interfaces modernes.","HTML5, CSS3, Tailwind CSS pour un design responsive."]},{"title":"BACKEND","descriptions":["Node.js et Python pour le développement côté serveur.","PostgreSQL, Supabase, APIs REST pour la gestion des données."]},{"title":"OUTILS & DEVOPS","descriptions":["Git, GitHub, VS Code pour le versionnement et le dev.","Bash, PowerShell, Linux pour l\'automatisation et l\'admin système."]}]}},"running":{"title":{"line1":"PROJETS","line2":"EN COURS"},"intro":"En tant que développeur full‑stack, je crée des solutions efficaces avec des technologies modernes. De l\'idée au déploiement, je concrétise les projets avec un code propre et de bonnes pratiques.","cta":"Discutons","repo":{"noDescription":"Aucune description disponible","live":"En ligne"},"empty":{"message":"Découvrez mes projets sur GitHub","cta":"Voir GitHub"}},"contact":{"title":{"line1":"ENTRONS","line2":"EN CONTACT"},"about":{"name":"Victor Frangov","description":"Étudiant en informatique à l\'EPFL, passionné par la technologie et la résolution de problèmes. Originaire de Montréal (Canada), j\'étudie actuellement en Suisse. J\'aime collaborer sur des projets innovants et apprendre de nouvelles technologies."},"info":{"location":{"label":"Localisation","value":"Lausanne, Suisse","note":"Originaire de Montréal, Canada"},"touch":{"label":"Me contacter","value":"Disponible pour collaborations et opportunités"}},"social":{"github":"GitHub","linkedin":"LinkedIn"},"skills":{"title":"Compétences techniques","frontend":{"label":"Frontend","items":"React, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS"},"backend":{"label":"Backend","items":"Node.js, Python, PostgreSQL, Supabase, APIs REST"},"tools":{"label":"Outils & DevOps","items":"Git, GitHub, VS Code, Bash, PowerShell, Linux"}},"footer":{"navigation":{"title":"Navigation","items":{"work":"Travaux","projects":"Projets","contact":"Contact"}},"expertise":{"title":"Expertise","items":["Dev Frontend","Dev Backend","Admin Système","Analyse de données"]},"connect":{"title":"Réseaux","items":{"linkedin":"LinkedIn","github":"GitHub","website":"Site web"}},"legal":{"privacy":"Politique de confidentialité","terms":"Conditions d\'utilisation"},"copyright":"© 2025 Victor Frangov. Tous droits réservés."}}}');
+
+/***/ })
+
+};
+;

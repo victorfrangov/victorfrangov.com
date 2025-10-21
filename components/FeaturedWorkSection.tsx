@@ -1,51 +1,50 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export default function FeaturedWorkSection() {
+  const t = useTranslations()
   return (
-    <section id="featured-work" className="px-4 sm:px-6">
+    <section id="featured-work" className="px-4 sm:px-6 pt-24">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 sm:mb-32">
           <div className="flex flex-col sm:flex-row justify-between items-start mb-8 sm:mb-16 gap-6 sm:gap-0">
             <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold">
-              FEATURED
+              {t("featured.title.line1")}
               <br />
-              WORK
+              {t("featured.title.line2")}
             </h2>
             <div className="max-w-md">
-              <p className="text-muted-foreground mb-4">
-                From automated deployment scripts to full-stack web applications and data analysis projects, my
-                portfolio showcases a blend of technical expertise and problem-solving skills.
-              </p>
+              <p className="text-muted-foreground mb-4">{t("featured.intro")}</p>
               <Link
                 href="/projects"
                 className="inline-flex items-center gap-2 border border-border px-4 sm:px-6 py-2 sm:py-3 hover:bg-accent hover:text-accent-foreground transition-colors"
               >
-                Let's create <ArrowRight className="w-4 h-4" />
+                {t("featured.cta")} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
 
           {[
             {
-              title: "FRONTEND DEVELOPMENT",
+              titleKey: "featured.categories.0.title",
               number: "01",
-              description: "Building modern, responsive interfaces with React, TypeScript, and Tailwind CSS",
+              descriptionKey: "featured.categories.0.description",
             },
             {
-              title: "BACKEND DEVELOPMENT",
+              titleKey: "featured.categories.1.title",
               number: "02",
-              description: "Creating robust APIs and server solutions with Node.js, Python, and PostgreSQL",
+              descriptionKey: "featured.categories.1.description",
             },
             {
-              title: "SYSTEM ADMINISTRATION",
+              titleKey: "featured.categories.2.title",
               number: "03",
-              description: "Automating deployments with Bash & PowerShell, managing server setups",
+              descriptionKey: "featured.categories.2.description",
             },
             {
-              title: "DATA ANALYSIS",
+              titleKey: "featured.categories.3.title",
               number: "04",
-              description: "Processing and analyzing data with Python, pandas, and visualization libraries",
+              descriptionKey: "featured.categories.3.description",
             },
           ].map((category, index) => (
             <div
@@ -54,10 +53,10 @@ export default function FeaturedWorkSection() {
             >
               <div className="space-y-4 mb-4 sm:mb-0">
                 <div className="flex items-baseline gap-4">
-                  <h3 className="text-2xl sm:text-4xl font-bold">{category.title}</h3>
+                  <h3 className="text-2xl sm:text-4xl font-bold">{t(category.titleKey)}</h3>
                   <span className="text-sm text-muted-foreground">({category.number})</span>
                 </div>
-                <p className="text-muted-foreground">{category.description}</p>
+                <p className="text-muted-foreground">{t(category.descriptionKey)}</p>
               </div>
             </div>
           ))}
@@ -67,20 +66,17 @@ export default function FeaturedWorkSection() {
         <div className="mb-16 sm:mb-32">
           <div className="flex flex-col sm:flex-row justify-between items-start mb-8 sm:mb-16 gap-6 sm:gap-0">
             <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold">
-              MY TECHNICAL
+              {t("featured.expertise.title.line1")}
               <br />
-              EXPERTISE
+              {t("featured.expertise.title.line2")}
             </h2>
             <div className="max-w-md">
-              <p className="text-muted-foreground mb-4">
-                Leveraging modern technologies and frameworks to deliver efficient, scalable solutions. Quick learner
-                with a structured approach to problem-solving.
-              </p>
+              <p className="text-muted-foreground mb-4">{t("featured.expertise.intro")}</p>
               <Link
                 href="#contact"
                 className="inline-flex items-center gap-2 border border-border px-4 sm:px-6 py-2 sm:py-3 hover:bg-accent hover:text-accent-foreground transition-colors"
               >
-                Start a project <ArrowRight className="w-4 h-4" />
+                {t("featured.expertise.cta")} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
@@ -89,35 +85,35 @@ export default function FeaturedWorkSection() {
             {[
               {
                 number: "01",
-                title: "FRONTEND",
-                descriptions: [
-                  "React, TypeScript, JavaScript for modern web interfaces.",
-                  "HTML5, CSS3, Tailwind CSS for responsive design.",
+                titleKey: "featured.expertise.items.0.title",
+                descriptionKeys: [
+                  "featured.expertise.items.0.descriptions.0",
+                  "featured.expertise.items.0.descriptions.1",
                 ],
               },
               {
                 number: "02",
-                title: "BACKEND",
-                descriptions: [
-                  "Node.js and Python for server-side development.",
-                  "PostgreSQL, Supabase, REST APIs for data management.",
+                titleKey: "featured.expertise.items.1.title",
+                descriptionKeys: [
+                  "featured.expertise.items.1.descriptions.0",
+                  "featured.expertise.items.1.descriptions.1",
                 ],
               },
               {
                 number: "03",
-                title: "TOOLS & DEVOPS",
-                descriptions: [
-                  "Git, GitHub, VS Code for version control and development.",
-                  "Bash, PowerShell, Linux for automation and system administration.",
+                titleKey: "featured.expertise.items.2.title",
+                descriptionKeys: [
+                  "featured.expertise.items.2.descriptions.0",
+                  "featured.expertise.items.2.descriptions.1",
                 ],
               },
             ].map((service, index) => (
               <div key={index} className="space-y-4">
                 <span className="text-sm text-muted-foreground">({service.number})</span>
-                <h3 className="text-2xl font-bold">{service.title}</h3>
-                {service.descriptions.map((desc, i) => (
+                <h3 className="text-2xl font-bold">{t(service.titleKey)}</h3>
+                {service.descriptionKeys.map((descKey, i) => (
                   <p key={i} className="text-muted-foreground text-sm">
-                    {desc}
+                    {t(descKey)}
                   </p>
                 ))}
               </div>
