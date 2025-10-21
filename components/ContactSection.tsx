@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { Mail, MapPin, Github, Linkedin } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
-export default function ContactSection() {
-  const t = useTranslations()
+export default async function ContactSection({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale })
   return (
     <section id="contact" className="max-w-7xl mx-auto mt-16 sm:mt-32 px-4 sm:px-6">
       <div className="mb-16 sm:mb-32">

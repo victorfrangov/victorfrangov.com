@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
-export default function FeaturedWorkSection() {
-  const t = useTranslations()
+export default async function FeaturedWorkSection({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale })
   return (
     <section id="featured-work" className="px-4 sm:px-6 pt-24">
       <div className="max-w-7xl mx-auto">

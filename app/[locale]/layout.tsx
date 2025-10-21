@@ -26,7 +26,7 @@ export default async function RootLayout({
   children: React.ReactNode
   params: { locale: string }
 }) {
-  // setRequestLocale(locale)
+  setRequestLocale(locale)
 
   let messages
   try {

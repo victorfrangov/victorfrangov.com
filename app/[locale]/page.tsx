@@ -148,9 +148,9 @@ export default async function HomePage({
         </div>
       </nav>
       <MainSection />
-      <FeaturedWorkSection />
-      <RunningProjectsSection />
-      <ContactSection />
+      <FeaturedWorkSection locale={locale} />
+      <RunningProjectsSection locale={locale} />
+      <ContactSection locale={locale} />
       <DockController apps={apps} />
     </div>
   )

@@ -32,8 +32,8 @@ async function getGitHubRepos(): Promise<GitHubRepo[]> {
   }
 }
 
-export default async function RunningProjectsSection() {
-  const t = await getTranslations()
+export default async function RunningProjectsSection({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale })
 
   const repos = await getGitHubRepos()
 
