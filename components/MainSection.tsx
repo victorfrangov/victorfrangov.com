@@ -2,7 +2,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
-import { Highlight } from "@/components/Highlight"
 import { useTranslations } from "next-intl"
 
 export default function MainSection() {
