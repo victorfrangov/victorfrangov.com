@@ -67,9 +67,9 @@ export const metadata: Metadata = {
 export default async function HomePage({
   params,
 }: {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = params
+  const { locale } = await params
   const t = await getTranslations({ locale })
 
   return (

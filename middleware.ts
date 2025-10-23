@@ -6,5 +6,6 @@ export default createMiddleware({
 })
 
 export const config = {
-  matcher: ["/", "/(en|fr)/:path*"],
+  // Exclude api, _next, _vercel and any file with an extension (e.g., .jpg, .css)
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 }

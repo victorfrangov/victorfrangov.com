@@ -1,8 +1,14 @@
 "use client"
 
 import {useEffect, useMemo, useState} from "react"
+import dynamic from "next/dynamic"
 import {useTheme} from "next-themes"
-import {MacOSDock} from "./ui/shadcn-io/mac-os-dock"
+
+// Load the dock client-side only to avoid prod SSR bundling issues
+const MacOSDock = dynamic(
+  () => import("@/components/ui/shadcn-io/mac-os-dock").then(m => m.MacOSDock),
+  {ssr: false}
+)
 
 type App = { id: string; icon: string; name?: string }
 
@@ -23,7 +29,6 @@ function selectThemedApps(apps: App[], isDark: boolean): App[] {
     .sort((a, b) => a[1].order - b[1].order)
     .map(([base, g]) => {
       const pick = (isDark ? g.dark : g.light) ?? g.neutral ?? g.light ?? g.dark
-      // Keep a stable id (base) and only swap the icon
       return {id: base, icon: pick?.icon ?? "", name: pick?.name ?? base}
     })
     .filter(a => a.icon)
