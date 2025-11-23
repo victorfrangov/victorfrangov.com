@@ -3,13 +3,17 @@
         "name": "Victor."
     },
     "nav": {
+        "greeting": "BONJOUR, JE SUIS VICTOR FRANGOV",
+        "greeting1": "Imagine 🎨",
+        "greeting2": "Construit 🔨",
+        "greeting3": "Deploie 🚀",
+        "greeting4": "VICTOR FRANGOV",
         "work": "Travaux",
         "about": "À propos",
         "contact": "Contact"
     },
     "main": {
         "hero": {
-            "greeting": "(BONJOUR, JE SUIS VICTOR FRANGOV)",
             "title": {
                 "line1": "FULL STACK",
                 "emphasis": "développeur",
@@ -17,8 +21,9 @@
             },
             "headshotAlt": "Photo de Victor Frangov",
             "subtitle": {
-                "line1": "Actuellement étudiant en informatique à l'EPFL en Suisse, passionné par la création d'applications modernes et performantes.",
-                "line2": "Transformer des idées en solutions numériques élégantes avec une expertise full‑stack."
+                "line1": "Actuellement étudiant en informatique à l'EPFL en Suisse, passionné par la",
+                "line2": "création d'applications modernes et performantes.",
+                "line3": "Transformer des idées en solutions numériques élégantes avec une expertise full‑stack."
             },
             "cta": "Collaborons"
         }
@@ -151,6 +156,19 @@
             },
             "legal": { "privacy": "Politique de confidentialité", "terms": "Conditions d'utilisation" },
             "copyright": "© 2025 Victor Frangov. Tous droits réservés."
+        }
+    },
+    "about": {
+        "sectionLabel": "À PROPOS DE MOI",
+        "title": {
+            "line1": "Je suis un développeur full‑stack",
+            "line2": "engagé à créer des sites web innovants et créatifs"
+        },
+        "metrics": {
+            "yearsValue": "5",
+            "years": "ANNÉES D’EXPÉRIENCE",
+            "projectsValue": "10+",
+            "projects": "PROJETS RÉALISÉS"
         }
     }
 }

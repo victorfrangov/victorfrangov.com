@@ -3,13 +3,17 @@
     "name": "Victor."
   },
   "nav": {
+    "greeting": "HELLO, I'M VICTOR FRANGOV",
+    "greeting1": "Design 🎨",
+    "greeting2": "Build 🔨",
+    "greeting3": "Ship 🚀",
+    "greeting4": "VICTOR FRANGOV",
     "work": "Work",
     "about": "About",
     "contact": "Contact"
   },
   "main": {
     "hero": {
-      "greeting": "(HELLO, I'M VICTOR FRANGOV)",
       "title": {
         "line1": "FULL STACK",
         "emphasis": "developer",
@@ -17,8 +21,9 @@
       },
       "headshotAlt": "Victor Frangov headshot",
       "subtitle": {
-        "line1": "Currently studying Computer Science at EPFL in Switzerland, passionate about creating modern and performant applications.",
-        "line2": "Transforming ideas into elegant digital solutions with expertise in full-stack development."
+        "line1": "Currently studying Computer Science at EPFL in Switzerland, passionate about",
+        "line2": "creating modern and performant applications.",
+        "line3": "Transforming ideas into elegant digital solutions with expertise in full-stack development."
       },
       "cta": "Let's collaborate"
     }
@@ -149,6 +154,19 @@
       },
       "legal": { "privacy": "Privacy Policy", "terms": "Terms of Service" },
       "copyright": "© 2025 Victor Frangov. All rights reserved."
+    }
+  },
+  "about": {
+    "sectionLabel": "ABOUT ME",
+    "title": {
+      "line1": "I'm a passionate full–stack developer",
+      "line2": "committed to building innovative and creative websites"
+    },
+    "metrics": {
+      "yearsValue": "5",
+      "years": "YEARS OF EXPERIENCE",
+      "projectsValue": "10+",
+      "projects": "PROJECTS COMPLETED"
     }
   }
 }

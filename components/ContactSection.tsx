@@ -1,6 +1,8 @@
 import Link from "next/link"
-import { Mail, MapPin, Github, Linkedin, ArrowRight } from "lucide-react"
+import { ArrowRight, Github, Linkedin, MapPin, Mail } from "lucide-react"
 import { getTranslations } from "next-intl/server"
+import { AuroraText } from "./ui/aurora-text"
+import { Button } from "./ui/button"
 
 export default async function ContactSection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale })
@@ -11,10 +13,12 @@ export default async function ContactSection({ locale }: { locale: string }) {
     >
       <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 max-w-7xl mx-auto">
         <div className="lg:col-span-5 space-y-8">
-          <h2 className="text-5xl sm:text-7xl font-bold leading-[0.95]">
+          <h2 className="text-5xl sm:text-7xl font-bold leading-[0.95] space-y-1">
             {t("contact.title.line1")}
             <br />
-            {t("contact.title.line2")}
+              <AuroraText className="inline-block">
+                <span>{t("contact.title.line2")}</span>
+              </AuroraText>
           </h2>
           <p className="text-muted-foreground text-lg max-w-md">
             {t("contact.invite", {
@@ -22,13 +26,22 @@ export default async function ContactSection({ locale }: { locale: string }) {
             })}
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
-            <Link
-              href="mailto:victor.frangov@gmail.com?"
-              className="inline-flex items-center gap-2 rounded-md px-6 py-3 bg-blue-600 text-white hover:bg-blue-500 transition-colors"
+            <Button
+              className="relative overflow-hidden bg-black hover:bg-black dark:bg-blue-600 dark:hover:bg-blue-600 text-white flex items-center justify-center rounded-md group transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             >
-              <ArrowRight className="w-4 h-4" />
-              {t("contact.cta.primary", { default: "Start a Project" })}
-            </Link>
+              <Link href="mailto:victor.frangov@gmail.com?">
+                <ArrowRight className="w-4 h-4 pr-1 inline-block transition-transform duration-500 ease-out group-hover:translate-x-[140%]" />
+                <span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-[140%]">
+                  {t("contact.cta.primary", { default: "Start a Project" })}
+                </span>
+                <span
+                  className="absolute inset-0 flex items-center justify-center translate-x-[-140%] group-hover:translate-x-0 transition-transform duration-500 ease-out text-xl"
+                  aria-hidden="true"
+                >
+                  ✉️
+                </span>
+              </Link>
+            </Button>
           </div>
         </div>
 
