@@ -77,7 +77,7 @@
     "running": {
         "title": { "line1": "PROJETS", "line2": "EN COURS" },
         "intro": "En tant que développeur full‑stack, je crée des solutions efficaces avec des technologies modernes. De l'idée au déploiement, je concrétise les projets avec un code propre et de bonnes pratiques.",
-        "description": "Test",
+        "description": "",
         "cta": "Discutons",
         "repo": {
             "noDescription": "Aucune description disponible",
@@ -90,6 +90,13 @@
     },
     "contact": {
         "title": { "line1": "ENTRONS", "line2": "EN CONTACT" },
+
+        "invite": "Construisons quelque chose d’impactant ensemble.",
+        "cta": {
+            "primary": "Démarrer un projet",
+            "secondary": "M’écrire un e‑mail"
+        },
+
         "about": {
             "name": "Victor Frangov",
             "description": "Étudiant en informatique à l'EPFL, passionné par la technologie et la résolution de problèmes. Originaire de Montréal (Canada), j'étudie actuellement en Suisse. J'aime collaborer sur des projets innovants et apprendre de nouvelles technologies."
@@ -120,6 +127,14 @@
                 "label": "Outils & DevOps",
                 "items": "Git, GitHub, VS Code, Bash, PowerShell, Linux"
             }
+        },
+        "availability": {
+            "title": "Disponibilité",
+            "body": "Ouvert aux missions freelance, collaborations avec des start-ups et projets de recherche en IA, données et outils pour développeurs."
+        },
+        "response": {
+            "title": "Délai de réponse",
+            "body": "Je réponds généralement sous 24 à 48 heures."
         },
         "footer": {
             "navigation": {

@@ -3,9 +3,9 @@ import MainSection from "@/components/MainSection"
 import FeaturedWorkSection from "@/components/FeaturedWorkSection"
 import RunningProjectsSection from "@/components/RunningProjectsSection"
 import ContactSection from "@/components/ContactSection"
-import { getTranslations } from "next-intl/server"
 import NavBar from "@/components/NavBar"
 import DockController from "@/components/DockController"
+import AboutMeSection from "@/components/AboutMeSection"
 
 const apps = [
   { id: "linkedin-light", icon: "/linkedin.png" },
@@ -75,6 +75,7 @@ export default async function HomePage({
     <div className="min-h-screen bg-background text-foreground">
       <NavBar />
       <MainSection />
+      <AboutMeSection />
       <FeaturedWorkSection locale={locale} />
       <RunningProjectsSection locale={locale} />
       <ContactSection locale={locale} />
