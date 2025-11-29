@@ -51,7 +51,7 @@
       }
     ],
     "expertise": {
-      "title": { "line1": "MY TECHNICAL", "line2": "EXPERTISE" },
+      "title": { "line1": "TECHNICAL", "line2": "EXPERTISE" },
       "intro": "Leveraging modern technologies and frameworks to deliver efficient, scalable solutions. Quick learner with a structured approach to problem-solving.",
       "cta": "Start a project",
       "items": [
@@ -80,29 +80,32 @@
     }
   },
   "running": {
-    "title": { "line1": "CURRENT", "line2": "PROJECTS" },
-    "intro": "As a full-stack developer, I focus on creating efficient solutions using modern technologies. From idea to prototype to deployment, I bring projects to life with clean code and best practices.",
-    "description": "",
-    "cta": "Let's discuss",
-    "repo": {
-      "noDescription": "No description available",
-      "live": "Live"
+    "title": "Running Projects - ",
+    "description": "Things I'm building and maintaining.",
+    "cta": "Get in touch"
+  },
+  "projects": {
+    "supervitre": {
+      "title": "SuperVitre",
+      "dates": "May 2025 - July 2025",
+      "description": "With the release of the OpenAI GPT Store, I built a SaaS to collect email addresses from GPT users..."
     },
-    "empty": {
-      "message": "Check out my projects on GitHub",
-      "cta": "Visit GitHub"
+    "fluidsim": {
+      "title": "Fluid Simulation",
+      "dates": "June 2023 – Present",
+      "description": "Animated UI components for developers."
     }
   },
   "contact": {
     "title": { "line1": "LET'S", "line2": "CONNECT" },
-    "invite": "Let’s build something impactful together.",
+    "invite": "Build something impactful.",
     "cta": {
       "primary": "Start a Project",
       "secondary": "Email Me"
     },
     "about": {
       "name": "Victor Frangov",
-      "description": "Computer Science student at EPFL with a passion for technology and problem-solving. Originally from Montréal, Canada, currently studying in Switzerland. I'm always interested in collaborating on innovative projects and learning new technologies."
+      "description": "Computer Science student with a passion for technology and problem-solving. I'm always interested in collaborating on innovative projects and learning new technologies."
     },
     "info": {
       "location": {

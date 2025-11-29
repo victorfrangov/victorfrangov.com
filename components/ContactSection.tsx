@@ -26,16 +26,14 @@ export default async function ContactSection({ locale }: { locale: string }) {
             })}
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
-            <Button
-              className="relative overflow-hidden bg-black hover:bg-black dark:bg-blue-600 dark:hover:bg-blue-600 text-white flex items-center justify-center rounded-md group transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-            >
+            <Button className="group relative overflow-hidden rounded-md bg-black hover:bg-black text-white dark:bg-blue-600 px-5">
               <Link href="mailto:victor.frangov@gmail.com?">
-                <ArrowRight className="w-4 h-4 pr-1 inline-block transition-transform duration-500 ease-out group-hover:translate-x-[140%]" />
-                <span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-[140%]">
-                  {t("contact.cta.primary", { default: "Start a Project" })}
+                <span className="flex items-center gap-2 transition-transform duration-500 ease-out group-hover:translate-x-[140%]">
+                  <ArrowRight className="w-4 h-4" />
+                  <span>{t("contact.cta.primary", { default: "Start a Project" })}</span>
                 </span>
                 <span
-                  className="absolute inset-0 flex items-center justify-center translate-x-[-140%] group-hover:translate-x-0 transition-transform duration-500 ease-out text-xl"
+                  className="absolute inset-0 flex items-center justify-center -translate-x-[140%] group-hover:translate-x-0 transition-transform duration-500 ease-out text-xl"
                   aria-hidden="true"
                 >
                   ✉️

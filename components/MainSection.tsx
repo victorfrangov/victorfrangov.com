@@ -6,16 +6,25 @@ import { useTranslations } from "next-intl"
 import { AnimatedGradientText } from "./ui/animated-gradient-text"
 import { cn } from "@/lib/utils"
 import { Highlighter } from "./ui/highlighter"
+import { Particles } from "./ui/particles"
+import { Meteors } from "./ui/meteors"
 
 export default function MainSection() {
   const t = useTranslations()
   return (
-    <section id="main" className="pt-24 sm:pt-32 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16 sm:mb-32 relative">
+    <section id="main" className="relative isolate px-4 sm:px-6 pt-24 sm:pt-32 mt-24 sm:mt-32">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -bottom-32 sm:-bottom-48 z-0"
+      >
+        <Particles className="w-full h-full" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        <div className="mb-16 sm:mb-32">
           <div className="flex items-end justify-between gap-6">
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold leading-none tracking-tight md:whitespace-nowrap">
-                {t("main.hero.title.line1")}{" "}
+              {t("main.hero.title.line1")}{" "}
               <Highlighter iterations={2} color="#0066FF" animationDuration={800}>
                 <span className="font-serif italic font-normal">
                   {t("main.hero.title.emphasis")}
@@ -39,7 +48,11 @@ export default function MainSection() {
 
           <div className="mt-8 sm:mt-10 flex flex-col items-center text-center gap-6">
             <p className="pt-28 sm:pt-28 max-w-7xl text-2xl sm:text-3xl md:text-4xl leading-relaxed md:leading-snug text-muted-foreground">
-              {t("main.hero.subtitle.line1")} <Highlighter action="underline" color="#0033FF" animationDuration={800}>{t("main.hero.subtitle.line2")}</Highlighter> {t("main.hero.subtitle.line3")}
+              {t("main.hero.subtitle.line1")}{" "}
+              <Highlighter action="underline" color="#0033FF" animationDuration={800}>
+                {t("main.hero.subtitle.line2")}
+              </Highlighter>{" "}
+              {t("main.hero.subtitle.line3")}
             </p>
             <Link
               href="#contact"

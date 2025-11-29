@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { TextReveal } from "./ui/text-reveal"
+import { TextAnimate } from "./ui/text-animate"
 
 export default function AboutMeSection() {
   const t = useTranslations("about")
@@ -12,10 +12,9 @@ export default function AboutMeSection() {
           {t("sectionLabel")}
         </span>
         <h2 className="font-bold leading-tight text-4xl sm:text-6xl md:text-7xl">
-          <TextReveal>
-            {t("title.line1")}
-            <div>{t("title.line2")}</div>
-          </TextReveal>
+          <TextAnimate delay={0.4} duration={1} once={true}>
+            {`${t("title.line1")} ${t("title.line2")}`}
+          </TextAnimate>
         </h2>
         <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-8 text-center">
           <div>

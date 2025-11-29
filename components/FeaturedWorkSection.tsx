@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { getTranslations } from "next-intl/server"
+import { ScrollVelocity } from "./ui/shadcn-io/scroll-velocity";
 
 type IconItem = { label: string; slug: string; invertDark?: boolean }
 
@@ -9,7 +10,6 @@ const ICON_OVERRIDES: Record<string, string> = {
   java: "https://www.vectorlogo.zone/logos/java/java-icon.svg",
   microsoftazure: "https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg",
   matplotlib: "https://www.vectorlogo.zone/logos/matplotlib/matplotlib-icon.svg",
-  // SDL3 -> LibSDL logo
   sdl3: "https://www.vectorlogo.zone/logos/libsdl/libsdl-icon.svg",
 }
 
@@ -91,17 +91,12 @@ export default async function FeaturedWorkSection({ locale }: { locale: string }
   const t = await getTranslations({ locale })
 
   return (
-    <section id="featured-work" className="px-4 sm:px-6 pt-24">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16 sm:mb-32">
-          <div className="flex flex-col sm:flex-row justify-between items-start mb-8 sm:mb-16 gap-6 sm:gap-0">
-            <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold">
-              {t("featured.expertise.title.line1")}
-              <br />
-              {t("featured.expertise.title.line2")}
-            </h2>
-          </div>
-
+    <section id="featured-work" className="pt-24">
+      <ScrollVelocity
+        texts={[t("featured.expertise.title.line1"), t("featured.expertise.title.line2")]}
+        className="text-4xl sm:text-6xl md:text-8xl font-bold"
+      />
+      <div className="max-w-7xl mx-auto mb-16 sm:mb-32 mt-16">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
             {[
               {
@@ -127,7 +122,6 @@ export default async function FeaturedWorkSection({ locale }: { locale: string }
               </div>
             ))}
           </div>
-        </div>
       </div>
     </section>
   )

@@ -1,116 +1,137 @@
+"use client"
+
+import React, { useRef } from "react"
 import Link from "next/link"
 import { ArrowRight, ExternalLink, Github } from "lucide-react"
-import { getTranslations } from "next-intl/server"
+import { useTranslations } from "next-intl"
+import { AnimatedBeam } from "./ui/animated-beam"
+import { cn } from "@/lib/utils"
+import { ProjectCard } from "./project-card"
+import { Line } from "recharts"
+import { useTheme } from "next-themes"
+import CurvedLoop from "./ui/shadcn-io/curved-loop"
 
-interface GitHubRepo {
-  id: number
-  name: string
-  description: string | null
-  html_url: string
-  homepage: string | null
-  topics: string[]
-  language: string | null
-  stargazers_count: number
-  updated_at: string
+type ProjectLink = {
+  icon: React.ReactNode
+  type: string
+  href: string
 }
 
-async function getGitHubRepos(): Promise<GitHubRepo[]> {
-  try {
-    const response = await fetch("https://api.github.com/users/victorfrangov/repos?sort=updated&per_page=8", {
-      next: { revalidate: 3600 }, // Revalidate every hour
-    })
+type Project = {
+  slug: string
+  href?: string
+  image?: string
+  video?: string
+  tags: readonly string[]
+  links: readonly ProjectLink[]
+}
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch repositories")
-    }
-
-    const repos: GitHubRepo[] = await response.json()
-    return repos.filter((repo) => !repo.name.includes("victorfrangov")) // Filter out profile repo
-  } catch (error) {
-    console.error("Error fetching GitHub repos:", error)
-    return []
+const PROJECTS: Project[] = [
+  {
+    slug: "supervitre",
+    href: "https://supervitre.net",
+    image: "/projects/supervitre.png",
+    tags: ["Next.js", "Typescript", "Firebase", "Prisma", "TailwindCSS", "Stripe", "Shadcn UI", "Magic UI"],
+    links: [
+      { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "https://supervitre.net" },
+      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/you/chat-collect" }
+    ]
+  },
+  {
+    slug: "fluidsim",
+    image: "/projects/fluid-simulation.gif",
+    tags: ["Next.js", "Typescript", "PostgreSQL", "Prisma", "TailwindCSS", "Shadcn UI"],
+    links: [
+      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/you/magic-ui" }
+    ]
   }
-}
+]
 
-export default async function RunningProjectsSection({ locale }: { locale: string }) {
-  const t = await getTranslations({ locale })
+export default function RunningProjectsSection() {
+  const t = useTranslations()
 
-  const repos = await getGitHubRepos()
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const dotRefs = useRef<(HTMLDivElement | null)[]>([])
+  dotRefs.current = PROJECTS.map((_, i) => dotRefs.current[i] ?? null)
 
   return (
-    <section id="running-project" className="py-16 sm:py-32 px-4 sm:px-6 bg-background">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row justify-between items-start mb-16 gap-8 lg:gap-16">
-          <h2 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter leading-none">
-            {t("running.title.line1")}
-            <br />
-            {t("running.title.line2")}
-          </h2>
-          <div className="max-w-md lg:text-right">
-            <p className="text-muted-foreground mb-8 text-lg">
-              {t("running.description")}
-            </p>
-            <Link
-              href="#contact"
-              className="inline-flex items-center gap-2 border border-border px-4 sm:px-6 py-2 sm:py-3 hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {t("running.cta")} <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
+    <section id="running-project" className="py-8 sm:py-16 px-4 sm:px-6">
+      <div className="relative -top-30 sm:-top-30">
+        <CurvedLoop
+          marqueeText={t("running.title")}
+          speed={2}
+          curveAmount={300}
+          direction="left"
+          interactive={true}
+          className="fill-black dark:fill-white text-5xl"
+        />
+      </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {repos.length > 0 ? (
-            repos.map((repo) => (
-              <div
-                key={repo.id}
-                className="border border-border rounded-lg p-6 hover:bg-accent/50 transition-colors group"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-bold group-hover:text-accent-foreground">{repo.name}</h3>
-                  <Link
-                    href={repo.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground"
+      <div className="max-w-7xl mx-auto">
+        <p
+          className="mx-auto mt-2 sm:mt-3 mb-10 sm:mb-12 max-w-3xl text-center text-2xl sm:text-3xl font-semibold tracking-tight text-foreground"
+        >
+          {t("running.description")}
+        </p>
+
+        <div ref={containerRef} className="relative mx-auto max-w-3xl">
+         <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-blue-500/70 via-blue-400/30 to-blue-300/10"
+          />
+
+          <div className="flex flex-col gap-16">
+            {PROJECTS.map((p, i) => {
+              const leftSide = i % 2 === 0
+              const title = t(`projects.${p.slug}.title`)
+              const dates = t(`projects.${p.slug}.dates`)
+              const description = t(`projects.${p.slug}.description`)
+
+              return (
+                <div
+                  key={p.slug}
+                  className={cn("relative w-full", leftSide ? "pr-[60%]" : "pl-[60%]")}
+                >
+                  <div
+                    ref={el => (dotRefs.current[i] = el)}
+                    className="absolute left-1/2 top-6 -translate-x-1/2 w-5 h-5 rounded-full bg-blue-500 shadow-[0_0_0_6px_rgba(59,130,246,0.25)]"
+                  />
+                  <div
+                    className={cn(
+                      "relative max-w-[24rem] lg:max-w-[26rem]",
+                      leftSide ? "ml-0 mr-auto" : "mr-0 ml-auto"
+                    )}
                   >
-                    <Github className="w-5 h-5" />
-                  </Link>
+                    <ProjectCard
+                      title={title}
+                      href={p.href}
+                      description={description}
+                      dates={dates}
+                      tags={p.tags}
+                      image={p.image}
+                      links={p.links}
+                    />
+                  </div>
                 </div>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                  {repo.description || t("running.repo.noDescription")}
-                </p>
-                <div className="flex items-center justify-between">
-                  {repo.language && (
-                    <span className="text-xs px-2 py-1 bg-muted rounded text-muted-foreground">{repo.language}</span>
-                  )}
-                  {repo.homepage && (
-                    <Link
-                      href={repo.homepage}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs flex items-center gap-1 hover:text-accent-foreground"
-                    >
-                      {t("running.repo.live")} <ExternalLink className="w-3 h-3" />
-                    </Link>
-                  )}
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <Github className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-              <p className="text-muted-foreground">{t("running.empty.message")}</p>
-              <Link
-                href="https://github.com/victorfrangov"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-4 text-sm hover:text-accent-foreground"
-              >
-                {t("running.empty.visitGithub")} <ExternalLink className="w-4 h-4" />
-              </Link>
-            </div>
-          )}
+              )
+            })}
+          </div>
+
+          {dotRefs.current.length > 1 &&
+            dotRefs.current.map((ref, i) => {
+              const next = dotRefs.current[i + 1]
+              if (!ref || !next) return null
+              return (
+                <AnimatedBeam
+                  key={i}
+                  duration={3}
+                  containerRef={containerRef}
+                  fromRef={{ current: ref }}
+                  toRef={{ current: next }}
+                  className="opacity-70"
+                />
+              )
+            })}
         </div>
       </div>
     </section>
