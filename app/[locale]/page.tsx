@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 import MainSection from "@/components/MainSection"
-import FeaturedWorkSection from "@/components/FeaturedWorkSection"
 import RunningProjectsSection from "@/components/RunningProjectsSection"
 import ContactSection from "@/components/ContactSection"
 import NavBar from "@/components/NavBar"
 import DockController from "@/components/DockController"
 import AboutMeSection from "@/components/AboutMeSection"
+import ExpertiseSection from "@/components/ExpertiseSection"
 
 const apps = [
   { id: "linkedin-light", icon: "/linkedin.png" },
@@ -21,7 +21,7 @@ const apps = [
 ]
 
 export const metadata: Metadata = {
-  title: "Victor Frangov | Full Stack Developer",
+  title: "Victor Frangov | Developer",
   description:
     "Computer Science student at EPFL passionate about creating modern and performant applications.",
   keywords: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "Computer Science",
   ],
   openGraph: {
-    title: "Victor Frangov | Full Stack Developer",
+    title: "Victor Frangov | Developer",
     description:
       "Computer Science student passionate about building modern web applications. Explore my projects and technical skills.",
     type: "website",
@@ -76,8 +76,8 @@ export default async function HomePage({
       <NavBar />
       <MainSection />
       <AboutMeSection />
-      <FeaturedWorkSection locale={locale} />
-      <RunningProjectsSection locale={locale} />
+      <ExpertiseSection locale={locale} />
+      <RunningProjectsSection/>
       <ContactSection locale={locale} />
       <DockController apps={apps} />
     </div>

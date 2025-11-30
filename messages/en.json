@@ -8,8 +8,8 @@
     "greeting2": "Build 🔨",
     "greeting3": "Ship 🚀",
     "greeting4": "VICTOR FRANGOV",
-    "work": "Work",
-    "about": "About",
+    "expertise": "Expertise",
+    "projects": "Projects",
     "contact": "Contact"
   },
   "main": {
@@ -28,72 +28,54 @@
       "cta": "Let's collaborate"
     }
   },
-  "featured": {
-    "title": { "line1": "FEATURED", "line2": "WORK" },
-    "intro": "From automated deployment scripts to full-stack web applications and data analysis projects, my portfolio showcases a blend of technical expertise and problem-solving skills.",
-    "cta": "Let's create",
-    "categories": [
+  "expertise": {
+    "title": { "line1": "TECHNICAL", "line2": "EXPERTISE" },
+    "items": [
       {
-        "title": "FRONTEND DEVELOPMENT",
-        "description": "Building modern, responsive interfaces with React, TypeScript, and Tailwind CSS"
+        "title": "FRONTEND"
       },
       {
-        "title": "BACKEND DEVELOPMENT",
-        "description": "Creating robust APIs and server solutions with Node.js, Python, and PostgreSQL"
+        "title": "BACKEND / SOFTWARE"
       },
       {
-        "title": "SYSTEM ADMINISTRATION",
-        "description": "Automating deployments with Bash & PowerShell, managing server setups"
-      },
-      {
-        "title": "DATA ANALYSIS",
-        "description": "Processing and analyzing data with Python, pandas, and visualization libraries"
+        "title": "TOOLS & DEVOPS"
       }
-    ],
-    "expertise": {
-      "title": { "line1": "TECHNICAL", "line2": "EXPERTISE" },
-      "intro": "Leveraging modern technologies and frameworks to deliver efficient, scalable solutions. Quick learner with a structured approach to problem-solving.",
-      "cta": "Start a project",
-      "items": [
-        {
-          "title": "FRONTEND",
-          "descriptions": [
-            "React, TypeScript, JavaScript for modern web interfaces.",
-            "HTML5, CSS3, Tailwind CSS for responsive design."
-          ]
-        },
-        {
-          "title": "BACKEND",
-          "descriptions": [
-            "Node.js and Python for server-side development.",
-            "PostgreSQL, Supabase, REST APIs for data management."
-          ]
-        },
-        {
-          "title": "TOOLS & DEVOPS",
-          "descriptions": [
-            "Git, GitHub, VS Code for version control and development.",
-            "Bash, PowerShell, Linux for automation and system administration."
-          ]
-        }
-      ]
-    }
+    ]
   },
   "running": {
     "title": "Running Projects - ",
-    "description": "Things I'm building and maintaining.",
-    "cta": "Get in touch"
+    "description": "Things I'm building and maintaining."
   },
   "projects": {
     "supervitre": {
       "title": "SuperVitre",
-      "dates": "May 2025 - July 2025",
-      "description": "With the release of the OpenAI GPT Store, I built a SaaS to collect email addresses from GPT users..."
+      "dates": "May 2025 - August 2025",
+      "description": "Created a full-stack website for a friend's summer business"
     },
     "fluidsim": {
       "title": "Fluid Simulation",
-      "dates": "June 2023 – Present",
-      "description": "Animated UI components for developers."
+      "dates": "December 2023",
+      "description": "Fluid Simulation with CPU rendering, using Navier-Strokes Equations (GPU acceleration coming soon!)"
+    },
+    "portfolio": {
+      "title": "Portfolio Website",
+      "dates": "August 2025 – October 2025",
+      "description": "Personal site built with Next.js, TypeScript, and Tailwind CSS."
+    },
+    "stock-ai-robot": {
+      "title": "Stock Prediction Machine Learning AI",
+      "dates": "July 2025 – Present",
+      "description": "Automated signal prediction using PyTorch/TensorFlow with MPS/CUDA acceleration."
+    },
+    "esp32": {
+      "title": "ESP32 Projects",
+      "dates": "March 2025 – April 2025",
+      "description": "Experimented embedded development with ESP-IDF and FreeRTOS; sensors, peripherals, and IoT prototypes."
+    },
+    "pong": {
+      "title": "Pong",
+      "dates": "July 2024 - September 2024",
+      "description": "Classic Pong clone written in C/C++ using SDL3."
     }
   },
   "contact": {
@@ -162,8 +144,8 @@
   "about": {
     "sectionLabel": "ABOUT ME",
     "title": {
-      "line1": "I'm a passionate full–stack developer",
-      "line2": "committed to building innovative and creative websites"
+      "line1": "I'm a passionate developer",
+      "line2": "committed to building innovative and creative solutions"
     },
     "metrics": {
       "yearsValue": "5",

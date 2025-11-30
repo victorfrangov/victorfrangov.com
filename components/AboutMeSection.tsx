@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { TextAnimate } from "./ui/text-animate"
+import { TextGenerateEffect } from "./ui/shadcn-io/text-generate-effect"
 
 export default function AboutMeSection() {
   const t = useTranslations("about")
@@ -12,9 +12,11 @@ export default function AboutMeSection() {
           {t("sectionLabel")}
         </span>
         <h2 className="font-bold leading-tight text-4xl sm:text-6xl md:text-7xl">
-          <TextAnimate delay={0.4} duration={1} once={true}>
-            {`${t("title.line1")} ${t("title.line2")}`}
-          </TextAnimate>
+          <TextGenerateEffect
+            words={`${t("title.line1")} ${t("title.line2")}`}
+            duration={0.6}
+            staggerDelay={0.15}
+          />
         </h2>
         <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-8 text-center">
           <div>

@@ -7,7 +7,6 @@ import { AnimatedGradientText } from "./ui/animated-gradient-text"
 import { cn } from "@/lib/utils"
 import { Highlighter } from "./ui/highlighter"
 import { Particles } from "./ui/particles"
-import { Meteors } from "./ui/meteors"
 
 export default function MainSection() {
   const t = useTranslations()

@@ -24,11 +24,11 @@ export default function NavBar() {
           />
         </Link>
         <div className="hidden sm:flex items-center gap-4 sm:gap-8">
-          <Link href="#work" className="hover:text-gray-300">
-            {t("nav.work")}
+          <Link href="#expertise" className="hover:text-gray-300">
+            {t("nav.expertise")}
           </Link>
-          <Link href="#about" className="hover:text-gray-300">
-            {t("nav.about")}
+          <Link href="#projects" className="hover:text-gray-300">
+            {t("nav.projects")}
           </Link>
           <Link href="#contact" className="hover:text-gray-300">
             {t("nav.contact")}

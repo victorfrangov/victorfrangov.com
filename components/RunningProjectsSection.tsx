@@ -1,14 +1,11 @@
 "use client"
 
 import React, { useRef } from "react"
-import Link from "next/link"
-import { ArrowRight, ExternalLink, Github } from "lucide-react"
+import { ExternalLink, Github } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { AnimatedBeam } from "./ui/animated-beam"
 import { cn } from "@/lib/utils"
 import { ProjectCard } from "./project-card"
-import { Line } from "recharts"
-import { useTheme } from "next-themes"
 import CurvedLoop from "./ui/shadcn-io/curved-loop"
 
 type ProjectLink = {
@@ -28,21 +25,55 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    slug: "portfolio",
+    href: "/",
+    image: "/projects/portfolio.png",
+    tags: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI", "i18n"],
+    links: [
+      { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "/" },
+      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/victorfrangov.com" }
+    ]
+  },
+  {
+    slug: "stock-ai-robot",
+    image: "/projects/stock.png",
+    tags: ["Python", "PyTorch", "Pandas", "NumPy", "MPS", "CUDA", "Matplotlib", "Big Data", "Scikit-Learn"],
+    links: [
+      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/stock-robot" }
+    ]
+  },
+  {
     slug: "supervitre",
     href: "https://supervitre.net",
     image: "/projects/supervitre.png",
-    tags: ["Next.js", "Typescript", "Firebase", "Prisma", "TailwindCSS", "Stripe", "Shadcn UI", "Magic UI"],
+    tags: ["Next.js", "Typescript", "Firebase", "Google Cloud", "Resend", "Pug", "reCAPTCHA", "SquareSpace", "TailwindCSS", "Shadcn UI", "i18n", "Magic UI"],
     links: [
       { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "https://supervitre.net" },
-      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/you/chat-collect" }
+      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/superVitre" }
     ]
   },
   {
     slug: "fluidsim",
     image: "/projects/fluid-simulation.gif",
-    tags: ["Next.js", "Typescript", "PostgreSQL", "Prisma", "TailwindCSS", "Shadcn UI"],
+    tags: ["C++", "C", "OpenGL", "ImGui", "SDL3"],
     links: [
-      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/you/magic-ui" }
+      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/fluid-simulation1" }
+    ]
+  },
+  {
+    slug: "pong",
+    image: "/projects/pong.gif",
+    tags: ["C", "C++", "SDL3"],
+    links: [
+      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/pong" }
+    ]
+  },
+  {
+    slug: "esp32",
+    image: "/projects/esp32.png",
+    tags: ["C", "ESP-IDF", "FreeRTOS", "Python", "Low-level", "u8g2"],
+    links: [
+      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/esp32-humidity" }
     ]
   }
 ]
@@ -55,7 +86,7 @@ export default function RunningProjectsSection() {
   dotRefs.current = PROJECTS.map((_, i) => dotRefs.current[i] ?? null)
 
   return (
-    <section id="running-project" className="py-8 sm:py-16 px-4 sm:px-6">
+    <section id="projects" className="py-8 sm:py-16 px-4 sm:px-6">
       <div className="relative -top-30 sm:-top-30">
         <CurvedLoop
           marqueeText={t("running.title")}

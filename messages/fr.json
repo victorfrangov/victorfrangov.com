@@ -63,7 +63,7 @@
                     ]
                 },
                 {
-                    "title": "BACKEND",
+                    "title": "BACKEND / SOFTWARE",
                     "descriptions": [
                         "Node.js et Python pour le développement côté serveur.",
                         "PostgreSQL, Supabase, APIs REST pour la gestion des données."
