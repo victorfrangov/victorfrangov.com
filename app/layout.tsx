@@ -8,7 +8,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="theme">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="theme">
           {children}
         </ThemeProvider>
       </body>

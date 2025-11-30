@@ -3,22 +3,8 @@ import MainSection from "@/components/MainSection"
 import RunningProjectsSection from "@/components/RunningProjectsSection"
 import ContactSection from "@/components/ContactSection"
 import NavBar from "@/components/NavBar"
-import DockController from "@/components/DockController"
 import AboutMeSection from "@/components/AboutMeSection"
 import ExpertiseSection from "@/components/ExpertiseSection"
-
-const apps = [
-  { id: "linkedin-light", icon: "/linkedin.png" },
-  { id: "github-light", icon: "/github-light.png" },
-  { id: "github-dark", icon: "/github-dark.png" },
-  { id: "mail-light", icon: "/mail-light.png" },
-  { id: "mail-dark", icon: "/mail-dark.png" },
-  { id: "phone", icon: "/phone.png" },
-  { id: "messages-light", icon: "/messages-light.png" },
-  { id: "messages-dark", icon: "/messages-dark.png" },
-  { id: "whatsapp-light", icon: "/whatsapp-light.png" },
-  { id: "whatsapp-dark", icon: "/whatsapp-dark.png" }
-]
 
 export const metadata: Metadata = {
   title: "Victor Frangov | Developer",
@@ -79,7 +65,6 @@ export default async function HomePage({
       <ExpertiseSection locale={locale} />
       <RunningProjectsSection/>
       <ContactSection locale={locale} />
-      <DockController apps={apps} />
     </div>
   )
 }

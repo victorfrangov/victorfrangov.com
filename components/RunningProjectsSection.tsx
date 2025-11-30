@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useRef } from "react"
+import React, { useRef, useLayoutEffect, useState } from "react"
 import { ExternalLink, Github } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { AnimatedBeam } from "./ui/animated-beam"
+import { AnimatedBeam } from "./ui/shadcn-io/animated-beam"
 import { cn } from "@/lib/utils"
 import { ProjectCard } from "./project-card"
 import CurvedLoop from "./ui/shadcn-io/curved-loop"
@@ -85,6 +85,34 @@ export default function RunningProjectsSection() {
   const dotRefs = useRef<(HTMLDivElement | null)[]>([])
   dotRefs.current = PROJECTS.map((_, i) => dotRefs.current[i] ?? null)
 
+  const [ready, setReady] = useState(false)
+  const [lineTop, setLineTop] = useState<number>(0)
+  const [lineHeight, setLineHeight] = useState<number>(0)
+
+  useLayoutEffect(() => {
+    const id = requestAnimationFrame(() => {
+      setReady(true)
+      // compute vertical line start/end using first and last dot centers
+      const container = containerRef.current
+      const first = dotRefs.current[0]
+      const last = dotRefs.current[dotRefs.current.length - 1]
+      if (!container || !first || !last) return
+      const cRect = container.getBoundingClientRect()
+      const fRect = first.getBoundingClientRect()
+      const lRect = last.getBoundingClientRect()
+
+      const firstCenterY = fRect.top - cRect.top + fRect.height / 2
+      const lastCenterY = lRect.top - cRect.top + lRect.height / 2
+
+      const top = Math.min(firstCenterY, lastCenterY)
+      const height = Math.abs(lastCenterY - firstCenterY)
+
+      setLineTop(top)
+      setLineHeight(height)
+    })
+    return () => cancelAnimationFrame(id)
+  }, [])
+
   return (
     <section id="projects" className="py-8 sm:py-16 px-4 sm:px-6">
       <div className="relative -top-30 sm:-top-30">
@@ -108,7 +136,8 @@ export default function RunningProjectsSection() {
         <div ref={containerRef} className="relative mx-auto max-w-3xl">
          <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-blue-500/70 via-blue-400/30 to-blue-300/10"
+            className="pointer-events-none absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-blue-500/70 via-blue-400/30 to-blue-300/10"
+            style={{ top: `${lineTop}px`, height: `${lineHeight}px` }}
           />
 
           <div className="flex flex-col gap-16">
@@ -147,19 +176,22 @@ export default function RunningProjectsSection() {
               )
             })}
           </div>
-
-          {dotRefs.current.length > 1 &&
-            dotRefs.current.map((ref, i) => {
-              const next = dotRefs.current[i + 1]
-              if (!ref || !next) return null
+          {ready &&
+            dotRefs.current.length > 1 &&
+            dotRefs.current.map((_, i) => {
+              const from = dotRefs.current[i]
+              const to = dotRefs.current[i + 1]
+              if (!from || !to) return null
               return (
                 <AnimatedBeam
-                  key={i}
-                  duration={3}
+                  key={`beam-${i}`}
                   containerRef={containerRef}
-                  fromRef={{ current: ref }}
-                  toRef={{ current: next }}
-                  className="opacity-70"
+                  fromRef={{ current: from }}
+                  toRef={{ current: to }}
+                  orientation="vertical"
+                  duration={20}
+                  pathOpacity={0.3}
+                  className="pointer-events-none opacity-80"
                 />
               )
             })}
