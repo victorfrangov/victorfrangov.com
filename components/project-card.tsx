@@ -30,7 +30,6 @@ interface Props {
 
 export function ProjectCard({
   title,
-  href,
   description,
   dates,
   tags,
@@ -87,7 +86,7 @@ export function ProjectCard({
           <div className="mt-2 flex flex-wrap gap-1">
             {tags?.map((tag) => (
               <Badge
-                className="px-1 py-0 text-[10px]"
+                className="px-1 py-0 text-[10px] bg-black text-white dark:bg-white dark:text-black"
                 variant="secondary"
                 key={tag}
               >
@@ -102,7 +101,10 @@ export function ProjectCard({
           <div className="flex flex-row flex-wrap items-start gap-1">
             {links?.map((link, idx) => (
               <Link href={link?.href} key={idx} target="_blank">
-                <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px]">
+                <Badge
+                  key={idx}
+                  className="flex gap-2 px-2 py-1 text-[10px] bg-black text-white dark:bg-white dark:text-black"
+                >
                   {link.icon}
                   {link.type}
                 </Badge>

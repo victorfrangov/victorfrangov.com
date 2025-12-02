@@ -127,7 +127,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
         </div>
       </div>
       <div className="mt-8 sm:mt-16 flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-border">
-        <div className="text-sm text-muted-foreground mb-4 sm:mb-0">{t("contact.footer.copyright")}</div>
+        <div className="text-sm text-muted-foreground mb-4 sm:mb-0">{t("contact.copyright")}</div>
       </div>
     </section>
   )

@@ -1,16 +1,13 @@
 {
-    "brand": {
-        "name": "Victor."
-    },
     "nav": {
         "greeting": "BONJOUR, JE SUIS VICTOR FRANGOV",
         "greeting1": "Imagine 🎨",
         "greeting2": "Construit 🔨",
-        "greeting3": "Deploie 🚀",
+        "greeting3": "Déploie 🚀",
         "greeting4": "VICTOR FRANGOV",
-        "work": "Travaux",
-        "about": "À propos",
-        "contact": "Contact"
+        "contact": "Contact",
+        "expertise": "Expertise",
+        "projects": "Projets"
     },
     "main": {
         "hero": {
@@ -28,80 +25,75 @@
             "cta": "Collaborons"
         }
     },
-    "featured": {
-        "title": { "line1": "PROJETS", "line2": "MIS EN AVANT" },
-        "intro": "Des scripts de déploiement automatisés aux applications web full‑stack et projets d'analyse de données, mon portfolio reflète une expertise technique et une approche orientée solution.",
-        "cta": "Créons ensemble",
-        "categories": [
-            {
-                "title": "DÉVELOPPEMENT FRONTEND",
-                "description": "Interfaces modernes et réactives avec React, TypeScript et Tailwind CSS"
-            },
-            {
-                "title": "DÉVELOPPEMENT BACKEND",
-                "description": "APIs robustes et services avec Node.js, Python et PostgreSQL"
-            },
-            {
-                "title": "ADMINISTRATION SYSTÈME",
-                "description": "Automatisation des déploiements avec Bash & PowerShell, gestion des serveurs"
-            },
-            {
-                "title": "ANALYSE DE DONNÉES",
-                "description": "Traitement et analyse avec Python, pandas et bibliothèques de visualisation"
-            }
-        ],
-        "expertise": {
-            "title": { "line1": "EXPERTISE", "line2": "TECHNIQUE" },
-            "intro": "Exploiter des technologies modernes pour livrer des solutions efficaces et scalables. Esprit d'apprentissage rapide et approche structurée de la résolution de problèmes.",
-            "cta": "Démarrer un projet",
-            "items": [
-                {
-                    "title": "FRONTEND",
-                    "descriptions": [
-                        "React, TypeScript, JavaScript pour des interfaces modernes.",
-                        "HTML5, CSS3, Tailwind CSS pour un design responsive."
-                    ]
-                },
-                {
-                    "title": "BACKEND / SOFTWARE",
-                    "descriptions": [
-                        "Node.js et Python pour le développement côté serveur.",
-                        "PostgreSQL, Supabase, APIs REST pour la gestion des données."
-                    ]
-                },
-                {
-                    "title": "OUTILS & DEVOPS",
-                    "descriptions": [
-                        "Git, GitHub, VS Code pour le versionnement et le dev.",
-                        "Bash, PowerShell, Linux pour l'automatisation et l'admin système."
-                    ]
-                }
-            ]
+    "about": {
+        "sectionLabel": "À PROPOS DE MOI",
+        "title": {
+            "line1": "Je suis un développeur full‑stack",
+            "line2": "engagé à créer des sites web innovants et créatifs"
+        },
+        "metrics": {
+            "yearsValue": "5",
+            "years": "ANNÉES D’EXPÉRIENCE",
+            "projectsValue": "10+",
+            "projects": "PROJETS RÉALISÉS"
         }
+    },
+    "expertise": {
+        "title": { "line1": "EXPERTISE", "line2": "TECHNIQUE" },
+        "items": [
+            {
+                "title": "FRONTEND"
+            },
+            {
+                "title": "BACKEND / SOFTWARE"
+            },
+            {
+                "title": "OUTILS & DEVOPS"
+            }
+        ]
     },
     "running": {
         "title": "PROJETS EN COURS - ",
-        "intro": "En tant que développeur full‑stack, je crée des solutions efficaces avec des technologies modernes. De l'idée au déploiement, je concrétise les projets avec un code propre et de bonnes pratiques.",
-        "description": "",
-        "cta": "Discutons",
-        "repo": {
-            "noDescription": "Aucune description disponible",
-            "live": "En ligne"
+        "description": "Ce que je construis et maintiens."
+    },
+    "projects": {
+        "supervitre": {
+            "title": "SuperVitre",
+            "dates": "Mai 2025 – Août 2025",
+            "description": "Site web full‑stack créé pour l’entreprise estivale d’un ami"
         },
-        "empty": {
-            "message": "Découvrez mes projets sur GitHub",
-            "cta": "Voir GitHub"
+        "fluidsim": {
+            "title": "Simulation de fluide",
+            "dates": "Décembre 2023",
+            "description": "Simulation de fluide avec rendu CPU, utilisant les équations de Navier‑Stokes (accélération GPU bientôt!)"
+        },
+        "portfolio": {
+            "title": "Site Portfolio",
+            "dates": "Août 2025 – Octobre 2025",
+            "description": "Site personnel construit avec Next.js, TypeScript et Tailwind CSS."
+        },
+        "stock-ai-robot": {
+            "title": "IA de prédiction boursière",
+            "dates": "Juillet 2025 – Présent",
+            "description": "Prédiction de signaux automatisée avec PyTorch/TensorFlow et accélération MPS/CUDA."
+        },
+        "esp32": {
+            "title": "Projets ESP32",
+            "dates": "Mars 2025 – Avril 2025",
+            "description": "Expérimentations en embarqué avec ESP‑IDF et FreeRTOS ; capteurs, périphériques et prototypes IoT."
+        },
+        "pong": {
+            "title": "Pong",
+            "dates": "Juillet 2024 – Septembre 2024",
+            "description": "Clone classique de Pong écrit en C/C++ avec SDL3."
         }
     },
     "contact": {
         "title": { "line1": "ENTRONS", "line2": "EN CONTACT" },
-
         "invite": "Construisons quelque chose d’impactant ensemble.",
         "cta": {
-            "primary": "Démarrer un projet",
-            "secondary": "M’écrire un e‑mail"
+            "primary": "Démarrer un projet"
         },
-
         "about": {
             "name": "Victor Frangov",
             "description": "Étudiant en informatique, passionné par la technologie et la résolution de problèmes. J'aime collaborer sur des projets innovants et apprendre de nouvelles technologies."
@@ -118,21 +110,6 @@
             }
         },
         "social": { "github": "GitHub", "linkedin": "LinkedIn" },
-        "skills": {
-            "title": "Compétences techniques",
-            "frontend": {
-                "label": "Frontend",
-                "items": "React, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS"
-            },
-            "backend": {
-                "label": "Backend",
-                "items": "Node.js, Python, PostgreSQL, Supabase, APIs REST"
-            },
-            "tools": {
-                "label": "Outils & DevOps",
-                "items": "Git, GitHub, VS Code, Bash, PowerShell, Linux"
-            }
-        },
         "availability": {
             "title": "Disponibilité",
             "body": "Ouvert aux missions freelance, collaborations avec des start-ups et projets de recherche en IA, données et outils pour développeurs."
@@ -141,34 +118,6 @@
             "title": "Délai de réponse",
             "body": "Je réponds généralement sous 24 à 48 heures."
         },
-        "footer": {
-            "navigation": {
-                "title": "Navigation",
-                "items": { "work": "Travaux", "projects": "Projets", "contact": "Contact" }
-            },
-            "expertise": {
-                "title": "Expertise",
-                "items": ["Dev Frontend", "Dev Backend", "Admin Système", "Analyse de données"]
-            },
-            "connect": {
-                "title": "Réseaux",
-                "items": { "linkedin": "LinkedIn", "github": "GitHub", "website": "Site web" }
-            },
-            "legal": { "privacy": "Politique de confidentialité", "terms": "Conditions d'utilisation" },
-            "copyright": "© 2025 Victor Frangov. Tous droits réservés."
-        }
-    },
-    "about": {
-        "sectionLabel": "À PROPOS DE MOI",
-        "title": {
-            "line1": "Je suis un développeur full‑stack",
-            "line2": "engagé à créer des sites web innovants et créatifs"
-        },
-        "metrics": {
-            "yearsValue": "5",
-            "years": "ANNÉES D’EXPÉRIENCE",
-            "projectsValue": "10+",
-            "projects": "PROJETS RÉALISÉS"
-        }
+        "copyright": "© 2025 Victor Frangov. Tous droits réservés."
     }
 }

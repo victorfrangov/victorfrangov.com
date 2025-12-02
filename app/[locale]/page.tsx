@@ -55,7 +55,7 @@ export default async function HomePage({
 }: {
   params: { locale: string }
 }) {
-  const { locale } = params
+  const { locale } = await (params as unknown as Promise<{ locale: string }>)
 
   return (
     <div className="min-h-screen bg-background text-foreground">

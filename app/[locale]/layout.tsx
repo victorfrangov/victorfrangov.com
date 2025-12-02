@@ -1,19 +1,18 @@
+import React from "react"
 import {notFound} from "next/navigation"
 import {NextIntlClientProvider} from "next-intl"
 import {setRequestLocale} from "next-intl/server"
+import NavBar from "@/components/NavBar"
 
-export function generateStaticParams() {
-  return [{locale: "en"}, {locale: "fr"}]
-}
-
+// Note: params is now a Promise
 export default async function LocaleLayout({
   children,
   params,
 }: {
   children: React.ReactNode
-  params: {locale: string}
+  params: Promise<{locale: string}>
 }) {
-  const {locale} = params
+  const {locale} = await params
   setRequestLocale(locale)
 
   let messages
@@ -23,5 +22,10 @@ export default async function LocaleLayout({
     notFound()
   }
 
-  return <NextIntlClientProvider locale={locale} messages={messages}>{children}</NextIntlClientProvider>
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <NavBar />
+      {children}
+    </NextIntlClientProvider>
+  )
 }

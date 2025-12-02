@@ -175,3 +175,8 @@
     animation: none;
     mix-blend-mode: normal;
 }
+
+/* Prevent layout shift when scrollbars appear/disappear */
+html {
+  scrollbar-gutter: stable both-edges;
+}

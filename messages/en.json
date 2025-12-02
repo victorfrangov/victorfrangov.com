@@ -1,7 +1,4 @@
 {
-  "brand": {
-    "name": "Victor."
-  },
   "nav": {
     "greeting": "HELLO, I'M VICTOR FRANGOV",
     "greeting1": "Design 🎨",
@@ -26,6 +23,19 @@
         "line3": "Transforming ideas into elegant digital solutions with expertise in full-stack development."
       },
       "cta": "Let's collaborate"
+    }
+  },
+  "about": {
+    "sectionLabel": "ABOUT ME",
+    "title": {
+      "line1": "I'm a passionate developer",
+      "line2": "committed to building innovative and creative solutions"
+    },
+    "metrics": {
+      "yearsValue": "5",
+      "years": "YEARS OF EXPERIENCE",
+      "projectsValue": "10+",
+      "projects": "PROJECTS COMPLETED"
     }
   },
   "expertise": {
@@ -82,8 +92,7 @@
     "title": { "line1": "LET'S", "line2": "CONNECT" },
     "invite": "Build something impactful.",
     "cta": {
-      "primary": "Start a Project",
-      "secondary": "Email Me"
+      "primary": "Start a Project"
     },
     "about": {
       "name": "Victor Frangov",
@@ -100,6 +109,7 @@
         "value": "Available for collaboration and opportunities"
       }
     },
+    "social": { "github": "GitHub", "linkedin": "LinkedIn" },
     "availability": {
       "title": "Availability",
       "body": "Open to freelance engagements, startup collaborations, and research projects in AI, data, and developer tooling."
@@ -108,50 +118,6 @@
       "title": "Response Time",
       "body": "I usually reply within 24–48 hours."
     },
-    "social": { "github": "GitHub", "linkedin": "LinkedIn" },
-    "skills": {
-      "title": "Technical Skills",
-      "frontend": {
-        "label": "Frontend",
-        "items": "React, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS"
-      },
-      "backend": {
-        "label": "Backend",
-        "items": "Node.js, Python, PostgreSQL, Supabase, REST APIs"
-      },
-      "tools": {
-        "label": "Tools & DevOps",
-        "items": "Git, GitHub, VS Code, Bash, PowerShell, Linux"
-      }
-    },
-    "footer": {
-      "navigation": {
-        "title": "Navigation",
-        "items": { "work": "Work", "projects": "Projects", "contact": "Contact" }
-      },
-      "expertise": {
-        "title": "Expertise",
-        "items": ["Frontend Dev", "Backend Dev", "System Admin", "Data Analysis"]
-      },
-      "connect": {
-        "title": "Connect",
-        "items": { "linkedin": "LinkedIn", "github": "GitHub", "website": "Website" }
-      },
-      "legal": { "privacy": "Privacy Policy", "terms": "Terms of Service" },
-      "copyright": "© 2025 Victor Frangov. All rights reserved."
-    }
-  },
-  "about": {
-    "sectionLabel": "ABOUT ME",
-    "title": {
-      "line1": "I'm a passionate developer",
-      "line2": "committed to building innovative and creative solutions"
-    },
-    "metrics": {
-      "yearsValue": "5",
-      "years": "YEARS OF EXPERIENCE",
-      "projectsValue": "10+",
-      "projects": "PROJECTS COMPLETED"
-    }
+    "copyright": "© 2025 Victor Frangov. All rights reserved."
   }
 }

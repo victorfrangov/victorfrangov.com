@@ -1,14 +1,21 @@
 import "./globals.css"
-import {Inter} from "next/font/google"
 import {ThemeProvider} from "next-themes"
+import {ReactNode} from "react"
+import {getLocale} from "next-intl/server"
 
-const inter = Inter({subsets: ["latin"]})
+export default async function RootLayout({children}: {children: ReactNode}) {
+  const locale = await getLocale()
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} storageKey="theme">
+    <html lang={locale} suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          storageKey="theme"
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>

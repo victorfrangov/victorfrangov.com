@@ -88,6 +88,8 @@ function IconBadges({ items }: { items: IconItem[] }) {
 }
 
 export default async function ExpertiseSection({ locale }: { locale: string }) {
+  // With next-intl configured and request locale set in layout,
+  // getTranslations can read the active locale; passing is fine too.
   const t = await getTranslations({ locale })
 
   return (
