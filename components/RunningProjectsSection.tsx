@@ -158,7 +158,9 @@ export default function RunningProjectsSection() {
                 >
                   {/* Dot only on lg+ */}
                   <div
-                    ref={el => (dotRefs.current[i] = el)}
+                    ref={(el) => {
+                      dotRefs.current[i] = el
+                    }}
                     className="absolute left-1/2 top-6 -translate-x-1/2 hidden lg:block"
                   >
                     <div className="w-5 h-5 rounded-full bg-blue-500 shadow-[0_0_0_6px_rgba(59,130,246,0.25)]" />

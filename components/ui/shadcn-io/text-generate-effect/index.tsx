@@ -34,13 +34,20 @@ export function TextGenerateEffect({
         const entry = entries[0];
         if (entry.isIntersecting && (!hasPlayed || !once)) {
           // Animate each word with stagger
-          const wordSpans = scope.current!.querySelectorAll('[data-word]');
+          const wordSpans = scope.current!.querySelectorAll('[data-word]') as NodeListOf<HTMLElement>
+
           wordSpans.forEach((el, i) => {
-            animate(
-              el,
-              { opacity: 1, filter: filter ? 'blur(0px)' : 'none', y: 0 },
-              { duration, delay: i * staggerDelay, easing: 'ease-out' }
-            );
+            const keyframes: Keyframe[] = [
+              { opacity: 0, transform: 'translateY(8px)', filter: filter ? 'blur(4px)' : 'none' },
+              { opacity: 1, transform: 'translateY(0px)', filter: 'none' },
+            ]
+
+            el.animate(keyframes, {
+              duration,
+              delay: i * staggerDelay,
+              easing: 'ease-out',
+              fill: 'forwards',
+            })
           });
           setHasPlayed(true);
         }

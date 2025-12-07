@@ -1,8 +1,8 @@
-import {heroui} from '@heroui/theme';
 import type {Config} from "tailwindcss"
 
 export default {
-  darkMode: ["class"],
+  // Use string form
+  darkMode: "class",
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -21,7 +21,5 @@ export default {
       },
     },
   },
-  plugins: [
-    // remove any HeroUI plugin entries here
-  ],
+  plugins: [],
 } satisfies Config
