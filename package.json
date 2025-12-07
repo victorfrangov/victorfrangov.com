@@ -10,8 +10,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@heroui/navbar": "^2.2.25",
-    "@heroui/theme": "^2.4.23",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
@@ -56,9 +54,9 @@
     "next-intl": "^4.3.12",
     "next-themes": "latest",
     "playwright": "^1.56.1",
-    "react": "18.2.0",
+    "react": "^19.2.1",
     "react-day-picker": "9.8.0",
-    "react-dom": "18.2.0",
+    "react-dom": "^19.2.1",
     "react-hook-form": "^7.60.0",
     "react-markdown": "^10.1.0",
     "react-resizable-panels": "^2.1.7",
