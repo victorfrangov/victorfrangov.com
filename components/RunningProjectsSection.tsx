@@ -114,7 +114,7 @@ export default function RunningProjectsSection() {
   }, [])
 
   return (
-    <section id="projects" className="py-8 sm:py-16 px-4 sm:px-6">
+    <section id="projects" className="py-2 sm:py-16">
       <div className="relative -top-30 sm:-top-30">
         <CurvedLoop
           marqueeText={t("running.title")}
@@ -122,25 +122,25 @@ export default function RunningProjectsSection() {
           curveAmount={300}
           direction="left"
           interactive={true}
-          className="fill-black dark:fill-white text-5xl"
+          className="fill-black dark:fill-white text-9xl sm:text-8xl lg:text-6xl"
         />
       </div>
 
-      <div className="max-w-7xl mx-auto">
-        <p
-          className="mx-auto mt-2 sm:mt-3 mb-10 sm:mb-12 max-w-3xl text-center text-2xl sm:text-3xl font-semibold tracking-tight text-foreground"
-        >
+      <div className="max-w-7xl mx-auto -mt-6 lg:mt-10">
+        <p className="mx-auto mt-2 sm:mt-3 mb-10 sm:mb-12 max-w-3xl text-center text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
           {t("running.description")}
         </p>
 
         <div ref={containerRef} className="relative mx-auto max-w-3xl">
-         <div
+          {/* Center line and beams only on lg+ */}
+          <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-blue-500/70 via-blue-400/30 to-blue-300/10"
+            className="pointer-events-none absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-blue-500/60 via-blue-400/25 to-blue-300/10 hidden lg:block"
             style={{ top: `${lineTop}px`, height: `${lineHeight}px` }}
           />
 
-          <div className="flex flex-col gap-16">
+          {/* Mobile/md: stacked centered. lg+: alternating */}
+          <div className="flex flex-col gap-10 md:gap-14 lg:gap-16">
             {PROJECTS.map((p, i) => {
               const leftSide = i % 2 === 0
               const title = t(`projects.${p.slug}.title`)
@@ -150,16 +150,26 @@ export default function RunningProjectsSection() {
               return (
                 <div
                   key={p.slug}
-                  className={cn("relative w-full", leftSide ? "pr-[60%]" : "pl-[60%]")}
+                  className={cn(
+                    "relative w-full",
+                    // Only offset on lg+ (no md offsets)
+                    leftSide ? "lg:pr-[60%]" : "lg:pl-[60%]"
+                  )}
                 >
+                  {/* Dot only on lg+ */}
                   <div
                     ref={el => (dotRefs.current[i] = el)}
-                    className="absolute left-1/2 top-6 -translate-x-1/2 w-5 h-5 rounded-full bg-blue-500 shadow-[0_0_0_6px_rgba(59,130,246,0.25)]"
-                  />
+                    className="absolute left-1/2 top-6 -translate-x-1/2 hidden lg:block"
+                  >
+                    <div className="w-5 h-5 rounded-full bg-blue-500 shadow-[0_0_0_6px_rgba(59,130,246,0.25)]" />
+                  </div>
+
                   <div
                     className={cn(
-                      "relative max-w-[24rem] lg:max-w-[26rem]",
-                      leftSide ? "ml-0 mr-auto" : "mr-0 ml-auto"
+                      "relative",
+                      // Centered card on mobile/md; push left/right on lg
+                      "mx-auto max-w-[22rem] md:max-w-[24rem] lg:max-w-[26rem]",
+                      leftSide ? "lg:ml-0 lg:mr-auto" : "lg:mr-0 lg:ml-auto"
                     )}
                   >
                     <ProjectCard
@@ -176,6 +186,8 @@ export default function RunningProjectsSection() {
               )
             })}
           </div>
+
+          {/* Beams only on lg+ */}
           {ready &&
             dotRefs.current.length > 1 &&
             dotRefs.current.map((_, i) => {
@@ -189,9 +201,9 @@ export default function RunningProjectsSection() {
                   fromRef={{ current: from }}
                   toRef={{ current: to }}
                   orientation="vertical"
-                  duration={20}
-                  pathOpacity={0.3}
-                  className="pointer-events-none opacity-80"
+                  duration={18}
+                  pathOpacity={0.22}
+                  className="pointer-events-none hidden lg:block"
                 />
               )
             })}

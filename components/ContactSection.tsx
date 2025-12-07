@@ -95,7 +95,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
                 {t("contact.social.github")}
               </Link>
               <Link
-                href="https://www.linkedin.com/in/victor-frangov-4b974a147/"
+                href="https://www.linkedin.com/in/victor-frangov/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-sm hover:bg-accent hover:text-accent-foreground transition-colors"

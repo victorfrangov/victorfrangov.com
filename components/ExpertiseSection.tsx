@@ -64,7 +64,7 @@ const TOOLS_DEVOPS_ICONS: IconItem[] = [
 
 function IconBadges({ items }: { items: IconItem[] }) {
   return (
-    <ul className="flex flex-wrap gap-2">
+    <ul className="flex flex-wrap gap-2 justify-center sm:justify-start">
       {items.map(({ label, slug, invertDark, noIcon }) => (
         <li
           key={label}
@@ -88,42 +88,41 @@ function IconBadges({ items }: { items: IconItem[] }) {
 }
 
 export default async function ExpertiseSection({ locale }: { locale: string }) {
-  // With next-intl configured and request locale set in layout,
-  // getTranslations can read the active locale; passing is fine too.
   const t = await getTranslations({ locale })
 
   return (
-    <section id="expertise" className="pt-24">
+    <section id="expertise" className="pt-24 pb-28 sm:pb-12">
       <ScrollVelocity
         texts={[t("expertise.title.line1"), t("expertise.title.line2")]}
-        className="text-4xl sm:text-6xl md:text-8xl font-bold"
+        className="text-4xl sm:text-6xl md:text-8xl font-bold text-center sm:text-left"
       />
       <div className="max-w-7xl mx-auto mb-16 sm:mb-32 mt-16">
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
-            {[
-              {
-                number: "01",
-                titleKey: "expertise.items.0.title",
-                icons: FRONTEND_ICONS,
-              },
-              {
-                number: "02",
-                titleKey: "expertise.items.1.title",
-                icons: BACKEND_ICONS,
-              },
-              {
-                number: "03",
-                titleKey: "expertise.items.2.title",
-                icons: TOOLS_DEVOPS_ICONS,
-              },
-            ].map((service, index) => (
-              <div key={index} className="space-y-4">
-                <span className="text-sm text-muted-foreground">({service.number})</span>
-                <h3 className="text-2xl font-bold">{t(service.titleKey)}</h3>
-                <IconBadges items={service.icons} />
-              </div>
-            ))}
-          </div>
+        {/* Center on mobile, left-align on larger screens */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 text-center sm:text-left">
+          {[
+            {
+              number: "01",
+              titleKey: "expertise.items.0.title",
+              icons: FRONTEND_ICONS,
+            },
+            {
+              number: "02",
+              titleKey: "expertise.items.1.title",
+              icons: BACKEND_ICONS,
+            },
+            {
+              number: "03",
+              titleKey: "expertise.items.2.title",
+              icons: TOOLS_DEVOPS_ICONS,
+            },
+          ].map((service, index) => (
+            <div key={index} className="space-y-4">
+              <span className="text-sm text-muted-foreground">({service.number})</span>
+              <h3 className="text-2xl font-bold">{t(service.titleKey)}</h3>
+              <IconBadges items={service.icons} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

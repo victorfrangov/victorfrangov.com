@@ -6,8 +6,7 @@ export default {
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
-    "./pages/**/*.{ts,tsx}",
-    "./node_modules/@heroui/theme/dist/components/navbar.js"
+    "./pages/**/*.{ts,tsx}"
   ],
   theme: {
     extend: {
@@ -22,5 +21,7 @@ export default {
       },
     },
   },
-  plugins: [heroui()],
+  plugins: [
+    // remove any HeroUI plugin entries here
+  ],
 } satisfies Config
