@@ -6,7 +6,7 @@ async function run() {
     viewport: { width: 1440, height: 900 },
     deviceScaleFactor: 2,
   });
-  await page.goto("https://supervitre.net", { waitUntil: "networkidle" });
+  await page.goto("https://victorfrangov.com", { waitUntil: "networkidle" });
 
   // Optional cleanup
   await page.addStyleTag({ content: `
