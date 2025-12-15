@@ -11,7 +11,7 @@ export default function AboutMeSection() {
         <span className="uppercase tracking-widest text-xs sm:text-sm text-muted-foreground mb-8 inline-block">
           {t("sectionLabel")}
         </span>
-        <h2 className="font-bold leading-tight text-4xl sm:text-6xl md:text-7xl">
+        <h2 className="font-bold leading-tight text-4xl sm:text-6xl md:text-7xl text-center sm:text-left">
           <TextGenerateEffect
             words={`${t("title.line1")} ${t("title.line2")}`}
             duration={0.6}

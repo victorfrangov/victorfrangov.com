@@ -53,7 +53,6 @@ const TOOLS_DEVOPS_ICONS: IconItem[] = [
   { label: "Vercel", slug: "vercel", invertDark: true },
   { label: "Google Cloud", slug: "googlecloud" },
   { label: "Microsoft Azure", slug: "microsoftazure" },
-  { label: "Heroku", slug: "heroku" },
   { label: "Postman", slug: "postman" },
   { label: "Insomnia", slug: "insomnia" },
   { label: "Anaconda", slug: "anaconda" },

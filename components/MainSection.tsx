@@ -31,7 +31,8 @@ export default function MainSection() {
               </Highlighter>
               <br /> {t("main.hero.title.line2")}
             </h1>
-            <div className="shrink-0">
+            {/* Add headshot image later */}
+            {/* <div className="shrink-0">
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full overflow-hidden border border-border bg-muted">
                 <Image
                   src="/headshot.jpg"
@@ -42,7 +43,7 @@ export default function MainSection() {
                   priority
                 />
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="mt-8 sm:mt-10 flex flex-col items-center text-center gap-6">

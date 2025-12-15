@@ -80,7 +80,6 @@ const PROJECTS: Project[] = [
 
 export default function RunningProjectsSection() {
   const t = useTranslations()
-
   const containerRef = useRef<HTMLDivElement | null>(null)
   const dotRefs = useRef<(HTMLDivElement | null)[]>([])
   dotRefs.current = PROJECTS.map((_, i) => dotRefs.current[i] ?? null)

@@ -23,7 +23,7 @@ export function TextGenerateEffect({
   className,
   ...props
 }: TextGenerateEffectProps) {
-  const [scope, animate] = useAnimate();
+  const [scope, animate] = useAnimate<HTMLElement>();
   const [hasPlayed, setHasPlayed] = React.useState(false);
 
   React.useEffect(() => {
@@ -33,21 +33,14 @@ export function TextGenerateEffect({
       entries => {
         const entry = entries[0];
         if (entry.isIntersecting && (!hasPlayed || !once)) {
-          // Animate each word with stagger
-          const wordSpans = scope.current!.querySelectorAll('[data-word]') as NodeListOf<HTMLElement>
-
-          wordSpans.forEach((el, i) => {
-            const keyframes: Keyframe[] = [
-              { opacity: 0, transform: 'translateY(8px)', filter: filter ? 'blur(4px)' : 'none' },
-              { opacity: 1, transform: 'translateY(0px)', filter: 'none' },
-            ]
-
-            el.animate(keyframes, {
-              duration,
-              delay: i * staggerDelay,
-              easing: 'ease-out',
-              fill: 'forwards',
-            })
+          const wordSpans = scope.current!.querySelectorAll<HTMLElement>('[data-word]');
+            wordSpans.forEach((el, i) => {
+              // Framer-style object target + options
+              animate(
+                el,
+                { opacity: 1, y: 0, filter: 'none' },
+                { duration, delay: i * staggerDelay, ease: 'easeOut' }
+              );
           });
           setHasPlayed(true);
         }
