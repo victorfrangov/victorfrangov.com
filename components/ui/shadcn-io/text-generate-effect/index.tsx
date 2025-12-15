@@ -23,19 +23,17 @@ export function TextGenerateEffect({
   className,
   ...props
 }: TextGenerateEffectProps) {
-  const [scope, animate] = useAnimate<HTMLElement>();
+  const [scope, animate] = useAnimate<HTMLDivElement>();
   const [hasPlayed, setHasPlayed] = React.useState(false);
 
   React.useEffect(() => {
     if (!scope.current) return;
-
     const observer = new IntersectionObserver(
       entries => {
         const entry = entries[0];
         if (entry.isIntersecting && (!hasPlayed || !once)) {
-          const wordSpans = scope.current!.querySelectorAll<HTMLElement>('[data-word]');
+          const wordSpans = scope.current!.querySelectorAll<HTMLSpanElement>('[data-word]');
             wordSpans.forEach((el, i) => {
-              // Framer-style object target + options
               animate(
                 el,
                 { opacity: 1, y: 0, filter: 'none' },
