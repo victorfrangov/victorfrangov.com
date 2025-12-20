@@ -37,8 +37,8 @@ jobs:
 
       - name: Prepare JSON Files
         run: |
-          cp resume.json public/resume_en.json
-          cp resume_fr.json public/resume_fr.json
+          cp data/resume_en.json public/resume_en.json
+          cp data/resume_fr.json public/resume_fr.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
