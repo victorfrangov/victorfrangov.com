@@ -35,13 +35,9 @@ jobs:
           # Clean up any extra folders RenderCV might leave behind (optional)
           rm -rf rendercv_output
 
-      - name: Prepare JSON Files
-        run: |
-          cp data/resume_en.json public/resume_en.json
-          cp data/resume_fr.json public/resume_fr.json
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          cname: cv.victorfrangov.com
