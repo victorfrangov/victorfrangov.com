@@ -8,22 +8,22 @@ cv:
   sections:
     Éducation:
       - institution: École Polytechnique Fédérale de Lausanne (EPFL)
-        area: Cours de mathématiques spéciales (CMS)
+        degree: Cours de mathématiques spéciales (CMS)
         date: 2025 - Présent
         location: Lausanne, Suisse
       
       - institution: Collège Édouard-Montpetit
-        area: "Sciences de la nature : Profil Sciences pures et appliquées"
+        degree: "Sciences de la nature : Profil Sciences pures et appliquées"
         date: 2024 - 2025
         location: Longueuil, QC
 
       - institution: Collège Dawson
-        area: Technologie de l’informatique
+        degree: Technologie de l’informatique
         date: 2023 - 2024
         location: Montréal, QC
 
       - institution: Collège Durocher St-Lambert
-        area: Diplôme d’études secondaires (Mathématiques Sciences Naturelles, Physique/Chimie)
+        degree: Diplôme d’études secondaires (Mathématiques Sciences Naturelles, Physique/Chimie)
         date: 2018 - 2023
         location: St-Lambert, QC
         highlights:
@@ -85,3 +85,4 @@ design:
 
 locale:
   language: fr
+  last_updated: "Dernière mise à jour en"
