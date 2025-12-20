@@ -1,0 +1,84 @@
+cv:
+  name: Victor Frangov
+  location: Crissier, Switzerland
+  email: victor.frangov@gmail.com
+  phone: +41 77 290 10 86
+  website: https://victorfrangov.com
+  
+  sections:
+    education:
+      - institution: École Polytechnique Fédérale de Lausanne (EPFL)
+        area: Cours de mathématiques spéciales (CMS)
+        date: 2025 - Present
+        location: Lausanne, Suisse
+      
+      - institution: Collège Édouard-Montpetit
+        area: Natural Sciences: Pure and Applied Science
+        date: 2024 - 2025
+        location: Longueuil, QC
+
+      - institution: Collège Dawson
+        area: Computer Science
+        date: 2023 - 2024
+        location: Montréal, QC
+
+      - institution: Collège Durocher St-Lambert
+        area: Secondary School Diploma (Natural Sciences, Math, Physics/Chemistry)
+        date: 2018 - 2023
+        location: St-Lambert, QC
+        highlights:
+          - "Winner of a cash prize for an advertising project"
+
+    experience:
+      - company: Office Québécois de la Langue Française
+        position: IT Support
+        location: Montréal, QC
+        date: July 2024 – August 2025
+        highlights:
+          - Implemented a labeling system with a Zebra printer and scanner using ZebraDesigner 3 and 123Scan
+          - Managed over 500 workstations with SCCM, Active Directory, and BitLocker
+          - Created scripts in Bash, PowerShell, and Python to automate various lengthy processes
+          - Managed the YubiKey installation project at the Montreal office
+          - Imaged/Purged over 200 employee laptops with Acronis
+          - Installed and updated new equipment in the server room
+          - Used the Octopus-ITSM ticketing system to provide customer support
+          - Performed hardware inventory, updated Windows 10/11 images, and prepared equipment delivery
+
+      - company: IGA
+        position: Grocery Clerk – Customer Service and Inventory Management
+        date: February 2024 - June 2024
+        
+      - company: Métro
+        position: Grocery Clerk – Customer Service and Inventory Management
+        date: August 2023 – November 2023
+
+      - company: Edikom
+        position: Warehouse Associate – Order Picking
+        date: October 2022 – October 2023
+        
+      - company: McDonald’s
+        position: Team Member
+        date: May 2022 – August 2022
+
+    volunteering:
+      - organization: School Project
+        position: Volunteer
+        location: St-Lambert, QC
+        date: February 2023
+        highlights:
+          - Participation in a project to assist single mothers, including the collection and distribution of essential products through a partnership with Maxi.
+
+    technologies:
+      - label: Infrastructure & Tools
+        details: M365, SCCM, AD, BitLocker, Acronis, Octopus-ITSM, RDP, Fortinet, Cisco, ZebraDesigner
+      - label: Programming
+        details: Bash, Python, Java, C/C++, HTML/CSS, JavaScript/NextJS
+      - label: OS & Hardware
+        details: Windows 7/10/11, MacOS, Linux, ESP-32
+      - label: Languages
+        details: French, English, Bulgarian
+      - label: Interests
+        details: Programming, Finance, AI, Science, Math, Music
+
+design:
+  theme: classic

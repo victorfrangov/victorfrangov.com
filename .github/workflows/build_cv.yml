@@ -1,0 +1,52 @@
+name: Build and Deploy CVs
+
+on:
+  push:
+    branches:
+      - main  # Set this to 'master' if your default branch is master
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install RenderCV
+        run: |
+          pip install rendercv
+
+      - name: Build PDFs (RenderCV)
+        run: |
+          # Build English CV
+          rendercv render data/cv_en.yaml --output-folder public
+          # Build French CV
+          rendercv render data/cv_fr.yaml --output-folder public
+          
+          # RenderCV creates subfolders, let's flatten them for easier hosting
+          mv public/cv_en_CV.pdf public/cv_en.pdf
+          mv public/cv_fr_CV.pdf public/cv_fr.pdf
+          
+          # Remove intermediate LaTeX files to keep it clean
+          find public -type f ! -name '*.pdf' -delete
+          find public -type d -empty -delete
+
+      - name: Prepare JSON Files
+        run: |
+          # Copy your JSON files to the public folder
+          cp data/resume.json public/resume_en.json
+          cp data/resume_fr.json public/resume_fr.json
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

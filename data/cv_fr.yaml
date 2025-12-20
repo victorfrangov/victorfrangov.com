@@ -1,0 +1,84 @@
+cv:
+  name: Victor Frangov
+  location: Crissier, Suisse
+  email: victor.frangov@gmail.com
+  phone: +41 77 290 10 86
+  website: https://victorfrangov.com
+  
+  sections:
+    education:
+      - institution: École Polytechnique Fédérale de Lausanne (EPFL)
+        area: Cours de mathématiques spéciales (CMS)
+        date: 2025 - Présent
+        [cite_start]location: Lausanne, Suisse [cite: 56, 57]
+      
+      - institution: Collège Édouard-Montpetit
+        area: Sciences de la nature : Profil Sciences pures et appliquées
+        date: 2024 - 2025
+        [cite_start]location: Longueuil, QC [cite: 58, 59]
+
+      - institution: Collège Dawson
+        area: Technologie de l’informatique
+        date: 2023 - 2024
+        [cite_start]location: Montréal, QC [cite: 60, 61]
+
+      - institution: Collège Durocher St-Lambert
+        area: Diplôme d’études secondaires (Mathématiques Sciences Naturelles, Physique/Chimie)
+        date: 2018 - 2023
+        location: St-Lambert, QC
+        highlights:
+          - [cite_start]"Gagnant d'un prix en argent d’un projet publicitaire" [cite: 63]
+
+    experience:
+      - company: Office Québécois de la Langue Française
+        position: Support TI
+        location: Montréal, QC
+        [cite_start]date: Juillet 2024 – Aout 2025 [cite: 65, 66]
+        highlights:
+          - [cite_start]Mis en place un système d’étiquetage avec une imprimante et scanneur Zebra avec ZebraDesigner 3 et 123Scan [cite: 67]
+          - [cite_start]Gestion de plus de 500 postes avec System Center Configuration Manager (SCCM), Active Directory et BitLocker [cite: 71]
+          - [cite_start]Création de scripts en Bash, PowerShell et Python pour automatiser divers processus longs [cite: 70]
+          - [cite_start]Géré le projet d’installation de YubiKey au bureau de Montréal [cite: 69]
+          - [cite_start]Imager/Purger plus de 200 portables pour les employés avec Acronis [cite: 73]
+          - [cite_start]Installation et mise à jour de nouvel équipement dans la salle des serveurs [cite: 68]
+          - [cite_start]Utiliser le système de billetterie Octopus-ITSM pour venir en aide à la clientèle [cite: 72]
+          - [cite_start]Faire l’inventaire du matériel informatique, mettre à jour les images Windows 10/11 et préparer la livraison d’équipement [cite: 74, 75, 76]
+
+      - company: IGA
+        position: Commis d’épicerie – Service à la clientèle et gestion des stocks
+        [cite_start]date: Février 2024 - Juin 2024 [cite: 78]
+        
+      - company: Métro
+        position: Commis d’épicerie – Service à la clientèle et gestion des stocks
+        [cite_start]date: Août 2023 – Novembre 2023 [cite: 79]
+
+      - company: Edikom
+        position: Commis d’entrepôt – Préparation des commandes
+        [cite_start]date: Octobre 2022 – Octobre 2023 [cite: 83]
+        
+      - company: McDonald’s
+        position: Équipier
+        [cite_start]date: Mai 2022 – Août 2022 [cite: 84]
+
+    volunteering:
+      - organization: Projet d’école
+        position: Bénévolat
+        location: St-Lambert, QC
+        [cite_start]date: Février 2023 [cite: 80, 81]
+        highlights:
+          - [cite_start]Participation à un projet d’aide aux mères monoparentales, incluant collecte et distribution de produits essentiels grâce à un partenariat avec Maxi. [cite: 82]
+
+    technologies:
+      - label: Techniques
+        [cite_start]details: M365, SCCM, AD, BitLocker, Acronis, Octopus-ITSM, RDP, Fortinet, Cisco, ZebraDesigner [cite: 87]
+      - label: Programmation
+        [cite_start]details: Bash, Python, Java, C/C++, HTML/CSS, JavaScript/NextJS [cite: 88]
+      - label: OS & Matériel
+        [cite_start]details: Windows 7/10/11, MacOS, Linux, ESP-32 [cite: 89]
+      - label: Langues
+        [cite_start]details: Français, Anglais, Bulgare [cite: 90]
+      - label: Intérêts
+        [cite_start]details: Programmation, Finances, IA, Sciences, Mathématiques, Musique [cite: 91]
+
+design:
+  theme: classic
