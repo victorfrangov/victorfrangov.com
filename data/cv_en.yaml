@@ -88,3 +88,12 @@ design:
     bottom_margin: 1.5cm
     left_margin: 1.5cm
     right_margin: 1.5cm
+  entry_types:
+    education_entry:
+      main_column_first_row_template:
+       |-
+        **INSTITUTION**
+        *AREA*
+  # header:
+  #     vertical_space_between_name_and_connections: 0.5cm
+  #     vertical_space_between_connections_and_first_section: 0.5cm
