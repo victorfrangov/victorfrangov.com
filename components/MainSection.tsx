@@ -2,14 +2,19 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ChevronRight } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { AnimatedGradientText } from "./ui/animated-gradient-text"
 import { cn } from "@/lib/utils"
 import { Highlighter } from "./ui/highlighter"
 import { Particles } from "./ui/particles"
 
 export default function MainSection() {
+  const locale = useLocale()
   const t = useTranslations()
+  const cvHref =
+    locale === "fr"
+      ? "https://cv.victorfrangov.com/cv_fr.pdf"
+      : "https://cv.victorfrangov.com/cv_en.pdf"
   return (
     <section id="main" className="relative isolate px-4 sm:px-6 pt-24 sm:pt-32 mt-24 sm:mt-32">
       <div
@@ -55,7 +60,7 @@ export default function MainSection() {
               {t("main.hero.subtitle.line3")}
             </p>
             <Link
-              href="#contact"
+              href={cvHref}
               className="group relative mx-auto flex items-center justify-center rounded-full px-4 py-2 shadow-[inset_0_-8px_10px_#4d5bff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#4d5bff3f] border border-border"
             >
               <span
@@ -75,7 +80,7 @@ export default function MainSection() {
               <span className="mr-2">🎉</span>
               <hr className="mx-2 h-4 w-px shrink-0 bg-neutral-500" />
               <AnimatedGradientText className="text-sm sm:text-base font-medium">
-                {t("main.hero.cta")}
+                {t("main.hero.cv")}
               </AnimatedGradientText>
               <ChevronRight className="ml-1 h-4 w-4 stroke-neutral-500 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
             </Link>

@@ -1,6 +1,6 @@
 cv:
   name: Victor Frangov
-  location: Crissier, Suisse
+  location: Lausanne, Suisse
   email: victor.frangov@gmail.com
   phone: +41 77 290 10 86
   website: https://victorfrangov.com
@@ -81,4 +81,4 @@ cv:
         details: Programmation, Finances, IA, Sciences, Mathématiques, Musique
 
 design:
-  theme: classic
+  theme: sb2nov
