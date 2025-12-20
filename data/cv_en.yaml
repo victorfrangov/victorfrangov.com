@@ -68,7 +68,7 @@ cv:
         highlights:
           - Participation in a project to assist single mothers, including the collection and distribution of essential products through a partnership with Maxi.
 
-    technologies:
+    skills:
       - label: Infrastructure & Tools
         details: M365, SCCM, AD, BitLocker, Acronis, Octopus-ITSM, RDP, Fortinet, Cisco, ZebraDesigner
       - label: Programming

@@ -6,7 +6,7 @@ cv:
   website: https://victorfrangov.com
   
   sections:
-    education:
+    Éducation:
       - institution: École Polytechnique Fédérale de Lausanne (EPFL)
         area: Cours de mathématiques spéciales (CMS)
         date: 2025 - Présent
@@ -29,7 +29,7 @@ cv:
         highlights:
           - "Gagnant d'un prix en argent d’un projet publicitaire"
 
-    experience:
+    Expérience:
       - company: Office Québécois de la Langue Française
         position: Support TI
         location: Montréal, QC
@@ -60,7 +60,7 @@ cv:
         position: Équipier
         date: Mai 2022 – Août 2022
 
-    volunteering:
+    Bénévolat:
       - company: Projet d’école
         position: Bénévolat
         location: St-Lambert, QC
@@ -68,7 +68,7 @@ cv:
         highlights:
           - Participation à un projet d’aide aux mères monoparentales, incluant collecte et distribution de produits essentiels grâce à un partenariat avec Maxi.
 
-    technologies:
+    Compétences:
       - label: Techniques
         details: M365, SCCM, AD, BitLocker, Acronis, Octopus-ITSM, RDP, Fortinet, Cisco, ZebraDesigner
       - label: Programmation
@@ -82,3 +82,6 @@ cv:
 
 design:
   theme: sb2nov
+
+locale:
+  language: fr
