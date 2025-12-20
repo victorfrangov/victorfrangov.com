@@ -22,28 +22,23 @@ jobs:
 
       - name: Install RenderCV
         run: |
-          pip install rendercv[full]
+          # The --upgrade flag ensures we get v2.5+, which supports --pdf-path
+          pip install --upgrade "rendercv[full]"
 
       - name: Build PDFs (RenderCV)
         run: |
-          # Build English CV
-          rendercv render data/cv_en.yaml --output-folder public
-          # Build French CV
-          rendercv render data/cv_fr.yaml --output-folder public
+          # We use --pdf-path to save the PDF directly to the right name/location
+          # This prevents the French CV from overwriting the English one
+          rendercv render data/cv_en.yaml --pdf-path public/cv_en.pdf
+          rendercv render data/cv_fr.yaml --pdf-path public/cv_fr.pdf
           
-          # RenderCV creates subfolders, let's flatten them for easier hosting
-          mv public/cv_en_CV.pdf public/cv_en.pdf
-          mv public/cv_fr_CV.pdf public/cv_fr.pdf
-          
-          # Remove intermediate LaTeX files to keep it clean
-          find public -type f ! -name '*.pdf' -delete
-          find public -type d -empty -delete
+          # Clean up any extra folders RenderCV might leave behind (optional)
+          rm -rf rendercv_output
 
       - name: Prepare JSON Files
         run: |
-          # Copy your JSON files to the public folder
-          cp data/resume.json public/resume_en.json
-          cp data/resume_fr.json public/resume_fr.json
+          cp resume.json public/resume_en.json
+          cp resume_fr.json public/resume_fr.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
