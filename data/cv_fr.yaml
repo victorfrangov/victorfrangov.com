@@ -8,22 +8,22 @@ cv:
   sections:
     Éducation:
       - institution: École Polytechnique Fédérale de Lausanne (EPFL)
-        degree: Cours de mathématiques spéciales (CMS)
+        area: Cours de mathématiques spéciales (CMS)
         date: 2025 - Présent
         location: Lausanne, Suisse
       
       - institution: Collège Édouard-Montpetit
-        degree: "Sciences de la nature : Profil Sciences pures et appliquées"
+        area: "Sciences de la nature : Profil Sciences pures et appliquées"
         date: 2024 - 2025
         location: Longueuil, QC
 
       - institution: Collège Dawson
-        degree: Technologie de l’informatique
+        area: Technologie de l’informatique
         date: 2023 - 2024
         location: Montréal, QC
 
       - institution: Collège Durocher St-Lambert
-        degree: Diplôme d’études secondaires (Mathématiques Sciences Naturelles, Physique/Chimie)
+        area: Diplôme d’études secondaires (Mathématiques Sciences Naturelles, Physique/Chimie)
         date: 2018 - 2023
         location: St-Lambert, QC
         highlights:
@@ -48,9 +48,9 @@ cv:
         position: Commis d’épicerie – Service à la clientèle et gestion des stocks
         date: Février 2024 - Juin 2024
         
-      - company: Métro
-        position: Commis d’épicerie – Service à la clientèle et gestion des stocks
-        date: Août 2023 – Novembre 2023
+      # - company: Métro
+      #   position: Commis d’épicerie – Service à la clientèle et gestion des stocks
+      #   date: Août 2023 – Novembre 2023
 
       - company: Edikom
         position: Commis d’entrepôt – Préparation des commandes
@@ -82,7 +82,22 @@ cv:
 
 design:
   theme: sb2nov
+  page:
+    size: us-letter
+    top_margin: 1.5cm
+    bottom_margin: 1.5cm
+    left_margin: 1.5cm
+    right_margin: 1.5cm
+  entry_types:
+    education_entry:
+      main_column_first_row_template:
+       |-
+        **INSTITUTION**
+        *AREA*
+  # header:
+  #     vertical_space_between_name_and_connections: 0.5cm
+  #     vertical_space_between_connections_and_first_section: 0.5cm
 
 locale:
   language: fr
-  last_updated: "Dernière mise à jour en"
+  last_updated_date_template: Dernière mise à jour en TODAY

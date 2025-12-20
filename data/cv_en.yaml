@@ -48,9 +48,9 @@ cv:
         position: Grocery Clerk – Customer Service and Inventory Management
         date: February 2024 - June 2024
         
-      - company: Métro
-        position: Grocery Clerk – Customer Service and Inventory Management
-        date: August 2023 – November 2023
+      # - company: Métro
+      #   position: Grocery Clerk – Customer Service and Inventory Management
+      #   date: August 2023 – November 2023
 
       - company: Edikom
         position: Warehouse Associate – Order Picking
@@ -82,3 +82,9 @@ cv:
 
 design:
   theme: sb2nov
+  page:
+    size: us-letter
+    top_margin: 1.5cm
+    bottom_margin: 1.5cm
+    left_margin: 1.5cm
+    right_margin: 1.5cm
