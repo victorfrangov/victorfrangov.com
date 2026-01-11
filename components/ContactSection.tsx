@@ -27,7 +27,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
             <Button className="group relative overflow-hidden rounded-md bg-black hover:bg-black text-white dark:bg-blue-600 px-5">
-              <Link href="mailto:victor.frangov@gmail.com?">
+              <Link href="mailto:v@victorfrangov.com?">
                 <span className="flex items-center gap-2 transition-transform duration-500 ease-out group-hover:translate-x-[140%]">
                   <ArrowRight className="w-4 h-4" />
                   <span>{t("contact.cta.primary", { default: "Start a Project" })}</span>
