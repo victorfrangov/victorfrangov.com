@@ -180,3 +180,8 @@
 html {
   scrollbar-gutter: stable both-edges;
 }
+
+html,
+body {
+  overflow-x: hidden;
+}
