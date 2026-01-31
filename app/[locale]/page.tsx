@@ -50,19 +50,22 @@ export const metadata: Metadata = {
   },
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams(): { locale: string }[] {
   return [{ locale: "en" }, { locale: "fr" }];
 }
 
-export default async function Page({ params }: { params: { locale: string } }) {
+export default async function Page(props: any) {
+  const params = await props.params
+  const { locale } = params ?? { locale: "en" }
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <NavBar />
       <MainSection />
       <AboutMeSection />
-      <ExpertiseSection locale={params.locale} />
-      <RunningProjectsSection/>
-      <ContactSection locale={params.locale} />
+      <ExpertiseSection locale={locale} />
+      <RunningProjectsSection />
+      <ContactSection locale={locale} />
     </div>
   )
 }

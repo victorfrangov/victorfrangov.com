@@ -13,7 +13,7 @@ const FRONTEND_ICONS: IconItem[] = [
   { label: "Tailwind CSS", slug: "tailwindcss" },
   { label: "Bootstrap", slug: "bootstrap" },
   { label: "Webpack", slug: "webpack" },
-  { label: "NPM", slug: "npm" },
+  { label: "Npm", slug: "npm" },
 ]
 
 const BACKEND_ICONS: IconItem[] = [
@@ -60,14 +60,12 @@ function IconBadges({ items }: { items: IconItem[] }) {
           title={label}
         >
           {!noIcon && slug && (
-            <svg
+            <img
+              src={`/icons/${slug}.svg`}
+              alt={label}
               className={`h-4 w-4 ${invertDark ? "dark:invert" : ""}`}
-              role="img"
-              aria-label={label}
-              focusable="false"
-            >
-              <use href={`#${slug}`} />
-            </svg>
+              loading="lazy"
+            />
           )}
           <span>{label}</span>
         </li>
