@@ -50,21 +50,19 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function HomePage({
-  params,
-}: {
-  params: { locale: string }
-}) {
-  const { locale } = await (params as unknown as Promise<{ locale: string }>)
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "fr" }];
+}
 
+export default async function Page({ params }: { params: { locale: string } }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <NavBar />
       <MainSection />
       <AboutMeSection />
-      <ExpertiseSection locale={locale} />
+      <ExpertiseSection locale={params.locale} />
       <RunningProjectsSection/>
-      <ContactSection locale={locale} />
+      <ContactSection locale={params.locale} />
     </div>
   )
 }

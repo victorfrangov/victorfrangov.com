@@ -3,15 +3,9 @@ import { ScrollVelocity } from "./ui/shadcn-io/scroll-velocity";
 
 type IconItem = { label: string; slug?: string; invertDark?: boolean; noIcon?: boolean }
 
-// CDN overrides for missing icons
-const ICON_OVERRIDES: Record<string, string> = {
-  java: "https://www.vectorlogo.zone/logos/java/java-icon.svg",
-  microsoftazure: "https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg",
-  metal: "https://developer.apple.com/assets/elements/icons/metal/metal-256x256_2x.png",
-}
-
 function getIconSrc(slug: string) {
-  return ICON_OVERRIDES[slug] ?? `https://cdn.simpleicons.org/${slug}`
+  // sprite is inlined in the HTML, so reference the fragment ID only
+  return `#${slug}`
 }
 
 const FRONTEND_ICONS: IconItem[] = [
@@ -71,13 +65,14 @@ function IconBadges({ items }: { items: IconItem[] }) {
           title={label}
         >
           {!noIcon && slug && (
-            <img
-              src={getIconSrc(slug)}
-              alt={`${label} logo`}
+            <svg
               className={`h-4 w-4 ${invertDark ? "dark:invert" : ""}`}
-              loading="lazy"
-              decoding="async"
-            />
+              role="img"
+              aria-label={label}
+              focusable="false"
+            >
+              <use href={`#${slug}`} />
+            </svg>
           )}
           <span>{label}</span>
         </li>
