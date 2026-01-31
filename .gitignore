@@ -22,3 +22,6 @@ dist-ssr
 *.sw?
 .env
 .next
+
+
+public/projects/ignored

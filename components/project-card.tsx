@@ -31,6 +31,11 @@ export default function ProjectCard({
   image,
   links,
 }: Props) {
+  const isVideo =
+    !!image &&
+    (image.toLowerCase().endsWith(".webm") ||
+      image.toLowerCase().endsWith(".mp4"));
+
   return (
     <Card
       className={
@@ -39,14 +44,26 @@ export default function ProjectCard({
     >
       {image && (
         <div className="relative w-full overflow-hidden rounded-t-lg">
-          <Image
-            src={image}
-            alt={title}
-            width={800}
-            height={450}
-            className="w-full h-auto object-contain max-h-56"
-            priority={false}
-          />
+          {isVideo ? (
+            <video
+              src={image}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="w-full h-auto object-contain max-h-56"
+            />
+          ) : (
+            <Image
+              src={image}
+              alt={title}
+              width={800}
+              height={450}
+              className="w-full h-auto object-contain max-h-56"
+              priority={false}
+            />
+          )}
         </div>
       )}
       <CardHeader className="px-2">

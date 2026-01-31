@@ -25,7 +25,7 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     slug: "portfolio",
-    image: "/projects/portfolio.png",
+    image: "/projects/portfolio.webp",
     tags: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI", "i18n"],
     links: [
       { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "/" },
@@ -34,7 +34,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "stock-ai-robot",
-    image: "/projects/stock.png",
+    image: "/projects/stock.webp",
     tags: ["Python", "PyTorch", "Pandas", "NumPy", "MPS", "CUDA", "Matplotlib", "Big Data", "Scikit-Learn"],
     links: [
       { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/stock-robot" }
@@ -42,7 +42,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "supervitre",
-    image: "/projects/supervitre.png",
+    image: "/projects/supervitre.webp",
     tags: ["Next.js", "Typescript", "Firebase", "Google Cloud", "Resend", "Pug", "reCAPTCHA", "SquareSpace", "TailwindCSS", "Shadcn UI", "i18n", "Magic UI"],
     links: [
       { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "https://supervitre.net" },
@@ -51,7 +51,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "fluidsim",
-    image: "/projects/fluid-simulation.gif",
+    image: "/projects/fluid-simulation.webm",
     tags: ["C++", "C", "OpenGL", "ImGui", "SDL3"],
     links: [
       { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/fluid-simulation1" }
@@ -59,7 +59,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "pong",
-    image: "/projects/pong.gif",
+    image: "/projects/pong.webm",
     tags: ["C", "C++", "SDL3"],
     links: [
       { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/pong" }
@@ -67,7 +67,7 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "esp32",
-    image: "/projects/esp32.png",
+    image: "/projects/esp32.webp",
     tags: ["C", "ESP-IDF", "FreeRTOS", "Python", "Low-level", "u8g2"],
     links: [
       { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/esp32-humidity" }
