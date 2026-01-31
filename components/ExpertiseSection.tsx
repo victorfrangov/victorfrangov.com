@@ -3,11 +3,6 @@ import { ScrollVelocity } from "./ui/shadcn-io/scroll-velocity";
 
 type IconItem = { label: string; slug?: string; invertDark?: boolean; noIcon?: boolean }
 
-function getIconSrc(slug: string) {
-  // sprite is inlined in the HTML, so reference the fragment ID only
-  return `#${slug}`
-}
-
 const FRONTEND_ICONS: IconItem[] = [
   { label: "Next.js", slug: "nextdotjs", invertDark: true },
   { label: "React", slug: "react" },

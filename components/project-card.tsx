@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
@@ -17,9 +16,7 @@ interface Props {
   description: string;
   dates: string;
   tags: readonly string[];
-  link?: string;
   image?: string;
-  video?: string;
   links?: readonly {
     icon: React.ReactNode;
     type: string;
@@ -28,16 +25,13 @@ interface Props {
   className?: string;
 }
 
-export function ProjectCard({
+export default function ProjectCard({
   title,
   description,
   dates,
   tags,
-  link,
   image,
-  video,
   links,
-  className,
 }: Props) {
   return (
     <Card
@@ -45,16 +39,6 @@ export function ProjectCard({
         "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
       }
     >
-      {video && (
-        <video
-          src={video}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
-        />
-      )}
       {image && (
         <div className="relative w-full overflow-hidden rounded-t-lg">
           <Image
@@ -71,9 +55,6 @@ export function ProjectCard({
         <div className="space-y-1">
           <CardTitle className="mt-1 text-base">{title}</CardTitle>
           <time className="font-sans text-xs">{dates}</time>
-          <div className="hidden font-sans text-xs underline print:visible">
-            {link?.replace("https://", "").replace("www.", "").replace("/", "")}
-          </div>
           <div className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
             <Markdown>
               {description}

@@ -5,7 +5,7 @@ import { ExternalLink, Github } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { AnimatedBeam } from "./ui/shadcn-io/animated-beam"
 import { cn } from "@/lib/utils"
-import { ProjectCard } from "./project-card"
+import ProjectCard from "./project-card"
 import CurvedLoop from "./ui/shadcn-io/curved-loop"
 
 type ProjectLink = {

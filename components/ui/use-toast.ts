@@ -189,3 +189,5 @@ function useToast() {
 }
 
 export { useToast, toast }
+
+export * from '../../hooks/use-toast'
