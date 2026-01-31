@@ -15,8 +15,7 @@ type ProjectLink = {
 }
 
 type Project = {
-  slug: string
-  href?: string
+  slug: string // Title
   image?: string
   video?: string
   tags: readonly string[]
@@ -26,7 +25,6 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     slug: "portfolio",
-    href: "/",
     image: "/projects/portfolio.png",
     tags: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI", "i18n"],
     links: [
@@ -44,7 +42,6 @@ const PROJECTS: Project[] = [
   },
   {
     slug: "supervitre",
-    href: "https://supervitre.net",
     image: "/projects/supervitre.png",
     tags: ["Next.js", "Typescript", "Firebase", "Google Cloud", "Resend", "Pug", "reCAPTCHA", "SquareSpace", "TailwindCSS", "Shadcn UI", "i18n", "Magic UI"],
     links: [
@@ -175,7 +172,6 @@ export default function RunningProjectsSection() {
                   >
                     <ProjectCard
                       title={title}
-                      href={p.href}
                       description={description}
                       dates={dates}
                       tags={p.tags}
