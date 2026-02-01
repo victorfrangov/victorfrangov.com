@@ -6,6 +6,8 @@ import { Button } from "./ui/button"
 
 export default async function ContactSection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale })
+  const year = new Date().getFullYear()
+
   return (
     <section
       id="contact"
@@ -127,7 +129,9 @@ export default async function ContactSection({ locale }: { locale: string }) {
         </div>
       </div>
       <div className="mt-8 sm:mt-16 flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-border">
-        <div className="text-sm text-muted-foreground mb-4 sm:mb-0">{t("contact.copyright")}</div>
+        <div className="text-sm text-muted-foreground mb-4 sm:mb-0">
+          {t("contact.copyright", { year })}
+        </div>
       </div>
     </section>
   )
