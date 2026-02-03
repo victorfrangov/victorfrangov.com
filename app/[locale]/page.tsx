@@ -71,11 +71,13 @@ export default async function Page(props: any) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <NavBar />
-      <MainSection />
-      <AboutMeSection />
-      <ExpertiseSection locale={locale} />
-      <RunningProjectsSection />
-      <ContactSection locale={locale} />
+      <main id="main-content">
+        <MainSection />
+        <AboutMeSection />
+        <ExpertiseSection locale={locale} />
+        <RunningProjectsSection />
+        <ContactSection locale={locale} />
+      </main>
     </div>
   )
 }

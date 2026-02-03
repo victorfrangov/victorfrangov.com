@@ -27,8 +27,8 @@ export default async function ContactSection({ locale }: { locale: string }) {
               default: "Let’s build something impactful together."
             })}
           </p>
-          <div className="flex flex-wrap gap-4 pt-2">
-            <Button className="group relative overflow-hidden rounded-md bg-black hover:bg-black text-white dark:bg-blue-600 px-5">
+          <div className="flex flex-wrap gap-4">
+            <Button asChild className="group relative overflow-hidden h-auto px-5 rounded-md bg-black hover:bg-black text-white dark:bg-blue-600">
               <Link href="mailto:v@victorfrangov.com?">
                 <span className="flex items-center gap-2 transition-transform duration-500 ease-out group-hover:translate-x-[140%]">
                   <ArrowRight className="w-4 h-4" />
