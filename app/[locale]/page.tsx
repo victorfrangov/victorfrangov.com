@@ -70,7 +70,6 @@ export default async function Page(props: any) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <NavBar />
       <main id="main-content">
         <MainSection />
         <AboutMeSection />
