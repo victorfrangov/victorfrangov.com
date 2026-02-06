@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import MainSection from "@/components/MainSection"
 import RunningProjectsSection from "@/components/RunningProjectsSection"
 import ContactSection from "@/components/ContactSection"
-import NavBar from "@/components/NavBar"
 import AboutMeSection from "@/components/AboutMeSection"
 import ExpertiseSection from "@/components/ExpertiseSection"
 
