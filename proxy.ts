@@ -8,7 +8,6 @@ const intlMiddleware = createMiddleware({
 // Next.js 16 proxy convention: export a single default `proxy(request)`
 export default function proxy(request: Request) {
     const authHeader = request.headers.get("X-Custom-Auth")
-    console.log("Auth Header:", authHeader);
     if (authHeader !== process.env.CLOUDFLARE_SECRET_KEY) {
         return new Response("Unauthorized Access", { status: 401 })
     }
