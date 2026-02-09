@@ -17,5 +17,5 @@ export default function proxy(request: Request) {
 
 export const config = {
     // Exclude api, _next, _vercel and any file with an extension (e.g., .jpg, .css)
-    matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+    matcher: ['/((?!api/stats|api|_next|_vercel|.*\\..*).*)'],
 }
