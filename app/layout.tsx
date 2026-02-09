@@ -21,17 +21,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           {children}
         </ThemeProvider>
-        {/* 1. Initialize the analytics queue */}
-        <Script id="vercel-analytics-init" strategy="afterInteractive">
-          {`window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`}
-        </Script>
-
-        {/* 2. Load the masked script and point it to your custom endpoint */}
-        <Script 
-          async 
-          src="/api/stats/va.js" 
-          data-endpoint="/api/stats" 
-        />
       </body>
     </html>
   );
