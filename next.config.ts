@@ -1,23 +1,23 @@
 import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
-export const nextConfig: NextConfig = {
+const withNextIntl = createNextIntlPlugin();
+
+const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        // Masking the script file itself to avoid "script.js" filters
-        source: '/api/stats/va.js', 
+        // This handles the GET request for the script file
+        source: '/api/stats/va.js',
         destination: '/_vercel/insights/script.js',
       },
       {
-        // Masking the data reporting endpoint
+        // This handles the data pings (POST requests)
         source: '/api/stats/:match*',
         destination: '/_vercel/insights/:match*',
       },
     ];
   },
 };
-
-const withNextIntl = createNextIntlPlugin();
 
 export default withNextIntl(nextConfig);
