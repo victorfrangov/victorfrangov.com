@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           {children}
         </ThemeProvider>
-        <Analytics />
+        <Analytics endpoint="/api/stats" />
       </body>
     </html>
   );
