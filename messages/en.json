@@ -72,6 +72,11 @@
       "dates": "August 2025 – October 2025",
       "description": "Personal site built with Next.js, TypeScript, and Tailwind CSS."
     },
+    "agency": {
+        "title": "Agency",
+        "dates": "January 2026 - Now",
+        "description": "Web creation agency helping small businesses grow their online presence and get more customers."
+    },
     "stock-ai-robot": {
       "title": "Stock Prediction Machine Learning AI",
       "dates": "July 2025 – Present",

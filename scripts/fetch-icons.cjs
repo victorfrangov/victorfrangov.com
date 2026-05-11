@@ -9,7 +9,7 @@ const ICON_OVERRIDES = {
 
 const SLUGS = [
   "nextdotjs","react","typescript","javascript","html5","css","tailwindcss","bootstrap","webpack","npm",
-  "nodedotjs","flask","python","java","postgresql","firebase","tensorflow","pytorch","numpy","pandas","nvidia","opengl","ollama","c","cplusplus",
+  "nodedotjs","flask","python","java","postgresql","firebase","supabase","tensorflow","pytorch","numpy","pandas","nvidia","opengl","ollama","c","cplusplus",
   "git","githubactions","vercel","googlecloud","microsoftazure","postman","insomnia","anaconda","gnubash","prettier","json",
   // entries with noIcon (Matplotlib, SDL3) are skipped since they have no slug
 ];

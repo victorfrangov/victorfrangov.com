@@ -31,6 +31,7 @@ const BACKEND_ICONS: IconItem[] = [
   { label: "CUDA", slug: "nvidia" },
   { label: "OpenGL", slug: "opengl" },
   { label: "Ollama", slug: "ollama" },
+  { label: "Supabase", slug: "supabase" },
   { label: "SDL3", noIcon: true },
   { label: "C", slug: "c" },
   { label: "C++", slug: "cplusplus" },

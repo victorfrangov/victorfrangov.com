@@ -23,13 +23,22 @@ type Project = {
 }
 
 const PROJECTS: Project[] = [
+  // {
+  //   slug: "portfolio",
+  //   image: "/projects/portfolio.webp",
+  //   tags: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI", "i18n"],
+  //   links: [
+  //     { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "/" },
+  //     { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/victorfrangov.com" }
+  //   ]
+  // },
   {
-    slug: "portfolio",
-    image: "/projects/portfolio.webp",
+    slug: "agency",
+    image: "",
     tags: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI", "i18n"],
     links: [
       { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "/" },
-      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/victorfrangov.com" }
+      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://web-agency-seven-snowy.vercel.app" }
     ]
   },
   {
@@ -40,15 +49,15 @@ const PROJECTS: Project[] = [
       { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/stock-robot" }
     ]
   },
-  {
-    slug: "supervitre",
-    image: "/projects/supervitre.webp",
-    tags: ["Next.js", "Typescript", "Firebase", "Google Cloud", "Resend", "Pug", "reCAPTCHA", "SquareSpace", "TailwindCSS", "Shadcn UI", "i18n", "Magic UI"],
-    links: [
-      { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "https://supervitre.net" },
-      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/superVitre" }
-    ]
-  },
+  // {
+  //   slug: "supervitre",
+  //   image: "/projects/supervitre.webp",
+  //   tags: ["Next.js", "Typescript", "Firebase", "Google Cloud", "Resend", "Pug", "reCAPTCHA", "SquareSpace", "TailwindCSS", "Shadcn UI", "i18n", "Magic UI"],
+  //   links: [
+  //     { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "https://supervitre.net" },
+  //     { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/superVitre" }
+  //   ]
+  // },
   {
     slug: "fluidsim",
     image: "/projects/fluid-simulation.webm",
