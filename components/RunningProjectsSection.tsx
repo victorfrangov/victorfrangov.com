@@ -37,8 +37,7 @@ const PROJECTS: Project[] = [
     image: "",
     tags: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI", "i18n"],
     links: [
-      { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "/" },
-      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://web-agency-seven-snowy.vercel.app" }
+      { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "https://situsdigital.com" },
     ]
   },
   {
