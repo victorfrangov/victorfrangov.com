@@ -22,15 +22,17 @@ jobs:
 
       - name: Install RenderCV
         run: |
-          # The --upgrade flag ensures we get v2.5+, which supports --pdf-path
-          pip install --upgrade "rendercv[full]"
+          python -m pip install --upgrade pip
+          python -m pip uninstall -y rendercv || true
+          python -m pip install --no-cache-dir --force-reinstall "rendercv[full]"
+          python -m rendercv --help
 
       - name: Build PDFs (RenderCV)
         run: |
           # We use --pdf-path to save the PDF directly to the right name/location
           # This prevents the French CV from overwriting the English one
-          rendercv render data/cv_en.yaml --pdf-path public/cv_en.pdf
-          rendercv render data/cv_fr.yaml --pdf-path public/cv_fr.pdf
+          python -m rendercv render data/cv_en.yaml --pdf-path public/cv_en.pdf
+          python -m rendercv render data/cv_fr.yaml --pdf-path public/cv_fr.pdf
           
           # Clean up any extra folders RenderCV might leave behind (optional)
           rm -rf rendercv_output
