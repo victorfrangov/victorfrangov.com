@@ -23,7 +23,8 @@ jobs:
       - name: Install RenderCV
         run: |
           # The --upgrade flag ensures we get v2.5+, which supports --pdf-path
-          pip install --upgrade "rendercv[full]"
+          # RenderCV 2.3 resolves on Python 3.11 and needs click explicitly
+          pip install --upgrade "rendercv[full]" "click>=8,<9"
 
       - name: Build PDFs (RenderCV)
         run: |
