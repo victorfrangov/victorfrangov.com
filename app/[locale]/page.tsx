@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next"
 import MainSection from "@/components/MainSection"
 import RunningProjectsSection from "@/components/RunningProjectsSection"
@@ -13,32 +14,31 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
   const resolvedParams = await params
   const locale = resolvedParams?.locale ?? "en"
   const base = "https://victorfrangov.com"
+  const messages = (await import(`@/messages/${locale}.json`)).default
+
+  const title = messages.seo.title
+  const description = messages.seo.description
+  const ogDescription = messages.seo.ogDescription
+  const keywords = messages.seo.keywords.split(", ")
 
   return {
-    title: "Victor Frangov | Developer",
-    description:
-      "Computer Science student at EPFL passionate about creating modern and performant applications.",
-    keywords: [
-      "full stack developer",
-      "web development",
-      "React developer",
-      "TypeScript",
-      "Python",
-      "C",
-      "Node.js",
-      "PostgreSQL",
-      "Victor Frangov",
-      "frontend developer",
-      "backend developer",
-      "EPFL",
-      "Computer Science",
-    ],
+    metadataBase: new URL(base),
+    title,
+    description,
+    keywords,
     openGraph: {
-      title: "Victor Frangov | Developer",
-      description:
-        "Computer Science student passionate about building modern web applications. Explore my projects and technical skills.",
+      title,
+      description: ogDescription,
       type: "website",
       url: `${base}/${locale}`,
+      siteName: "Victor Frangov",
+      locale: locale === "fr" ? "fr_FR" : "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: ogDescription,
+      creator: "@victorfrangov",
     },
     alternates: {
       canonical: `${base}/${locale}`,
@@ -47,7 +47,8 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
         fr: `${base}/fr`,
       },
     },
-    authors: [{ name: "Victor Frangov" }],
+    authors: [{ name: "Victor Frangov", url: base }],
+    creator: "Victor Frangov",
     category: "Technology",
     robots: {
       index: true,

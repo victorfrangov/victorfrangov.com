@@ -36,7 +36,7 @@ export default function NavBar() {
   }, [isOpen])
 
   return (
-    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 sm:py-8 bg-background/80 backdrop-blur border-b border-border/60">
+    <nav ref={navRef} aria-label="Main navigation" className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 sm:py-8 bg-background/80 backdrop-blur border-b border-border/60">
       {!isOpen && <ScrollProgress barClassName="bg-blue-500" />}
 
       {/* Top bar content stays visible on mobile when menu is open */}
@@ -53,15 +53,11 @@ export default function NavBar() {
 
         {/* Desktop */}
         <div className="hidden sm:flex items-center gap-4 sm:gap-8">
-          <Link href="#expertise" className="hover:text-gray-300">
-            {t("nav.expertise")}
-          </Link>
-          <Link href="#projects" className="hover:text-gray-300">
-            {t("nav.projects")}
-          </Link>
-          <Link href="#contact" className="hover:text-gray-300">
-            {t("nav.contact")}
-          </Link>
+          <ul className="flex items-center gap-4 sm:gap-8 list-none m-0 p-0">
+            <li><Link href="#expertise" className="hover:text-gray-300">{t("nav.expertise")}</Link></li>
+            <li><Link href="#projects" className="hover:text-gray-300">{t("nav.projects")}</Link></li>
+            <li><Link href="#contact" className="hover:text-gray-300">{t("nav.contact")}</Link></li>
+          </ul>
           <LanguageSwitcher />
           <AnimatedThemeToggler />
         </div>
@@ -93,15 +89,11 @@ export default function NavBar() {
         >
           {/* Menu content */}
           <div className="px-4 py-4 space-y-3 bg-background">
-             <Link href="#expertise" className="block py-2" onClick={() => setIsOpen(false)}>
-               {t("nav.expertise")}
-             </Link>
-             <Link href="#projects" className="block py-2" onClick={() => setIsOpen(false)}>
-               {t("nav.projects")}
-             </Link>
-             <Link href="#contact" className="block py-2" onClick={() => setIsOpen(false)}>
-               {t("nav.contact")}
-             </Link>
+             <ul className="list-none m-0 p-0 space-y-3">
+               <li><Link href="#expertise" className="block py-2" onClick={() => setIsOpen(false)}>{t("nav.expertise")}</Link></li>
+               <li><Link href="#projects" className="block py-2" onClick={() => setIsOpen(false)}>{t("nav.projects")}</Link></li>
+               <li><Link href="#contact" className="block py-2" onClick={() => setIsOpen(false)}>{t("nav.contact")}</Link></li>
+             </ul>
              <div className="mt-2 flex items-center gap-3">
                <LanguageSwitcher />
                <AnimatedThemeToggler />

@@ -11,11 +11,12 @@ export default async function ContactSection({ locale }: { locale: string }) {
   return (
     <section
       id="contact"
+      aria-labelledby="contact-heading"
       className="w-full mt-24 sm:mt-40 px-4 sm:px-8 py-24 border-t border-border bg-gradient-to-b from-background to-background/60"
     >
       <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 max-w-7xl mx-auto">
         <div className="lg:col-span-5 space-y-8">
-          <h2 className="text-5xl sm:text-7xl font-bold leading-[0.95] space-y-1">
+          <h2 id="contact-heading" className="text-5xl sm:text-7xl font-bold leading-[0.95] space-y-1">
             {t("contact.title.line1")}
             <br />
               <AuroraText className="inline-block">
@@ -91,6 +92,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
                 href="https://github.com/victorfrangov"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Victor Frangov on GitHub"
                 className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-sm hover:bg-accent hover:text-accent-foreground transition-colors"
               >
                 <Github className="w-4 h-4" />
@@ -100,6 +102,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
                 href="https://www.linkedin.com/in/victor-frangov/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Victor Frangov on LinkedIn"
                 className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-sm hover:bg-accent hover:text-accent-foreground transition-colors"
               >
                 <Linkedin className="w-4 h-4" />

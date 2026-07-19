@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server"
 import { ScrollVelocity } from "./ui/shadcn-io/scroll-velocity";
+import Image from "next/image";
 
 type IconItem = { label: string; slug?: string; invertDark?: boolean; noIcon?: boolean }
 
@@ -61,9 +62,11 @@ function IconBadges({ items }: { items: IconItem[] }) {
           title={label}
         >
           {!noIcon && slug && (
-            <img
+            <Image
               src={`/icons/${slug}.svg`}
-              alt={label}
+              alt={`${label} logo`}
+              width={16}
+              height={16}
               className={`h-4 w-4 ${invertDark ? "dark:invert" : ""}`}
               loading="lazy"
             />
@@ -79,7 +82,8 @@ export default async function ExpertiseSection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale })
 
   return (
-    <section id="expertise" className="pt-24 pb-28 sm:pb-12">
+    <section id="expertise" aria-labelledby="expertise-heading" className="pt-24 pb-28 sm:pb-12">
+      <h2 id="expertise-heading" className="sr-only">{t("expertise.title.line1")} {t("expertise.title.line2")}</h2>
       <ScrollVelocity
         texts={[t("expertise.title.line1"), t("expertise.title.line2")]}
         className="text-4xl sm:text-6xl md:text-8xl font-bold text-center sm:text-left"

@@ -34,7 +34,7 @@ const PROJECTS: Project[] = [
   // },
   {
     slug: "agency",
-    image: "",
+    image: "/projects/situs-large-white.webp",
     tags: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI", "i18n"],
     links: [
       { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "https://situsdigital.com" },
@@ -118,7 +118,8 @@ export default function RunningProjectsSection() {
   }, [])
 
   return (
-    <section id="projects" className="py-2 sm:py-16">
+    <section id="projects" aria-labelledby="projects-heading" className="py-2 sm:py-16">
+      <h2 id="projects-heading" className="sr-only">{t("running.title")} {t("running.description")}</h2>
       <div className="relative -top-30 sm:-top-30">
         <CurvedLoop
           marqueeText={t("running.title")}

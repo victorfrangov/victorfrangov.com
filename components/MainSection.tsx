@@ -16,7 +16,7 @@ export default function MainSection() {
       ? "https://cv.victorfrangov.com/cv_fr.pdf"
       : "https://cv.victorfrangov.com/cv_en.pdf"
   return (
-    <section id="main" className="relative isolate px-4 sm:px-6 pt-24 sm:pt-32 mt-24 sm:mt-32">
+    <section id="main" aria-label="Hero" className="relative isolate px-4 sm:px-6 pt-24 sm:pt-32 mt-24 sm:mt-32">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 -bottom-32 sm:-bottom-48 z-0"

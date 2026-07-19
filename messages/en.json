@@ -1,4 +1,10 @@
 {
+  "seo": {
+    "title": "Victor Frangov | Full Stack Developer & CS Student at EPFL",
+    "description": "Full stack developer and Computer Science student at EPFL. Building modern, performant web applications with React, TypeScript, Next.js, and Python. Explore my projects and skills.",
+    "ogDescription": "Full stack developer & EPFL CS student. Explore my projects in web development, machine learning, and embedded systems.",
+    "keywords": "full stack developer, web development, React developer, TypeScript, Python, C, Node.js, PostgreSQL, Victor Frangov, frontend developer, backend developer, EPFL, Computer Science, Next.js, machine learning, portfolio"
+  },
   "nav": {
     "greeting": "HELLO, I'M VICTOR FRANGOV",
     "greeting1": "Design 🎨",

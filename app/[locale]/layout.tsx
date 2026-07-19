@@ -3,6 +3,11 @@ import {notFound} from "next/navigation"
 import {NextIntlClientProvider} from "next-intl"
 import {setRequestLocale} from "next-intl/server"
 import NavBar from "@/components/NavBar"
+import JsonLd from "./json-ld"
+
+export function generateStaticParams() {
+  return [{locale: "en"}, {locale: "fr"}]
+}
 
 // Note: params is now a Promise
 export default async function LocaleLayout({
@@ -24,6 +29,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <JsonLd locale={locale} />
       <NavBar />
       {children}
     </NextIntlClientProvider>
