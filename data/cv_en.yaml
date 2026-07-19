@@ -10,7 +10,7 @@ cv:
       - institution: École Polytechnique Fédérale de Lausanne (EPFL)
         area: Cours de mathématiques spéciales (CMS)
         date: 2025 - Present
-        location: Lausanne, Suisse
+        location: Lausanne, Switzerland
       
       - institution: Collège Édouard-Montpetit
         area: "Natural Sciences: Pure and Applied Science"
@@ -21,13 +21,6 @@ cv:
         area: Computer Science
         date: 2023 - 2024
         location: Montréal, QC
-
-      - institution: Collège Durocher St-Lambert
-        area: Secondary School Diploma (Natural Sciences, Math, Physics/Chemistry)
-        date: 2018 - 2023
-        location: St-Lambert, QC
-        highlights:
-          - "Winner of a cash prize for an advertising project"
 
     experience:
       - company: Situs Digital
@@ -44,30 +37,18 @@ cv:
         location: Montréal, QC
         date: July 2024 – August 2025
         highlights:
-          - Implemented a labeling system with a Zebra printer and scanner using ZebraDesigner 3 and 123Scan
-          - Managed over 500 workstations with SCCM, Active Directory, and BitLocker
-          - Created scripts in Bash, PowerShell, and Python to automate various lengthy processes
-          - Managed the YubiKey installation project at the Montreal office
-          - Imaged/Purged over 200 employee laptops with Acronis
-          - Installed and updated new equipment in the server room
-          - Used the Octopus-ITSM ticketing system to provide customer support
-          - Performed hardware inventory, updated Windows 10/11 images, and prepared equipment delivery
-
-      - company: IGA
-        position: Grocery Clerk – Customer Service and Inventory Management
-        date: February 2024 - June 2024
-
-      - company: Edikom
-        position: Warehouse Associate – Order Picking
-        date: October 2022 – October 2023
+          - Managed over 500 workstations using SCCM, Active Directory, BitLocker, and Octopus-ITSM
+          - Created automated scripts in Bash, PowerShell, and Python to streamline IT workflows
+          - Managed YubiKey security deployment and configured Zebra printer/scanner labeling systems
+          - Imaged and deployed 200+ employee laptops with Acronis and maintained server room equipment
 
     volunteering:
-      - company: School Project
+      - company: Community Project
         position: Volunteer
         location: St-Lambert, QC
         date: February 2023
         highlights:
-          - Participation in a project to assist single mothers, including the collection and distribution of essential products through a partnership with Maxi.
+          - Assisted single-mother families through essential product collection and distribution in partnership with Maxi
 
     skills:
       - label: Infrastructure & Tools
@@ -85,16 +66,14 @@ design:
   theme: sb2nov
   page:
     size: us-letter
-    top_margin: 1.5cm
-    bottom_margin: 1.5cm
-    left_margin: 1.5cm
-    right_margin: 1.5cm
+    top_margin: 1.2cm
+    bottom_margin: 1.2cm
+    left_margin: 1.2cm
+    right_margin: 1.2cm
   entry_types:
     education_entry:
       main_column_first_row_template:
        |-
         **INSTITUTION**
         *AREA*
-  # header:
-  #     vertical_space_between_name_and_connections: 0.5cm
-  #     vertical_space_between_connections_and_first_section: 0.5cm
+

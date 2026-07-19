@@ -22,13 +22,6 @@ cv:
         date: 2023 - 2024
         location: Montréal, QC
 
-      - institution: Collège Durocher St-Lambert
-        area: Diplôme d’études secondaires (Mathématiques Sciences Naturelles, Physique/Chimie)
-        date: 2018 - 2023
-        location: St-Lambert, QC
-        highlights:
-          - "Gagnant d'un prix en argent d’un projet publicitaire"
-
     Expérience:
       - company: Situs Digital
         position: Co-fondateur & Développeur Lead Full-Stack
@@ -44,30 +37,18 @@ cv:
         location: Montréal, QC
         date: Juillet 2024 – Aout 2025
         highlights:
-          - Mis en place un système d’étiquetage avec une imprimante et scanneur Zebra avec ZebraDesigner 3 et 123Scan
-          - Gestion de plus de 500 postes avec System Center Configuration Manager (SCCM), Active Directory et BitLocker
-          - Création de scripts en Bash, PowerShell et Python pour automatiser divers processus longs
-          - Géré le projet d’installation de YubiKey au bureau de Montréal
-          - Imager/Purger plus de 200 portables pour les employés avec Acronis
-          - Installation et mise à jour de nouvel équipement dans la salle des serveurs
-          - Utiliser le système de billetterie Octopus-ITSM pour venir en aide à la clientèle
-          - Faire l’inventaire du matériel informatique, mettre à jour les images Windows 10/11 et préparer la livraison d’équipement
-
-      - company: IGA
-        position: Commis d’épicerie – Service à la clientèle et gestion des stocks
-        date: Février 2024 - Juin 2024
-
-      - company: Edikom
-        position: Commis d’entrepôt – Préparation des commandes
-        date: Octobre 2022 – Octobre 2023
+          - Gestion de plus de 500 postes avec SCCM, Active Directory, BitLocker et Octopus-ITSM
+          - Création de scripts automatisés en Bash, PowerShell et Python pour optimiser les processus TI
+          - Gestion du projet de sécurité YubiKey et configuration des systèmes d'étiquetage Zebra
+          - Imagerie et déploiement de plus de 200 portables avec Acronis et maintenance des serveurs
 
     Bénévolat:
-      - company: Projet d’école
+      - company: Projet Communautaire
         position: Bénévolat
         location: St-Lambert, QC
         date: Février 2023
         highlights:
-          - Participation à un projet d’aide aux mères monoparentales, incluant collecte et distribution de produits essentiels grâce à un partenariat avec Maxi.
+          - Aide aux mères monoparentales via la collecte et distribution de produits essentiels avec Maxi
 
     Compétences:
       - label: Techniques
@@ -85,10 +66,10 @@ design:
   theme: sb2nov
   page:
     size: us-letter
-    top_margin: 1.5cm
-    bottom_margin: 1.5cm
-    left_margin: 1.5cm
-    right_margin: 1.5cm
+    top_margin: 1.2cm
+    bottom_margin: 1.2cm
+    left_margin: 1.2cm
+    right_margin: 1.2cm
   entry_types:
     education_entry:
       main_column_first_row_template:
