@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/_next/static/", "/api/"],
+        disallow: ["/api/"],
       },
     ],
     sitemap: "https://victorfrangov.com/sitemap.xml",

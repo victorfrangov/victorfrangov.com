@@ -45,6 +45,7 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
       languages: {
         en: `${base}/en`,
         fr: `${base}/fr`,
+        "x-default": `${base}/en`,
       },
     },
     authors: [{ name: "Victor Frangov", url: base }],
