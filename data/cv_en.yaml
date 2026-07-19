@@ -30,6 +30,15 @@ cv:
           - "Winner of a cash prize for an advertising project"
 
     experience:
+      - company: Situs Digital
+        position: Co-Founder & Full Stack Lead
+        location: Montréal, QC / Remote
+        date: January 2026 – Present
+        highlights:
+          - Co-founded a web agency helping small businesses build high-performance web applications and grow online
+          - Built custom full-stack web solutions using Next.js, TypeScript, and Tailwind CSS with modern UI/UX principles
+          - Oversee client relations, architecture design, deployment, and search engine optimization (SEO)
+
       - company: Office Québécois de la Langue Française
         position: IT Support
         location: Montréal, QC
@@ -47,18 +56,10 @@ cv:
       - company: IGA
         position: Grocery Clerk – Customer Service and Inventory Management
         date: February 2024 - June 2024
-        
-      # - company: Métro
-      #   position: Grocery Clerk – Customer Service and Inventory Management
-      #   date: August 2023 – November 2023
 
       - company: Edikom
         position: Warehouse Associate – Order Picking
         date: October 2022 – October 2023
-        
-      - company: McDonald’s
-        position: Team Member
-        date: May 2022 – August 2022
 
     volunteering:
       - company: School Project

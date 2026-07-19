@@ -30,6 +30,15 @@ cv:
           - "Gagnant d'un prix en argent d’un projet publicitaire"
 
     Expérience:
+      - company: Situs Digital
+        position: Co-fondateur & Développeur Lead Full-Stack
+        location: Montréal, QC / À distance
+        date: Janvier 2026 – Présent
+        highlights:
+          - Co-fondation d'une agence web pour aider les entreprises à concevoir des applications web performantes
+          - Développement de solutions full-stack sur mesure avec Next.js, TypeScript et Tailwind CSS selon les standards modernes
+          - Gestion de la relation client, de l'architecture, du déploiement et de l'optimisation pour les moteurs de recherche (SEO)
+
       - company: Office Québécois de la Langue Française
         position: Support TI
         location: Montréal, QC
@@ -47,18 +56,10 @@ cv:
       - company: IGA
         position: Commis d’épicerie – Service à la clientèle et gestion des stocks
         date: Février 2024 - Juin 2024
-        
-      # - company: Métro
-      #   position: Commis d’épicerie – Service à la clientèle et gestion des stocks
-      #   date: Août 2023 – Novembre 2023
 
       - company: Edikom
         position: Commis d’entrepôt – Préparation des commandes
         date: Octobre 2022 – Octobre 2023
-        
-      - company: McDonald’s
-        position: Équipier
-        date: Mai 2022 – Août 2022
 
     Bénévolat:
       - company: Projet d’école
