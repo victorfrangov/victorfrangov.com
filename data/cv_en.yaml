@@ -22,6 +22,13 @@ cv:
         date: 2023 - 2024
         location: Montréal, QC
 
+      - institution: Collège Durocher St-Lambert
+        area: Secondary School Diploma (Natural Sciences, Math, Physics/Chemistry)
+        date: 2018 - 2023
+        location: St-Lambert, QC
+        highlights:
+          - "Winner of a cash prize for an advertising project"
+
     experience:
       - company: Situs Digital
         position: Co-Founder & Full Stack Lead
@@ -41,6 +48,14 @@ cv:
           - Created automated scripts in Bash, PowerShell, and Python to streamline IT workflows
           - Managed YubiKey security deployment and configured Zebra printer/scanner labeling systems
           - Imaged and deployed 200+ employee laptops with Acronis and maintained server room equipment
+
+      - company: IGA
+        position: Grocery Clerk – Customer Service and Inventory Management
+        date: February 2024 - June 2024
+
+      - company: Edikom
+        position: Warehouse Associate – Order Picking
+        date: October 2022 – October 2023
 
     volunteering:
       - company: Community Project
