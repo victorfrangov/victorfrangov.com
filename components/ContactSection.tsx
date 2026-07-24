@@ -131,9 +131,20 @@ export default async function ContactSection({ locale }: { locale: string }) {
           </div>
         </div>
       </div>
-      <div className="mt-8 sm:mt-16 flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-border">
-        <div className="text-sm text-muted-foreground mb-4 sm:mb-0">
+      <div className="mt-8 sm:mt-16 flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-border gap-4">
+        <div className="text-sm text-muted-foreground">
           {t("contact.copyright", { year })}
+        </div>
+        <div className="text-sm text-muted-foreground">
+          {t("contact.madeBy")}{" "}
+          <Link
+            href="https://situsdigital.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-foreground hover:underline transition-colors"
+          >
+            Situs Digital
+          </Link>
         </div>
       </div>
     </section>

@@ -129,6 +129,7 @@
       "title": "Response Time",
       "body": "I usually reply within 24–48 hours."
     },
-    "copyright": "© {year} Victor Frangov. All rights reserved."
+    "copyright": "© {year} Victor Frangov. All rights reserved.",
+    "madeBy": "Made by"
   }
 }
