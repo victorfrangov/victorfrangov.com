@@ -3,12 +3,12 @@
 import React, { useState } from "react"
 import { useTranslations } from "next-intl"
 import ProjectCard from "./project-card"
-import PapagalModel from "./PapagalModel"
-import Esp32Model from "./Esp32Model"
-import PongModel from "./PongModel"
-import FluidSimModel from "./FluidSimModel"
-import StockChartModel from "./StockChartModel"
-import SitusModel from "./SitusModel"
+import PapagalModel from "./3d/PapagalModel"
+import Esp32Model from "./3d/Esp32Model"
+import PongModel from "./3d/PongModel"
+import FluidSimModel from "./3d/FluidSimModel"
+import StockChartModel from "./3d/StockChartModel"
+import SitusModel from "./3d/SitusModel"
 
 type ProjectCategory = "all" | "web" | "systems" | "embedded"
 
