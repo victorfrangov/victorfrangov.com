@@ -47,10 +47,19 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       }
     }
 
-    document.addEventListener("click", handleAnchorClick)
+    const handleStop = () => lenis.stop()
+    const handleStart = () => lenis.start()
+
+    window.addEventListener("lenis:stop", handleStop)
+    window.addEventListener("lenis:start", handleStart)
+    if (typeof window !== "undefined") {
+      ;(window as any).__lenis = lenis
+    }
 
     return () => {
       document.removeEventListener("click", handleAnchorClick)
+      window.removeEventListener("lenis:stop", handleStop)
+      window.removeEventListener("lenis:start", handleStart)
       cancelAnimationFrame(rafId)
       lenis.destroy()
     }

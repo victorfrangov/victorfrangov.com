@@ -63,46 +63,57 @@ export default function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // When menu is open, intercept scroll down/up: slide rectangles back up first without scrolling the page
+  // When menu is open, lock page scroll and intercept any scroll (UP or DOWN) to only close menu without scrolling the page
   useEffect(() => {
-    if (!isOpen) return
+    if (isOpen) {
+      window.dispatchEvent(new CustomEvent("lenis:stop"))
+      document.documentElement.style.overflow = "hidden"
+      document.body.style.overflow = "hidden"
 
-    let isClosing = false
+      let isClosing = false
 
-    const handleWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) > 5) {
+      const handleWheel = (e: WheelEvent) => {
         e.preventDefault()
-        if (!isClosing) {
+        e.stopPropagation()
+        if (!isClosing && Math.abs(e.deltaY) > 3) {
           isClosing = true
           setIsOpen(false)
         }
       }
-    }
 
-    let touchStartY = 0
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY
-    }
+      let touchStartY = 0
+      const handleTouchStart = (e: TouchEvent) => {
+        touchStartY = e.touches[0].clientY
+      }
 
-    const handleTouchMove = (e: TouchEvent) => {
-      const touchDelta = touchStartY - e.touches[0].clientY
-      if (Math.abs(touchDelta) > 8) {
+      const handleTouchMove = (e: TouchEvent) => {
         e.preventDefault()
-        if (!isClosing) {
+        e.stopPropagation()
+        const touchDelta = touchStartY - e.touches[0].clientY
+        if (!isClosing && Math.abs(touchDelta) > 5) {
           isClosing = true
           setIsOpen(false)
         }
       }
-    }
 
-    window.addEventListener("wheel", handleWheel, { passive: false })
-    window.addEventListener("touchstart", handleTouchStart, { passive: true })
-    window.addEventListener("touchmove", handleTouchMove, { passive: false })
+      window.addEventListener("wheel", handleWheel, { passive: false })
+      window.addEventListener("touchstart", handleTouchStart, { passive: true })
+      window.addEventListener("touchmove", handleTouchMove, { passive: false })
 
-    return () => {
-      window.removeEventListener("wheel", handleWheel)
-      window.removeEventListener("touchstart", handleTouchStart)
-      window.removeEventListener("touchmove", handleTouchMove)
+      return () => {
+        window.removeEventListener("wheel", handleWheel)
+        window.removeEventListener("touchstart", handleTouchStart)
+        window.removeEventListener("touchmove", handleTouchMove)
+      }
+    } else {
+      // Menu just closed: keep scroll locked until the 1300ms + stagger slide-up animation completes
+      const unlockTimer = setTimeout(() => {
+        window.dispatchEvent(new CustomEvent("lenis:start"))
+        document.documentElement.style.overflow = ""
+        document.body.style.overflow = ""
+      }, 1600)
+
+      return () => clearTimeout(unlockTimer)
     }
   }, [isOpen])
 
