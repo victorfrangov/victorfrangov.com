@@ -22,7 +22,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
       aria-labelledby="contact-heading"
       className="w-full bg-background text-foreground h-[100dvh] max-h-[100dvh] overflow-hidden pt-6 sm:pt-10 pb-0 px-4 sm:px-8 md:px-12 border-t border-foreground/10 flex flex-col justify-between select-none"
     >
-      {/* 1. Top & Middle Section: Vertically Expanded Giant Links Grid (Utilizing Full Viewport Height) */}
+      {/* 1. Main Section: 3-Column Layout (Left Navigation, Center Year & Stacked Locations, Right Social Links) */}
       <div className="w-full max-w-7xl mx-auto grid grid-cols-12 gap-x-4 sm:gap-x-8 items-stretch flex-1 py-4 sm:py-6 md:py-8">
         
         {/* Left: 5 Main Navigation Links (Evenly distributed vertically) */}
@@ -68,11 +68,22 @@ export default async function ContactSection({ locale }: { locale: string }) {
           </nav>
         </div>
 
-        {/* Center: Accent Year */}
-        <div className="hidden lg:flex col-span-2 justify-center items-start pt-2">
+        {/* Center: Accent Year + Stacked Lausanne & Montreal one under the other */}
+        <div className="hidden lg:flex col-span-2 flex-col items-center justify-start pt-2 gap-4">
           <span className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-foreground/15 hover:text-foreground/70 transition-colors cursor-default select-none">
             &apos;{shortYear}&copy;
           </span>
+
+          <div className="flex flex-col items-center gap-2.5 text-sm sm:text-base md:text-lg font-light tracking-tight text-foreground/80">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="font-medium">{t("contact.lausanne")}</span>
+              <SwissCross className="w-4 h-4 sm:w-5 sm:h-5 inline-block align-middle shrink-0" />
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="font-medium">{t("contact.montreal")}</span>
+              <MontrealLogo className="w-4 h-4 sm:w-5 sm:h-5 inline-block align-middle shrink-0 hover:rotate-45 transition-transform duration-500" />
+            </span>
+          </div>
         </div>
 
         {/* Right: 4 Social Links (Evenly distributed vertically, large scale) */}
@@ -126,21 +137,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
         </div>
       </div>
 
-      {/* 2. Middle Section: Lausanne & Montreal Location Badges */}
-      <div className="w-full max-w-7xl mx-auto pt-4 pb-2 border-t border-foreground/10 flex items-center justify-between">
-        <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-base sm:text-lg md:text-xl font-light tracking-tight text-foreground">
-          <span className="inline-flex items-center gap-1.5">
-            <span className="font-medium">{t("contact.lausanne")}</span>
-            <SwissCross className="w-4 h-4 sm:w-5 sm:h-5 inline-block align-middle shrink-0" />
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="font-medium">{t("contact.montreal")}</span>
-            <MontrealLogo className="w-5 h-5 sm:w-6 sm:h-6 inline-block align-middle shrink-0 hover:rotate-45 transition-transform duration-500" />
-          </span>
-        </div>
-      </div>
-
-      {/* 3. Big Victor Frangov Wordmark (At the absolute bottom, matching Hamburger Menu) */}
+      {/* 2. Big Victor Frangov Wordmark (At the absolute bottom, matching Hamburger Menu) */}
       <div
         className="w-full overflow-hidden select-none relative z-0 px-4 sm:px-8 pb-3 pt-1 flex items-end justify-center"
         aria-hidden="true"
