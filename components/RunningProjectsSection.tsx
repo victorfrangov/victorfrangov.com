@@ -78,51 +78,30 @@ export default function RunningProjectsSection() {
     return p.category === activeFilter
   })
 
-  const filterCategories: ProjectCategory[] = ["all", "web", "systems", "embedded"]
-
   return (
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="py-20 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-b border-foreground/10"
+      className="pt-20 sm:pt-32 pb-0 w-full border-b border-foreground/20"
     >
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
-        <div>
-          <span className="text-xs font-mono text-foreground/50 tracking-widest uppercase block mb-3">
-            ( 04 / {t("running.sectionTag")} )
+      {/* Header Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-10 sm:mb-14">
+        <span className="text-xs font-mono text-foreground/50 tracking-widest uppercase block mb-3">
+          ( 04 / {t("running.sectionTag")} )
+        </span>
+        <h2
+          id="projects-heading"
+          className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase"
+        >
+          {t("running.title.line1")}{" "}
+          <span className="font-serif italic font-normal lowercase">
+            {t("running.title.line2")}
           </span>
-          <h2
-            id="projects-heading"
-            className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase"
-          >
-            {t("running.title.line1")}{" "}
-            <span className="font-serif italic font-normal lowercase">
-              {t("running.title.line2")}
-            </span>
-          </h2>
-        </div>
-
-        {/* Filter Pills */}
-        <div className="flex flex-wrap gap-2">
-          {filterCategories.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-200 ${
-                activeFilter === filter
-                  ? "bg-foreground text-background font-semibold"
-                  : "border border-foreground/20 text-foreground/70 hover:border-foreground hover:text-foreground"
-              }`}
-            >
-              {t(`running.filter.${filter}`)}
-            </button>
-          ))}
-        </div>
+        </h2>
       </div>
 
-      {/* 2-Column Locomotive Works Grid */}
-      <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+      {/* 2-Column Full-Bleed Flush Brutalist Works Grid (Zero gap, zero padding) */}
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-l border-foreground/20">
         {filteredProjects.map((p, idx) => {
           const indexFormatted = `( ${String(idx + 1).padStart(2, "0")} )`
           const title = t(`projects.${p.slug}.title`)

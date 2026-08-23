@@ -35,96 +35,97 @@ export default function ProjectCard({
       image.toLowerCase().endsWith(".mp4"))
 
   return (
-    <article className="group flex flex-col justify-between border border-foreground/15 rounded-none bg-background hover:border-foreground/40 transition-all duration-300">
-      {/* Media Canvas */}
-      {(customComponent || image) && (
-        <div className="relative w-full aspect-[16/10] overflow-hidden bg-foreground/[0.03] border-b border-foreground/10 flex items-center justify-center">
-          {image && (
-            isVideo ? (
-              <video
-                src={image}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
-              />
-            ) : (
-              <Image
-                src={image}
-                alt={title}
-                width={1000}
-                height={600}
-                className={`w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out ${
-                  customComponent ? "opacity-75" : "p-4"
-                }`}
-                priority={false}
-              />
-            )
-          )}
-          {customComponent && (
-            <div className="absolute inset-0 z-10">
-              {customComponent}
-            </div>
-          )}
-          {/* Index Pill Overlay */}
-          <div className="absolute top-3 left-3 bg-background/90 backdrop-blur-sm px-2.5 py-1 rounded-full border border-foreground/20 text-[11px] font-mono tracking-wider z-20 pointer-events-none">
-            {index}
-          </div>
-        </div>
-      )}
+    <article className="group relative w-full h-[50vh] sm:h-[52vh] md:h-[50vh] min-h-[400px] overflow-hidden border-b md:border-r border-foreground/20 bg-background select-none">
+      {/* 1. Default Visual Canvas (Image / Video + 3D Model with pointer-events-none) */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden bg-foreground/[0.02] flex items-center justify-center">
+        {image &&
+          (isVideo ? (
+            <video
+              src={image}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+            />
+          ) : (
+            <Image
+              src={image}
+              alt={title}
+              width={1200}
+              height={800}
+              className={`w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out ${
+                customComponent ? "opacity-70" : ""
+              }`}
+              priority={false}
+            />
+          ))}
 
-      {/* Info & Meta */}
-      <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between space-y-4">
-        <div className="space-y-2">
-          <div className="flex items-baseline justify-between gap-2">
-            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground group-hover:underline underline-offset-4">
-              {title}
-            </h3>
-            <span className="text-xs font-mono text-foreground/50 shrink-0">
-              {dates}
-            </span>
+        {/* 3D Model: Pointer events disabled so mouse passes directly through */}
+        {customComponent && (
+          <div className="absolute inset-0 z-10 pointer-events-none">
+            {customComponent}
           </div>
-          <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed font-normal">
+        )}
+
+        {/* Minimal Corner Badge on Default View */}
+        <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-background/85 backdrop-blur-md border border-foreground/20 text-xs font-mono tracking-wider text-foreground group-hover:opacity-0 transition-opacity duration-300 flex items-center gap-2 shadow-sm">
+          <span className="font-semibold">{index}</span>
+          <span className="opacity-40">·</span>
+          <span className="font-bold uppercase tracking-tight">{title}</span>
+        </div>
+      </div>
+
+      {/* 2. Hover State: Color Flip & Full Information Overlay */}
+      <div className="absolute inset-0 z-30 bg-foreground text-background p-6 sm:p-8 md:p-10 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none group-hover:pointer-events-auto">
+        {/* Top: Index & Dates */}
+        <div className="flex items-center justify-between font-mono text-xs text-background/60 uppercase tracking-widest">
+          <span className="font-bold">{index}</span>
+          <span>{dates}</span>
+        </div>
+
+        {/* Middle: Big Title & Description */}
+        <div className="space-y-3 my-auto">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none text-background">
+            {title}
+          </h3>
+          <p className="text-xs sm:text-sm md:text-base text-background/80 leading-relaxed font-normal max-w-xl">
             {description}
           </p>
-        </div>
 
-        {/* Tags & Action Capsules */}
-        <div className="pt-4 border-t border-foreground/10 space-y-3">
-          {/* Tech tags */}
+          {/* Tech Tags */}
           {tags && tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1.5 pt-2">
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2 py-0.5 rounded-full border border-foreground/15 text-[10px] font-mono text-foreground/60"
+                  className="px-2.5 py-0.5 rounded-full border border-background/25 text-[10px] sm:text-xs font-mono text-background/70"
                 >
                   {tag}
                 </span>
               ))}
             </div>
           )}
-
-          {/* Locomotive Connected Action Pills */}
-          {links && links.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2 pt-1">
-              {links.map((link, idx) => (
-                <Link
-                  href={link.href}
-                  key={idx}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-foreground/40 text-xs font-mono uppercase tracking-tight hover:bg-foreground hover:text-background transition-all duration-200"
-                >
-                  <span>{link.type}</span>
-                  <ArrowUpRight className="w-3 h-3" />
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
+
+        {/* Bottom: Action Links (Pills that invert on hover) */}
+        {links && links.length > 0 && (
+          <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-background/20">
+            {links.map((link, idx) => (
+              <Link
+                href={link.href}
+                key={idx}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-background bg-background text-foreground hover:bg-transparent hover:text-background text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-200 shadow-sm"
+              >
+                <span>{link.type}</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </article>
   )
