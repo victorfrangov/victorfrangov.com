@@ -14,8 +14,8 @@ export default function NavBar() {
   const locale = useLocale()
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isFlashActive, setIsFlashActive] = useState(false)
-  const [isFlashVisible, setIsFlashVisible] = useState(false)
+  const [isFading, setIsFading] = useState(false)
+  const [fadeVisible, setFadeVisible] = useState(false)
   const [mtlTime, setMtlTime] = useState("")
   const [lsnTime, setLsnTime] = useState("")
   const currentYear = new Date().getFullYear()
@@ -129,42 +129,41 @@ export default function NavBar() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [isOpen])
 
-  // Screen-cut navigation: Turns screen black/white and jumps directly to section
+  // Cinematic crossfade section navigation: Fades in to theme background, changes section, fades out
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault()
 
-      // 1. Immediately activate full-screen background overlay (black in dark mode, white in light mode)
-      setIsFlashActive(true)
-      setIsFlashVisible(true)
+      // 1. Mount overlay and smoothly fade in to solid background (black/white)
+      setIsFading(true)
+      requestAnimationFrame(() => {
+        setFadeVisible(true)
+      })
 
-      // 2. Close hamburger menu if open
-      setIsOpen(false)
-
-      // 3. Unlock scroll immediately
-      document.documentElement.style.overflow = ""
-      document.body.style.overflow = ""
-      window.dispatchEvent(new CustomEvent("lenis:start"))
-
-      // 4. Instantly jump directly to destination section while screen is black/white
+      // 2. When screen is completely black/white (400ms), jump directly to section and close menu
       setTimeout(() => {
+        setIsOpen(false)
+        document.documentElement.style.overflow = ""
+        document.body.style.overflow = ""
+        window.dispatchEvent(new CustomEvent("lenis:start"))
+
         const target = document.querySelector(href) as HTMLElement | null
         if (target) {
           if (typeof window !== "undefined" && (window as any).__lenis) {
             ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: -60 })
           } else {
-            target.scrollIntoView({ behavior: "instant" as any })
+            window.scrollTo(0, target.offsetTop - 60)
           }
         }
 
-        // 5. Fade out the screen overlay to reveal the new section
+        // 3. Smoothly fade out the overlay to reveal the new section
         setTimeout(() => {
-          setIsFlashVisible(false)
+          setFadeVisible(false)
           setTimeout(() => {
-            setIsFlashActive(false)
-          }, 300)
-        }, 80)
-      }, 60)
+            setIsFading(false)
+          }, 450)
+        }, 60)
+      }, 400)
     }
   }
 
@@ -179,11 +178,11 @@ export default function NavBar() {
 
   return (
     <>
-      {/* Full Page Flash Overlay: Turns whole page black or white (theme-dependent) and loads directly on section */}
-      {isFlashActive && (
+      {/* Full Screen Cinematic Crossfade Overlay (Fade In -> Section Load -> Fade Out) */}
+      {isFading && (
         <div
-          className={`fixed inset-0 z-[100] bg-background pointer-events-none transition-opacity duration-300 ease-out ${
-            isFlashVisible ? "opacity-100" : "opacity-0"
+          className={`fixed inset-0 z-[100] bg-background pointer-events-auto transition-opacity duration-400 ease-in-out ${
+            fadeVisible ? "opacity-100" : "opacity-0"
           }`}
           aria-hidden="true"
         />
