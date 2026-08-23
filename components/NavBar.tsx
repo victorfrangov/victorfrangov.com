@@ -230,9 +230,9 @@ export default function NavBar() {
               href={panel.href}
               onClick={() => setIsOpen(false)}
               style={{
-                transitionDelay: isOpen ? `${idx * 60}ms` : `${(4 - idx) * 35}ms`,
+                transitionDelay: isOpen ? `${idx * 90}ms` : `${(4 - idx) * 50}ms`,
               }}
-              className={`group flex flex-col justify-between p-4 sm:p-6 lg:p-8 ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-r border-b border-foreground/20 rounded-none shadow-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${
+              className={`group flex flex-col justify-between p-4 sm:p-6 lg:p-8 ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-r border-b border-foreground/20 rounded-none shadow-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${
                 isOpen ? "translate-y-0" : "-translate-y-[115%]"
               }`}
             >
