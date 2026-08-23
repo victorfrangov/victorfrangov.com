@@ -354,42 +354,48 @@ export default function NavBar() {
               {panel.href === "#about-me" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
-                    src="/hello.webm"
                     autoPlay
                     loop
                     muted
                     playsInline
                     preload="auto"
                     className="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity duration-300"
-                  />
+                  >
+                    <source src="/hello.webm" type="video/webm" />
+                    <source src="/hello.mp4" type="video/mp4" />
+                  </video>
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
               {panel.href === "#projects" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
-                    src="/tonystark.webm"
                     autoPlay
                     loop
                     muted
                     playsInline
                     preload="auto"
                     className="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity duration-300"
-                  />
+                  >
+                    <source src="/tonystark.webm" type="video/webm" />
+                    <source src="/tonystark.mp4" type="video/mp4" />
+                  </video>
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
               {panel.href === "#contact" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
-                    src="/jamesbond.webm"
                     autoPlay
                     loop
                     muted
                     playsInline
                     preload="auto"
                     className="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity duration-300"
-                  />
+                  >
+                    <source src="/jamesbond.webm" type="video/webm" />
+                    <source src="/jamesbond.mp4" type="video/mp4" />
+                  </video>
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
