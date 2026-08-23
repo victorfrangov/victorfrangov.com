@@ -102,6 +102,11 @@
     }
   },
   "projects": {
+    "papagal": {
+      "title": "Papagal",
+      "dates": "Février 2026 – Présent",
+      "description": "Visualiseur natif macOS de bases de données haute performance conçu en Swift, AppKit et shaders MetalKit GPU. Démarrage <50ms, empreinte de 38 Mo et prise en charge de SQLite, Parquet, Excel, CSV et JSON."
+    },
     "supervitre": {
       "title": "SuperVitre",
       "dates": "Mai 2025 – Août 2025",

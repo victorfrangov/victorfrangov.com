@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import { useTranslations } from "next-intl"
 import ProjectCard from "./project-card"
+import PapagalModel from "./PapagalModel"
 import Esp32Model from "./Esp32Model"
 import PongModel from "./PongModel"
 import FluidSimModel from "./FluidSimModel"
@@ -22,6 +23,15 @@ type Project = {
 }
 
 const PROJECTS: Project[] = [
+  {
+    slug: "papagal",
+    category: "systems",
+    image: "/projects/papagal.png",
+    tags: ["Swift", "AppKit", "MetalKit", "SQLite", "Parquet", "macOS"],
+    links: [
+      { key: "website", href: "https://papagal.dev" },
+    ]
+  },
   {
     slug: "agency",
     category: "web",
@@ -113,7 +123,9 @@ export default function RunningProjectsSection() {
           }))
 
           let customComponent: React.ReactNode | undefined
-          if (p.slug === "agency") {
+          if (p.slug === "papagal") {
+            customComponent = <PapagalModel />
+          } else if (p.slug === "agency") {
             customComponent = <SitusModel />
           } else if (p.slug === "esp32") {
             customComponent = <Esp32Model />
