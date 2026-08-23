@@ -160,10 +160,13 @@ export default async function ContactSection({ locale }: { locale: string }) {
         </div>
       </div>
 
-      {/* 3. Big Victor Frangov Wordmark (Spanning Width in Viewport) */}
-      <div className="w-full max-w-7xl mx-auto overflow-hidden select-none py-1">
-        <h2 className="text-[12vw] sm:text-[13vw] font-extrabold tracking-[-0.055em] leading-[0.82] uppercase text-foreground text-center w-full whitespace-nowrap">
-          VICTORFRANGOV
+      {/* 3. Big Victor Frangov Wordmark (Matching Hamburger Menu layout & typography) */}
+      <div
+        className="w-full overflow-hidden select-none relative z-0 px-4 sm:px-8 pb-3 pt-1 flex items-end justify-center"
+        aria-hidden="true"
+      >
+        <h2 className="text-[7.2vw] font-black tracking-[-0.04em] leading-[0.85] uppercase text-black dark:text-white text-center w-full whitespace-nowrap">
+          VICTORFRANGOV©{year}
         </h2>
       </div>
 
