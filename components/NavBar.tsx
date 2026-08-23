@@ -46,22 +46,15 @@ export default function NavBar() {
     return () => clearInterval(interval)
   }, [])
 
-  // Track scroll position: only show menu button when scrolled down, swipe up menu on scroll down
+  // Track scroll position to reveal the MENU button when scrolled past top
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY
-
       if (currentScroll > 40) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
       }
-
-      // If user scrolls down while menu is open, smoothly swipe up and close
-      if (currentScroll > lastScrollY.current + 15 && currentScroll > 60) {
-        setIsOpen(false)
-      }
-
       lastScrollY.current = currentScroll
     }
 
@@ -69,6 +62,49 @@ export default function NavBar() {
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // When menu is open, intercept scroll down/up: slide rectangles back up first without scrolling the page
+  useEffect(() => {
+    if (!isOpen) return
+
+    let isClosing = false
+
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) > 5) {
+        e.preventDefault()
+        if (!isClosing) {
+          isClosing = true
+          setIsOpen(false)
+        }
+      }
+    }
+
+    let touchStartY = 0
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touchDelta = touchStartY - e.touches[0].clientY
+      if (Math.abs(touchDelta) > 8) {
+        e.preventDefault()
+        if (!isClosing) {
+          isClosing = true
+          setIsOpen(false)
+        }
+      }
+    }
+
+    window.addEventListener("wheel", handleWheel, { passive: false })
+    window.addEventListener("touchstart", handleTouchStart, { passive: true })
+    window.addEventListener("touchmove", handleTouchMove, { passive: false })
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel)
+      window.removeEventListener("touchstart", handleTouchStart)
+      window.removeEventListener("touchmove", handleTouchMove)
+    }
+  }, [isOpen])
 
   // Close menu on Escape key
   useEffect(() => {
