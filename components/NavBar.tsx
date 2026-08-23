@@ -347,18 +347,33 @@ export default function NavBar() {
               style={{
                 transitionDelay: isOpen ? `${idx * 110}ms` : `${(4 - idx) * 75}ms`,
               }}
-              className={`group flex flex-col justify-between p-4 sm:p-6 lg:p-8 ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-r border-b border-foreground/20 rounded-none shadow-none transition-all duration-[1300ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${
+              className={`group relative overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-r border-b border-foreground/20 rounded-none shadow-none transition-all duration-[1300ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${
                 isOpen ? "translate-y-0" : "-translate-y-[120%]"
               }`}
             >
-              <div />
+              {panel.href === "#contact" && (
+                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                  <video
+                    src="/jamesbond.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+                </div>
+              )}
+
+              <div className="relative z-10" />
 
               {/* Bottom: Big Section Title */}
-              <div className="space-y-1">
+              <div className="space-y-1 relative z-10">
                 <span className="block text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground group-hover:translate-x-1 transition-transform duration-200">
                   {panel.label}
                 </span>
-                <span className="text-[10px] sm:text-xs font-mono text-foreground/50 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-[10px] sm:text-xs font-mono text-foreground/70 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <span>Jump</span>
                   <ArrowDown className="w-3 h-3" />
                 </span>
