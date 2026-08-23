@@ -13,54 +13,93 @@
     "greeting4": "VICTOR FRANGOV",
     "expertise": "Expertise",
     "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close",
+    "availableForProjects": "Available for projects",
+    "letsTalk": "Let's Talk",
+    "mainNav": "Main Navigation",
+    "locations": "Locations",
+    "connect": "Connect",
+    "overview": "Overview",
+    "aboutMe": "About Me",
+    "freshnessGuaranteed": "FRESHNESS GUARANTEED",
+    "portfolioFooter": "VICTOR FRANGOV PORTFOLIO — {year}©",
+    "locationLsn": "Lausanne, Switzerland",
+    "locationLsnSub": "EPFL Computer Science",
+    "locationMtl": "Montréal, Canada",
+    "locationMtlSub": "Origins & Agency Hub"
   },
   "main": {
     "hero": {
+      "metaRole": "EPFL CS & Full-Stack Developer",
+      "metaLocation": "Lausanne, CH / Montréal, CA",
       "title": {
         "line1": "FULL STACK",
         "emphasis": "developer",
         "line2": "& STUDENT"
       },
-      "headshotAlt": "Victor Frangov headshot",
-      "subtitle": {
-        "line1": "Currently studying Computer Science at EPFL in Switzerland, passionate about",
-        "line2": "creating modern and performant applications.",
-        "line3": "Transforming ideas into elegant digital solutions with expertise in full-stack development."
-      },
-      "cv": "See My CV"
+      "profileSection": "( 01 / PROFILE )",
+      "profileBio": "Studying Computer Science at EPFL in Switzerland, originally from Montréal. Focused on modern web architecture, machine learning, and high-performance software engineering.",
+      "manifesto": "Engineered with Swiss precision and Montréal creativity. Transforming ideas into fast, elegant, and impactful digital solutions.",
+      "freshness": "Freshness guaranteed.",
+      "visit": "visit",
+      "cv": "See My CV",
+      "projects": "Projects",
+      "indexLocationLabel": "( 01 ) LOCATION",
+      "indexLocationVal": "Lausanne, CH / MTL, CA",
+      "indexEducationLabel": "( 02 ) EDUCATION",
+      "indexEducationVal": "EPFL Computer Science",
+      "indexStackLabel": "( 03 ) CORE STACK",
+      "indexStackVal": "Next.js · PyTorch · C/C++",
+      "indexAvailabilityLabel": "( 04 ) AVAILABILITY",
+      "indexAvailabilityVal": "Open for Projects & Roles"
     }
   },
   "about": {
     "sectionLabel": "ABOUT ME",
+    "subLabel": "EPFL · Computer Science",
     "title": {
       "line1": "I'm a passionate developer",
       "line2": "committed to building innovative and creative solutions"
     },
     "metrics": {
-      "yearsValue": "5",
+      "yearsValue": "05+",
       "years": "YEARS OF EXPERIENCE",
-      "projectsValue": "10+",
-      "projects": "PROJECTS COMPLETED"
+      "projectsValue": "15+",
+      "projects": "PROJECTS COMPLETED",
+      "role": "CS UNDERGRADUATE"
     }
   },
   "expertise": {
     "title": { "line1": "TECHNICAL", "line2": "EXPERTISE" },
-    "items": [
-      {
-        "title": "FRONTEND"
-      },
-      {
-        "title": "BACKEND / SOFTWARE"
-      },
-      {
-        "title": "TOOLS & DEVOPS"
-      }
-    ]
+    "subtitle": "Technical capabilities across the full engineering stack.",
+    "service1": {
+      "title": "FRONTEND & UI ARCHITECTURE",
+      "desc": "Pixel-perfect, high-performance web experiences built with Next.js, React, modern state management, and silky kinetic animations."
+    },
+    "service2": {
+      "title": "BACKEND & DISTRIBUTED SYSTEMS",
+      "desc": "Robust API services, machine learning models, database modeling, and low-level system programming with C/C++ and CUDA."
+    },
+    "service3": {
+      "title": "TOOLS, DEVOPS & INFRASTRUCTURE",
+      "desc": "CI/CD pipelines, automated testing, cloud deployments on Vercel & GCP, and developer tooling for seamless releases."
+    }
   },
   "running": {
-    "title": "Running Projects - ",
-    "description": "Things I'm building and maintaining."
+    "sectionTag": "SELECTED WORKS",
+    "title": { "line1": "Selected", "line2": "works" },
+    "filter": {
+      "all": "All Projects",
+      "web": "Web & Agency",
+      "systems": "AI & Systems",
+      "embedded": "Embedded & C++"
+    },
+    "linkTypes": {
+      "website": "Website",
+      "sourceCode": "Source Code"
+    }
   },
   "projects": {
     "supervitre": {
@@ -79,9 +118,9 @@
       "description": "Personal site built with Next.js, TypeScript, and Tailwind CSS."
     },
     "agency": {
-        "title": "Situs Digital",
-        "dates": "January 2026 - Now",
-        "description": "Web creation agency helping small businesses grow their online presence and get more customers."
+      "title": "Situs Digital",
+      "dates": "January 2026 - Now",
+      "description": "Web creation agency helping small businesses grow their online presence and get more customers."
     },
     "stock-ai-robot": {
       "title": "Stock Prediction Machine Learning AI",
@@ -100,36 +139,16 @@
     }
   },
   "contact": {
-    "title": { "line1": "LET'S", "line2": "CONNECT" },
-    "invite": "Build something impactful.",
-    "cta": {
-      "primary": "Start a Project"
-    },
-    "about": {
-      "name": "Victor Frangov",
-      "description": "Computer Science student with a passion for technology and problem-solving. I'm always interested in collaborating on innovative projects and learning new technologies."
-    },
-    "info": {
-      "location": {
-        "label": "Location",
-        "value": "Lausanne, Switzerland",
-        "note": "Originally from Montréal, Canada"
-      },
-      "touch": {
-        "label": "Get in Touch",
-        "value": "Available for collaboration and opportunities"
-      }
-    },
-    "social": { "github": "GitHub", "linkedin": "LinkedIn" },
-    "availability": {
-      "title": "Availability",
-      "body": "Open to freelance engagements, startup collaborations, and research projects in AI, data, and developer tooling."
-    },
-    "response": {
-      "title": "Response Time",
-      "body": "I usually reply within 24–48 hours."
-    },
-    "copyright": "© {year} Victor Frangov. All rights reserved.",
-    "madeBy": "Made by"
+    "work": "Work",
+    "about": "About",
+    "capabilities": "Capabilities",
+    "resume": "Resume",
+    "resumeFull": "Resume / CV",
+    "curriculumVitae": "Curriculum Vitae",
+    "social": "Social",
+    "external": "External",
+    "altLanguageName": "Français",
+    "lausanne": "Lausanne",
+    "montreal": "Montréal"
   }
 }

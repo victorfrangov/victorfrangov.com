@@ -1,219 +1,165 @@
 "use client"
 
-import React, { useRef, useLayoutEffect, useState } from "react"
-import { ExternalLink, Github } from "lucide-react"
+import React, { useState } from "react"
 import { useTranslations } from "next-intl"
-import { AnimatedBeam } from "./ui/shadcn-io/animated-beam"
-import { cn } from "@/lib/utils"
 import ProjectCard from "./project-card"
-import CurvedLoop from "./ui/shadcn-io/curved-loop"
+import Esp32Model from "./Esp32Model"
+import PongModel from "./PongModel"
+import FluidSimModel from "./FluidSimModel"
+import StockChartModel from "./StockChartModel"
+import SitusModel from "./SitusModel"
 
-type ProjectLink = {
-  icon: React.ReactNode
-  type: string
-  href: string
-}
+type ProjectCategory = "all" | "web" | "systems" | "embedded"
+
+type ProjectLinkKey = "website" | "sourceCode"
 
 type Project = {
-  slug: string // Title
+  slug: string
+  category: ProjectCategory
   image?: string
-  video?: string
   tags: readonly string[]
-  links: readonly ProjectLink[]
+  links: readonly { key: ProjectLinkKey; href: string }[]
 }
 
 const PROJECTS: Project[] = [
-  // {
-  //   slug: "portfolio",
-  //   image: "/projects/portfolio.webp",
-  //   tags: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI", "i18n"],
-  //   links: [
-  //     { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "/" },
-  //     { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/victorfrangov.com" }
-  //   ]
-  // },
   {
     slug: "agency",
+    category: "web",
     image: "/projects/situs-large-white.webp",
-    tags: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI", "i18n"],
+    tags: ["Next.js", "TypeScript", "TailwindCSS", "i18n", "SEO Architecture"],
     links: [
-      { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "https://situsdigital.com" },
+      { key: "website", href: "https://situsdigital.com" },
     ]
   },
   {
     slug: "stock-ai-robot",
+    category: "systems",
     image: "/projects/stock.webp",
-    tags: ["Python", "PyTorch", "Pandas", "NumPy", "MPS", "CUDA", "Matplotlib", "Big Data", "Scikit-Learn"],
+    tags: ["Python", "PyTorch", "Pandas", "CUDA / MPS", "Time Series"],
     links: [
-      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/stock-robot" }
+      { key: "sourceCode", href: "https://github.com/victorfrangov/stock-robot" }
     ]
   },
-  // {
-  //   slug: "supervitre",
-  //   image: "/projects/supervitre.webp",
-  //   tags: ["Next.js", "Typescript", "Firebase", "Google Cloud", "Resend", "Pug", "reCAPTCHA", "SquareSpace", "TailwindCSS", "Shadcn UI", "i18n", "Magic UI"],
-  //   links: [
-  //     { icon: <ExternalLink className="w-3.5 h-3.5" />, type: "Website", href: "https://supervitre.net" },
-  //     { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/superVitre" }
-  //   ]
-  // },
   {
     slug: "fluidsim",
+    category: "systems",
     image: "/projects/fluid-simulation.webm",
-    tags: ["C++", "C", "OpenGL", "ImGui", "SDL3"],
+    tags: ["C++", "C", "OpenGL", "SDL3", "Navier-Stokes"],
     links: [
-      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/fluid-simulation1" }
+      { key: "sourceCode", href: "https://github.com/victorfrangov/fluid-simulation1" }
     ]
   },
   {
     slug: "pong",
+    category: "embedded",
     image: "/projects/pong.webm",
-    tags: ["C", "C++", "SDL3"],
+    tags: ["C", "C++", "SDL3", "Game Loop"],
     links: [
-      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/pong" }
+      { key: "sourceCode", href: "https://github.com/victorfrangov/pong" }
     ]
   },
   {
     slug: "esp32",
+    category: "embedded",
     image: "/projects/esp32.webp",
-    tags: ["C", "ESP-IDF", "FreeRTOS", "Python", "Low-level", "u8g2"],
+    tags: ["C", "ESP-IDF", "FreeRTOS", "IoT", "Sensors"],
     links: [
-      { icon: <Github className="w-3.5 h-3.5" />, type: "Source", href: "https://github.com/victorfrangov/esp32-humidity" }
+      { key: "sourceCode", href: "https://github.com/victorfrangov/esp32-humidity" }
     ]
   }
 ]
 
 export default function RunningProjectsSection() {
   const t = useTranslations()
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const dotRefs = useRef<(HTMLDivElement | null)[]>([])
-  dotRefs.current = PROJECTS.map((_, i) => dotRefs.current[i] ?? null)
+  const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all")
 
-  const [ready, setReady] = useState(false)
-  const [lineTop, setLineTop] = useState<number>(0)
-  const [lineHeight, setLineHeight] = useState<number>(0)
+  const filteredProjects = PROJECTS.filter((p) => {
+    if (activeFilter === "all") return true
+    return p.category === activeFilter
+  })
 
-  useLayoutEffect(() => {
-    const id = requestAnimationFrame(() => {
-      setReady(true)
-      // compute vertical line start/end using first and last dot centers
-      const container = containerRef.current
-      const first = dotRefs.current[0]
-      const last = dotRefs.current[dotRefs.current.length - 1]
-      if (!container || !first || !last) return
-      const cRect = container.getBoundingClientRect()
-      const fRect = first.getBoundingClientRect()
-      const lRect = last.getBoundingClientRect()
-
-      const firstCenterY = fRect.top - cRect.top + fRect.height / 2
-      const lastCenterY = lRect.top - cRect.top + lRect.height / 2
-
-      const top = Math.min(firstCenterY, lastCenterY)
-      const height = Math.abs(lastCenterY - firstCenterY)
-
-      setLineTop(top)
-      setLineHeight(height)
-    })
-    return () => cancelAnimationFrame(id)
-  }, [])
+  const filterCategories: ProjectCategory[] = ["all", "web", "systems", "embedded"]
 
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="py-2 sm:py-16">
-      <h2 id="projects-heading" className="sr-only">{t("running.title")} {t("running.description")}</h2>
-      <div className="relative -top-30 sm:-top-30">
-        <CurvedLoop
-          marqueeText={t("running.title")}
-          speed={2}
-          curveAmount={300}
-          direction="left"
-          interactive={true}
-          className="fill-black dark:fill-white text-9xl sm:text-8xl lg:text-6xl"
-        />
+    <section
+      id="projects"
+      aria-labelledby="projects-heading"
+      className="py-20 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-b border-foreground/10"
+    >
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+        <div>
+          <span className="text-xs font-mono text-foreground/50 tracking-widest uppercase block mb-3">
+            ( 04 / {t("running.sectionTag")} )
+          </span>
+          <h2
+            id="projects-heading"
+            className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase"
+          >
+            {t("running.title.line1")}{" "}
+            <span className="font-serif italic font-normal lowercase">
+              {t("running.title.line2")}
+            </span>
+          </h2>
+        </div>
+
+        {/* Filter Pills */}
+        <div className="flex flex-wrap gap-2">
+          {filterCategories.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-200 ${
+                activeFilter === filter
+                  ? "bg-foreground text-background font-semibold"
+                  : "border border-foreground/20 text-foreground/70 hover:border-foreground hover:text-foreground"
+              }`}
+            >
+              {t(`running.filter.${filter}`)}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto -mt-6 lg:mt-10">
-        <p className="mx-auto mt-2 sm:mt-3 mb-10 sm:mb-12 max-w-3xl text-center text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
-          {t("running.description")}
-        </p>
+      {/* 2-Column Locomotive Works Grid */}
+      <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+        {filteredProjects.map((p, idx) => {
+          const indexFormatted = `( ${String(idx + 1).padStart(2, "0")} )`
+          const title = t(`projects.${p.slug}.title`)
+          const dates = t(`projects.${p.slug}.dates`)
+          const description = t(`projects.${p.slug}.description`)
+          const mappedLinks = p.links.map((link) => ({
+            type: t(`running.linkTypes.${link.key}`),
+            href: link.href,
+          }))
 
-        <div ref={containerRef} className="relative mx-auto max-w-3xl">
-          {/* Center line and beams only on lg+ */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-blue-500/60 via-blue-400/25 to-blue-300/10 hidden lg:block"
-            style={{ top: `${lineTop}px`, height: `${lineHeight}px` }}
-          />
+          let customComponent: React.ReactNode | undefined
+          if (p.slug === "agency") {
+            customComponent = <SitusModel />
+          } else if (p.slug === "esp32") {
+            customComponent = <Esp32Model />
+          } else if (p.slug === "pong") {
+            customComponent = <PongModel />
+          } else if (p.slug === "fluidsim") {
+            customComponent = <FluidSimModel />
+          } else if (p.slug === "stock-ai-robot") {
+            customComponent = <StockChartModel />
+          }
 
-          {/* Mobile/md: stacked centered. lg+: alternating */}
-          <div className="flex flex-col gap-10 md:gap-14 lg:gap-16">
-            {PROJECTS.map((p, i) => {
-              const leftSide = i % 2 === 0
-              const title = t(`projects.${p.slug}.title`)
-              const dates = t(`projects.${p.slug}.dates`)
-              const description = t(`projects.${p.slug}.description`)
-
-              return (
-                <div
-                  key={p.slug}
-                  className={cn(
-                    "relative w-full",
-                    // Only offset on lg+ (no md offsets)
-                    leftSide ? "lg:pr-[60%]" : "lg:pl-[60%]"
-                  )}
-                >
-                  {/* Dot only on lg+ */}
-                  <div
-                    ref={(el) => {
-                      dotRefs.current[i] = el
-                    }}
-                    className="absolute left-1/2 top-6 -translate-x-1/2 hidden lg:block"
-                  >
-                    <div className="w-5 h-5 rounded-full bg-blue-500 shadow-[0_0_0_6px_rgba(59,130,246,0.25)]" />
-                  </div>
-
-                  <div
-                    className={cn(
-                      "relative",
-                      // Centered card on mobile/md; push left/right on lg
-                      "mx-auto max-w-[22rem] md:max-w-[24rem] lg:max-w-[26rem]",
-                      leftSide ? "lg:ml-0 lg:mr-auto" : "lg:mr-0 lg:ml-auto"
-                    )}
-                  >
-                    <ProjectCard
-                      title={title}
-                      description={description}
-                      dates={dates}
-                      tags={p.tags}
-                      image={p.image}
-                      links={p.links}
-                    />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* Beams only on lg+ */}
-          {ready &&
-            dotRefs.current.length > 1 &&
-            dotRefs.current.map((_, i) => {
-              const from = dotRefs.current[i]
-              const to = dotRefs.current[i + 1]
-              if (!from || !to) return null
-              return (
-                <AnimatedBeam
-                  key={`beam-${i}`}
-                  containerRef={containerRef}
-                  fromRef={{ current: from }}
-                  toRef={{ current: to }}
-                  orientation="vertical"
-                  duration={18}
-                  pathOpacity={0.22}
-                  className="pointer-events-none hidden lg:block"
-                />
-              )
-            })}
-        </div>
+          return (
+            <ProjectCard
+              key={p.slug}
+              index={indexFormatted}
+              title={title}
+              description={description}
+              dates={dates}
+              tags={p.tags}
+              image={p.image}
+              customComponent={customComponent}
+              links={mappedLinks}
+            />
+          )
+        })}
       </div>
     </section>
   )

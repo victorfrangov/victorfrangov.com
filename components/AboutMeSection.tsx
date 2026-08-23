@@ -1,31 +1,64 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { TextGenerateEffect } from "./ui/shadcn-io/text-generate-effect"
+import { EpflLogo } from "@/components/EpflLogo"
 
 export default function AboutMeSection() {
   const t = useTranslations("about")
+
   return (
-    <section id="about-me" aria-labelledby="about-heading" className="relative px-4 sm:px-6 pt-24 pb-24 sm:pt-32 sm:pb-32 overflow-hidden">
-      <div className="max-w-6xl mx-auto relative">
-        <h2 id="about-heading" className="uppercase tracking-widest text-xs sm:text-sm text-muted-foreground mb-8 inline-block">
-          {t("sectionLabel")}
-        </h2>
-        <div className="font-bold leading-tight text-4xl sm:text-6xl md:text-7xl text-center sm:text-left">
-          <TextGenerateEffect
-            words={`${t("title.line1")} ${t("title.line2")}`}
-            duration={0.6}
-            staggerDelay={0.15}
-          />
-        </div>
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-8 text-center">
-          <div>
-            <p className="text-3xl sm:text-4xl font-semibold text-blue-500">{t("metrics.yearsValue")}</p>
-            <p className="mt-2 text-xs sm:text-sm tracking-wide">{t("metrics.years")}</p>
+    <section
+      id="about-me"
+      aria-labelledby="about-heading"
+      className="relative px-4 sm:px-8 py-20 sm:py-32 max-w-7xl mx-auto border-b border-foreground/10"
+    >
+      <div className="grid md:grid-cols-12 gap-8 items-start">
+        {/* Left index label */}
+        <div className="md:col-span-3 space-y-2">
+          <span className="text-xs font-mono text-foreground/50 tracking-widest uppercase block">
+            ( 02 / {t("sectionLabel")} )
+          </span>
+          <div className="text-sm font-mono text-foreground/70">
+            {t("subLabel")}
           </div>
-          <div>
-            <p className="text-3xl sm:text-4xl font-semibold text-blue-500">{t("metrics.projectsValue")}</p>
-            <p className="mt-2 text-xs sm:text-sm tracking-wide">{t("metrics.projects")}</p>
+        </div>
+
+        {/* Right giant statement & metrics */}
+        <div className="md:col-span-9 space-y-12">
+          <h2
+            id="about-heading"
+            className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] text-foreground"
+          >
+            {t("title.line1")} {t("title.line2")}.
+          </h2>
+
+          <div className="grid sm:grid-cols-3 gap-8 pt-8 border-t border-foreground/10">
+            <div className="space-y-1">
+              <div className="text-4xl sm:text-6xl font-extrabold font-mono tracking-tighter text-foreground">
+                {t("metrics.yearsValue")}
+              </div>
+              <div className="text-xs font-mono text-foreground/60 uppercase tracking-wider">
+                {t("metrics.years")}
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="text-4xl sm:text-6xl font-extrabold font-mono tracking-tighter text-foreground">
+                {t("metrics.projectsValue")}
+              </div>
+              <div className="text-xs font-mono text-foreground/60 uppercase tracking-wider">
+                {t("metrics.projects")}
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="h-[40px] sm:h-[60px] flex items-center">
+                <EpflLogo className="h-8 sm:h-12 w-auto" />
+              </div>
+              <div className="text-xs font-mono text-foreground/60 uppercase tracking-wider">
+                {t("metrics.role")}
+              </div>
+            </div>
           </div>
         </div>
       </div>

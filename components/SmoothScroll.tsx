@@ -1,0 +1,60 @@
+"use client"
+
+import { useEffect, useRef, ReactNode } from "react"
+import Lenis from "lenis"
+
+interface SmoothScrollProps {
+  children: ReactNode
+}
+
+export default function SmoothScroll({ children }: SmoothScrollProps) {
+  const lenisRef = useRef<Lenis | null>(null)
+
+  useEffect(() => {
+    // Initialize Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
+    })
+
+    lenisRef.current = lenis
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    const rafId = requestAnimationFrame(raf)
+
+    // Handle internal anchor clicks smoothly
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null
+      const anchor = target?.closest("a")
+      if (!anchor) return
+      
+      const href = anchor.getAttribute("href")
+      if (href?.startsWith("#") && href.length > 1) {
+        const elem = document.querySelector(href)
+        if (elem) {
+          e.preventDefault()
+          lenis.scrollTo(elem as HTMLElement, { offset: -80, duration: 1.4 })
+        }
+      }
+    }
+
+    document.addEventListener("click", handleAnchorClick)
+
+    return () => {
+      document.removeEventListener("click", handleAnchorClick)
+      cancelAnimationFrame(rafId)
+      lenis.destroy()
+    }
+  }, [])
+
+  return <>{children}</>
+}

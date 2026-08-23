@@ -1,152 +1,117 @@
 import Link from "next/link"
-import { ArrowRight, Github, Linkedin, MapPin, Mail } from "lucide-react"
 import { getTranslations } from "next-intl/server"
-import { AuroraText } from "./ui/aurora-text"
-import { Button } from "./ui/button"
+import { ArrowUpRight, ArrowDown } from "lucide-react"
+import { MontrealLogo } from "./MontrealLogo"
+import { SwissCross } from "./SwissCross"
 
 export default async function ContactSection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale })
   const year = new Date().getFullYear()
 
+  const cvHref =
+    locale === "fr"
+      ? "https://cv.victorfrangov.com/cv_fr.pdf"
+      : "https://cv.victorfrangov.com/cv_en.pdf"
+
+  const altLocale = locale === "en" ? "fr" : "en"
+
   return (
-    <section
+    <footer
       id="contact"
       aria-labelledby="contact-heading"
-      className="w-full mt-24 sm:mt-40 px-4 sm:px-8 py-24 border-t border-border bg-gradient-to-b from-background to-background/60"
+      className="w-full bg-background text-foreground px-6 sm:px-10 md:px-16 py-16 sm:py-24"
     >
-      <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 max-w-7xl mx-auto">
-        <div className="lg:col-span-5 space-y-8">
-          <h2 id="contact-heading" className="text-5xl sm:text-7xl font-bold leading-[0.95] space-y-1">
-            {t("contact.title.line1")}
-            <br />
-              <AuroraText className="inline-block">
-                <span>{t("contact.title.line2")}</span>
-              </AuroraText>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-md">
-            {t("contact.invite", {
-              default: "Let’s build something impactful together."
-            })}
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Button asChild className="group relative overflow-hidden h-auto px-5 rounded-md bg-black hover:bg-black text-white dark:bg-blue-600">
-              <Link href="mailto:v@victorfrangov.com?">
-                <span className="flex items-center gap-2 transition-transform duration-500 ease-out group-hover:translate-x-[140%]">
-                  <ArrowRight className="w-4 h-4" />
-                  <span>{t("contact.cta.primary", { default: "Start a Project" })}</span>
-                </span>
-                <span
-                  className="absolute inset-0 flex items-center justify-center -translate-x-[140%] group-hover:translate-x-0 transition-transform duration-500 ease-out text-xl"
-                  aria-hidden="true"
-                >
-                  ✉️
-                </span>
-              </Link>
-            </Button>
-          </div>
+      {/* Top: Massive Links Grid */}
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-2 md:grid-cols-12 gap-x-8 md:gap-x-12 gap-y-12 items-start text-foreground/70">
+        {/* Social */}
+        <div className="md:col-span-4">
+          <ul className="space-y-1 sm:space-y-2 list-none m-0 p-0 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.15]">
+            <li>
+              <a href="https://github.com/victorfrangov" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors inline-flex items-baseline gap-1">
+                GitHub <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 opacity-40 self-center" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/victor-frangov/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors inline-flex items-baseline gap-1">
+                LinkedIn <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 opacity-40 self-center" />
+              </a>
+            </li>
+            <li>
+              <a href="mailto:v@victorfrangov.com" className="hover:text-foreground transition-colors inline-flex items-baseline gap-1">
+                Email <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 opacity-40 self-center" />
+              </a>
+            </li>
+            <li>
+              <a href="https://situsdigital.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors inline-flex items-baseline gap-1">
+                Situs Digital <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 opacity-40 self-center" />
+              </a>
+            </li>
+          </ul>
         </div>
 
-        {/* Right: Details */}
-        <div className="lg:col-span-7 grid sm:grid-cols-2 gap-12">
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold mb-2">
-                {t("contact.about.name")}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {t("contact.about.description")}
-              </p>
-            </div>
-
-            <div className="space-y-5">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 mt-0.5 text-muted-foreground" />
-                <div>
-                  <div className="font-medium">
-                    {t("contact.info.location.label")}
-                  </div>
-                  <div className="text-muted-foreground text-sm">
-                    {t("contact.info.location.value")}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    {t("contact.info.location.note")}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 mt-0.5 text-muted-foreground" />
-                <div>
-                  <div className="font-medium">
-                    {t("contact.info.touch.label")}
-                  </div>
-                  <div className="text-muted-foreground text-sm">
-                    {t("contact.info.touch.value")}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Link
-                href="https://github.com/victorfrangov"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Victor Frangov on GitHub"
-                className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-sm hover:bg-accent hover:text-accent-foreground transition-colors"
-              >
-                <Github className="w-4 h-4" />
-                {t("contact.social.github")}
+        {/* Menu */}
+        <div className="md:col-span-4">
+          <ul className="space-y-1 sm:space-y-2 list-none m-0 p-0 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.15]">
+            <li>
+              <Link href="#projects" className="hover:text-foreground transition-colors">
+                {t("contact.work")}
               </Link>
-              <Link
-                href="https://www.linkedin.com/in/victor-frangov/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Victor Frangov on LinkedIn"
-                className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-sm hover:bg-accent hover:text-accent-foreground transition-colors"
-              >
-                <Linkedin className="w-4 h-4" />
-                {t("contact.social.linkedin")}
+            </li>
+            <li>
+              <Link href="#about-me" className="hover:text-foreground transition-colors">
+                {t("contact.about")}
               </Link>
-            </div>
-          </div>
+            </li>
+            <li>
+              <Link href="#expertise" className="hover:text-foreground transition-colors">
+                {t("contact.capabilities")}
+              </Link>
+            </li>
+            <li>
+              <a href={cvHref} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors inline-flex items-baseline gap-1">
+                {t("contact.resume")} <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 opacity-40 self-center" />
+              </a>
+            </li>
+            <li>
+              <Link href={`/${altLocale}`} className="hover:text-foreground transition-colors">
+                {t("contact.altLanguageName")}
+              </Link>
+            </li>
+          </ul>
+        </div>
 
-          <div className="space-y-6">
-            <div className="rounded-md border border-dashed border-border p-6">
-              <h4 className="font-medium mb-2 text-sm tracking-wide">
-                {t("contact.availability.title")}
-              </h4>
-              <p className="text-muted-foreground text-xs leading-relaxed">
-                {t("contact.availability.body")}
-              </p>
-            </div>
-            <div className="rounded-md border border-dashed border-border p-6">
-              <h4 className="font-medium mb-2 text-sm tracking-wide">
-                {t("contact.response.title")}
-              </h4>
-              <p className="text-muted-foreground text-xs leading-relaxed">
-                {t("contact.response.body")}
-              </p>
+        {/* Copyright + Email + Location */}
+        <div className="col-span-2 md:col-span-4 flex flex-col items-end justify-between mt-6 md:mt-0 space-y-8">
+          <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-foreground tracking-tighter">
+            {year}©
+          </span>
+
+          <div className="flex flex-col items-end gap-4">
+            <a
+              href="mailto:v@victorfrangov.com"
+              className="inline-flex items-center rounded-full border border-foreground/40 overflow-hidden text-sm sm:text-lg md:text-xl font-normal hover:border-foreground transition-colors"
+            >
+              <span className="px-4 sm:px-5 py-2 sm:py-3 border-r border-foreground/40">email</span>
+              <span className="px-4 sm:px-5 py-2 sm:py-3 border-r border-foreground/40 font-medium">v</span>
+              <span className="px-3 sm:px-4 py-2 sm:py-3 border-r border-foreground/40">@</span>
+              <span className="px-4 sm:px-5 py-2 sm:py-3 border-r border-foreground/40 font-medium">victorfrangov</span>
+              <span className="px-3 sm:px-4 py-2 sm:py-3 border-r border-foreground/40">.</span>
+              <span className="px-4 sm:px-5 py-2 sm:py-3">com</span>
+            </a>
+
+            <div className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 text-xl sm:text-2xl md:text-3xl font-light tracking-tight text-foreground">
+              <span className="inline-flex items-center gap-1.5">
+                <span>{t("contact.lausanne")}</span>
+                <SwissCross className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 inline-block align-middle shrink-0" />
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <span>{t("contact.montreal")}</span>
+                <MontrealLogo className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 inline-block align-middle shrink-0 hover:rotate-45 transition-transform duration-500" />
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <div className="mt-8 sm:mt-16 flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-border gap-4">
-        <div className="text-sm text-muted-foreground">
-          {t("contact.copyright", { year })}
-        </div>
-        <div className="text-sm text-muted-foreground">
-          {t("contact.madeBy")}{" "}
-          <Link
-            href="https://situsdigital.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-medium text-foreground hover:underline transition-colors"
-          >
-            Situs Digital
-          </Link>
-        </div>
-      </div>
-    </section>
+    </footer>
   )
 }

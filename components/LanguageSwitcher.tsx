@@ -1,6 +1,5 @@
 "use client"
 
-import { Globe } from "lucide-react"
 import { useLocale } from "next-intl"
 import { createNavigation } from "next-intl/navigation"
 
@@ -10,21 +9,37 @@ export function LanguageSwitcher() {
   const router = useRouter()
   const pathname = usePathname()
   const locale = useLocale()
-  const next = locale === "en" ? "fr" : "en"
+
+  const switchLocale = (newLocale: "en" | "fr") => {
+    if (newLocale !== locale) {
+      router.replace(pathname, { locale: newLocale })
+    }
+  }
 
   return (
-    <button
-      onClick={() => router.replace(pathname, { locale: next })}
-      className="
-        flex items-center gap-2 px-3 py-1.5 rounded transition-colors
-        border border-black/20 dark:border-white/20
-        hover:border-black/40 dark:hover:border-white/40
-        bg-transparent
-      "
-      aria-label="Switch language"
-    >
-      <Globe className="w-4 h-4" />
-      <span className="text-sm font-medium">{locale.toUpperCase()}</span>
-    </button>
+    <div className="inline-flex items-center rounded-full border border-foreground/30 p-0.5 text-xs font-mono tracking-tight">
+      <button
+        onClick={() => switchLocale("en")}
+        className={`px-2.5 py-0.5 rounded-full transition-all duration-200 ${
+          locale === "en"
+            ? "bg-foreground text-background font-semibold"
+            : "text-foreground/60 hover:text-foreground"
+        }`}
+        aria-label="Switch to English"
+      >
+        EN
+      </button>
+      <button
+        onClick={() => switchLocale("fr")}
+        className={`px-2.5 py-0.5 rounded-full transition-all duration-200 ${
+          locale === "fr"
+            ? "bg-foreground text-background font-semibold"
+            : "text-foreground/60 hover:text-foreground"
+        }`}
+        aria-label="Passer au Français"
+      >
+        FR
+      </button>
+    </div>
   )
 }

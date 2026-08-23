@@ -1,135 +1,154 @@
 {
-    "seo": {
-        "title": "Victor Frangov | Développeur Full Stack & Étudiant en Informatique à l'EPFL",
-        "description": "Développeur full stack & étudiant EPFL. Création d'applications web modernes avec React, TypeScript, Next.js et Python. Découvrez mon portfolio.",
-        "ogDescription": "Développeur full stack & étudiant en informatique à l'EPFL. Découvrez mes projets en développement web, machine learning et systèmes embarqués.",
-        "keywords": "développeur full stack, développement web, développeur React, TypeScript, Python, C, Node.js, PostgreSQL, Victor Frangov, développeur frontend, développeur backend, EPFL, informatique, Next.js, machine learning, portfolio"
-    },
-    "nav": {
-        "greeting": "BONJOUR, JE SUIS VICTOR FRANGOV",
-        "greeting1": "Imagine 🎨",
-        "greeting2": "Construit 🔨",
-        "greeting3": "Déploie 🚀",
-        "greeting4": "VICTOR FRANGOV",
-        "contact": "Contact",
-        "expertise": "Expertise",
-        "projects": "Projets"
-    },
-    "main": {
-        "hero": {
-            "title": {
-                "line1": "FULL STACK",
-                "emphasis": "développeur",
-                "line2": "& ÉTUDIANT"
-            },
-            "headshotAlt": "Photo de Victor Frangov",
-            "subtitle": {
-                "line1": "Actuellement étudiant en informatique à l'EPFL en Suisse, passionné par la",
-                "line2": "création d'applications modernes et performantes.",
-                "line3": "Transformer des idées en solutions numériques élégantes avec une expertise full‑stack."
-            },
-            "cv": "Voir Mon CV"
-        }
-    },
-    "about": {
-        "sectionLabel": "À PROPOS DE MOI",
-        "title": {
-            "line1": "Je suis un développeur full‑stack",
-            "line2": "engagé à créer des sites web innovants et créatifs"
-        },
-        "metrics": {
-            "yearsValue": "5",
-            "years": "ANNÉES D’EXPÉRIENCE",
-            "projectsValue": "10+",
-            "projects": "PROJETS RÉALISÉS"
-        }
-    },
-    "expertise": {
-        "title": { "line1": "EXPERTISE", "line2": "TECHNIQUE" },
-        "items": [
-            {
-                "title": "FRONTEND"
-            },
-            {
-                "title": "BACKEND / SOFTWARE"
-            },
-            {
-                "title": "OUTILS & DEVOPS"
-            }
-        ]
-    },
-    "running": {
-        "title": "PROJETS EN COURS - ",
-        "description": "Ce que je construis et maintiens."
-    },
-    "projects": {
-        "supervitre": {
-            "title": "SuperVitre",
-            "dates": "Mai 2025 – Août 2025",
-            "description": "Site web full‑stack créé pour l’entreprise estivale d’un ami"
-        },
-        "fluidsim": {
-            "title": "Simulation de fluide",
-            "dates": "Décembre 2023",
-            "description": "Simulation de fluide avec rendu CPU, utilisant les équations de Navier‑Stokes (accélération GPU bientôt!)"
-        },
-        "portfolio": {
-            "title": "Site Portfolio",
-            "dates": "Août 2025 – Octobre 2025",
-            "description": "Site personnel construit avec Next.js, TypeScript et Tailwind CSS."
-        },
-        "agency": {
-            "title": "Situs Digital",
-            "dates": "Janvier 2026 – Présent",
-            "description": "Agence de création web pour aider les petites entreprises à gagner en visibilité et en clients."
-        },
-        "stock-ai-robot": {
-            "title": "IA de prédiction boursière",
-            "dates": "Juillet 2025 – Présent",
-            "description": "Prédiction de signaux automatisée avec PyTorch/TensorFlow et accélération MPS/CUDA."
-        },
-        "esp32": {
-            "title": "Projets ESP32",
-            "dates": "Mars 2025 – Avril 2025",
-            "description": "Expérimentations en embarqué avec ESP‑IDF et FreeRTOS ; capteurs, périphériques et prototypes IoT."
-        },
-        "pong": {
-            "title": "Pong",
-            "dates": "Juillet 2024 – Septembre 2024",
-            "description": "Clone classique de Pong écrit en C/C++ avec SDL3."
-        }
-    },
-    "contact": {
-        "title": { "line1": "ENTRONS", "line2": "EN CONTACT" },
-        "invite": "Construisons quelque chose d’impactant ensemble.",
-        "cta": {
-            "primary": "Démarrer un projet"
-        },
-        "about": {
-            "name": "Victor Frangov",
-            "description": "Étudiant en informatique, passionné par la technologie et la résolution de problèmes. J'aime collaborer sur des projets innovants et apprendre de nouvelles technologies."
-        },
-        "info": {
-            "location": {
-                "label": "Localisation",
-                "value": "Lausanne, Suisse",
-                "note": "Originaire de Montréal, Canada"
-            },
-            "touch": {
-                "label": "Me contacter",
-                "value": "Disponible pour collaborations et opportunités"
-            }
-        },
-        "social": { "github": "GitHub", "linkedin": "LinkedIn" },
-        "availability": {
-            "title": "Disponibilité",
-            "body": "Ouvert aux missions freelance, collaborations avec des start-ups et projets de recherche en IA, données et outils pour développeurs."
-        },
-        "response": {
-            "title": "Délai de réponse",
-            "body": "Je réponds généralement sous 24 à 48 heures."
-        },
-        "copyright": "© {year} Victor Frangov. Tous droits réservés.",
-        "madeBy": "Conçu par"
+  "seo": {
+    "title": "Victor Frangov | Développeur Full Stack & Étudiant en Informatique à l'EPFL",
+    "description": "Développeur full stack & étudiant EPFL. Création d'applications web modernes avec React, TypeScript, Next.js et Python. Découvrez mon portfolio.",
+    "ogDescription": "Développeur full stack & étudiant en informatique à l'EPFL. Découvrez mes projets en développement web, machine learning et systèmes embarqués.",
+    "keywords": "développeur full stack, développement web, développeur React, TypeScript, Python, C, Node.js, PostgreSQL, Victor Frangov, développeur frontend, développeur backend, EPFL, informatique, Next.js, machine learning, portfolio"
+  },
+  "nav": {
+    "greeting": "BONJOUR, JE SUIS VICTOR FRANGOV",
+    "greeting1": "Imagine 🎨",
+    "greeting2": "Construit 🔨",
+    "greeting3": "Déploie 🚀",
+    "greeting4": "VICTOR FRANGOV",
+    "expertise": "Expertise",
+    "projects": "Projets",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Fermer",
+    "availableForProjects": "Disponible pour projets",
+    "letsTalk": "Discutons",
+    "mainNav": "Navigation principale",
+    "locations": "Localisations",
+    "connect": "Réseaux",
+    "overview": "Accueil",
+    "aboutMe": "À Propos",
+    "freshnessGuaranteed": "FRAÎCHEUR GARANTIE",
+    "portfolioFooter": "PORTFOLIO VICTOR FRANGOV — {year}©",
+    "locationLsn": "Lausanne, Suisse",
+    "locationLsnSub": "EPFL Informatique",
+    "locationMtl": "Montréal, Canada",
+    "locationMtlSub": "Origines & Agence"
+  },
+  "main": {
+    "hero": {
+      "metaRole": "EPFL Informatique & Développeur Full-Stack",
+      "metaLocation": "Lausanne, CH / Montréal, CA",
+      "title": {
+        "line1": "FULL STACK",
+        "emphasis": "développeur",
+        "line2": "& ÉTUDIANT"
+      },
+      "profileSection": "( 01 / PROFIL )",
+      "profileBio": "Étudiant en informatique à l'EPFL en Suisse, originaire de Montréal. Passionné par l'architecture logicielle, le web moderne et l'ingénierie haute performance.",
+      "manifesto": "Conçu avec la rigueur suisse et la créativité montréalaise. Création de solutions numériques élégantes, rapides et pérennes.",
+      "freshness": "Fraîcheur garantie.",
+      "visit": "visiter",
+      "cv": "Voir Mon CV",
+      "projects": "Projets",
+      "indexLocationLabel": "( 01 ) LOCALISATION",
+      "indexLocationVal": "Lausanne, CH / MTL, CA",
+      "indexEducationLabel": "( 02 ) ÉDUCATION",
+      "indexEducationVal": "EPFL Informatique",
+      "indexStackLabel": "( 03 ) STACK PRINCIPALE",
+      "indexStackVal": "Next.js · PyTorch · C/C++",
+      "indexAvailabilityLabel": "( 04 ) DISPONIBILITÉ",
+      "indexAvailabilityVal": "Disponible pour projets & missions"
     }
+  },
+  "about": {
+    "sectionLabel": "À PROPOS DE MOI",
+    "subLabel": "EPFL · Informatique",
+    "title": {
+      "line1": "Je suis un développeur full‑stack",
+      "line2": "engagé à créer des solutions innovantes et créatives"
+    },
+    "metrics": {
+      "yearsValue": "05+",
+      "years": "ANNÉES D’EXPÉRIENCE",
+      "projectsValue": "15+",
+      "projects": "PROJETS RÉALISÉS",
+      "role": "ÉTUDIANT EN INFORMATIQUE"
+    }
+  },
+  "expertise": {
+    "title": { "line1": "EXPERTISE", "line2": "TECHNIQUE" },
+    "subtitle": "Compétences techniques et méthodologies modernes.",
+    "service1": {
+      "title": "FRONTEND & ARCHITECTURE UI",
+      "desc": "Interfaces réactives, performantes et axées sur l'expérience utilisateur, avec Next.js, React et animations fluides."
+    },
+    "service2": {
+      "title": "BACKEND & SYSTÈMES DISTRIBUÉS",
+      "desc": "Architectures backend robustes, calcul scientifique, pipelines de machine learning (PyTorch) et programmation système (C/C++)."
+    },
+    "service3": {
+      "title": "OUTILS, DEVOPS & INFRASTRUCTURE",
+      "desc": "Intégration continue, déploiement automatisé sur le cloud, optimisation de la vitesse et observabilité."
+    }
+  },
+  "running": {
+    "sectionTag": "PROJETS SÉLECTIONNÉS",
+    "title": { "line1": "Projets", "line2": "en cours" },
+    "filter": {
+      "all": "Tous les projets",
+      "web": "Web & Agence",
+      "systems": "IA & Systèmes",
+      "embedded": "Embarqué & C++"
+    },
+    "linkTypes": {
+      "website": "Site Web",
+      "sourceCode": "Code Source"
+    }
+  },
+  "projects": {
+    "supervitre": {
+      "title": "SuperVitre",
+      "dates": "Mai 2025 – Août 2025",
+      "description": "Site web full‑stack créé pour l’entreprise estivale d’un ami"
+    },
+    "fluidsim": {
+      "title": "Simulation de fluide",
+      "dates": "Décembre 2023",
+      "description": "Simulation de fluide avec rendu CPU, utilisant les équations de Navier‑Stokes (accélération GPU bientôt!)"
+    },
+    "portfolio": {
+      "title": "Site Portfolio",
+      "dates": "Août 2025 – Octobre 2025",
+      "description": "Site personnel construit avec Next.js, TypeScript et Tailwind CSS."
+    },
+    "agency": {
+      "title": "Situs Digital",
+      "dates": "Janvier 2026 – Présent",
+      "description": "Agence de création web pour aider les petites entreprises à gagner en visibilité et en clients."
+    },
+    "stock-ai-robot": {
+      "title": "IA de prédiction boursière",
+      "dates": "Juillet 2025 – Présent",
+      "description": "Prédiction de signaux automatisée avec PyTorch/TensorFlow et accélération MPS/CUDA."
+    },
+    "esp32": {
+      "title": "Projets ESP32",
+      "dates": "Mars 2025 – Avril 2025",
+      "description": "Expérimentations en embarqué avec ESP‑IDF et FreeRTOS ; capteurs, périphériques et prototypes IoT."
+    },
+    "pong": {
+      "title": "Pong",
+      "dates": "Juillet 2024 – Septembre 2024",
+      "description": "Clone classique de Pong écrit en C/C++ avec SDL3."
+    }
+  },
+  "contact": {
+    "work": "Projets",
+    "about": "À Propos",
+    "capabilities": "Expertise",
+    "resume": "CV",
+    "resumeFull": "Curriculum Vitae",
+    "curriculumVitae": "Curriculum Vitae",
+    "social": "Social",
+    "external": "Liens",
+    "altLanguageName": "English",
+    "lausanne": "Lausanne",
+    "montreal": "Montréal"
+  }
 }
