@@ -214,10 +214,10 @@ export default function NavBar() {
 
       {/* 3. Full-Screen Brutalist Slide-Down Overlay */}
       <div
-        className={`fixed inset-0 z-50 bg-background/95 backdrop-blur-2xl flex flex-col justify-between p-0 transition-opacity duration-500 ${
+        className={`fixed inset-0 z-50 bg-background/95 backdrop-blur-2xl flex flex-col justify-between p-0 transition-all ${
           isOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+            ? "opacity-100 pointer-events-auto duration-500 delay-0"
+            : "opacity-0 pointer-events-none duration-700 delay-700"
         }`}
         role="dialog"
         aria-modal="true"
@@ -230,10 +230,10 @@ export default function NavBar() {
               href={panel.href}
               onClick={() => setIsOpen(false)}
               style={{
-                transitionDelay: isOpen ? `${idx * 90}ms` : `${(4 - idx) * 50}ms`,
+                transitionDelay: isOpen ? `${idx * 110}ms` : `${(4 - idx) * 75}ms`,
               }}
-              className={`group flex flex-col justify-between p-4 sm:p-6 lg:p-8 ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-r border-b border-foreground/20 rounded-none shadow-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${
-                isOpen ? "translate-y-0" : "-translate-y-[115%]"
+              className={`group flex flex-col justify-between p-4 sm:p-6 lg:p-8 ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-r border-b border-foreground/20 rounded-none shadow-none transition-all duration-[1300ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${
+                isOpen ? "translate-y-0" : "-translate-y-[120%]"
               }`}
             >
               <div />
