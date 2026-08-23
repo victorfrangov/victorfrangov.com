@@ -9,7 +9,7 @@ export function MontrealLogo({
     <svg
       viewBox="0 0 77.215 77.43"
       className={className}
-      fill="currentColor"
+      fill="#FF0000"
       aria-label="City of Montréal Emblem"
     >
       <path

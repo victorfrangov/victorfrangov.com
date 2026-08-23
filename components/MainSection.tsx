@@ -22,7 +22,7 @@ export default function MainSection() {
       {/* Top micro-meta badge */}
       <div className="flex items-center justify-between gap-4 mb-6 sm:mb-10 text-xs font-mono text-foreground/60 uppercase tracking-wider">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-foreground" />
+          <span className="w-2 h-2 rounded-full bg-[#FF0000]" />
           <span>{t("main.hero.metaRole")}</span>
         </div>
         <div className="hidden sm:block">
