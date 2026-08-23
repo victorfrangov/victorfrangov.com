@@ -68,13 +68,6 @@ export default function ProjectCard({
             {customComponent}
           </div>
         )}
-
-        {/* Minimal Corner Badge on Default View */}
-        <div className="absolute top-4 left-4 z-20 px-3 py-1 rounded-full bg-background/85 backdrop-blur-md border border-foreground/20 text-xs font-mono tracking-wider text-foreground group-hover:opacity-0 transition-opacity duration-300 flex items-center gap-2 shadow-sm">
-          <span className="font-semibold">{index}</span>
-          <span className="opacity-40">·</span>
-          <span className="font-bold uppercase tracking-tight">{title}</span>
-        </div>
       </div>
 
       {/* 2. Hover State: Color Flip & Full Information Overlay */}

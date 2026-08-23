@@ -17,7 +17,7 @@ export default function StockChartModel() {
     const height = container.clientHeight || 375
 
     const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100)
-    camera.position.set(0, 2.6, 7.2)
+    camera.position.set(0, 0.4, 7.2)
     camera.lookAt(0, 0, 0)
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
@@ -399,13 +399,7 @@ export default function StockChartModel() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full cursor-grab active:cursor-grabbing overflow-hidden bg-transparent select-none"
-    >
-      {/* Interactive 3D pill indicator */}
-      <div className="absolute bottom-3 right-3 z-10 pointer-events-none bg-background/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-foreground/20 text-[10px] font-mono text-foreground/70 flex items-center gap-1.5 shadow-sm">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-        <span>RSI · MACD 3D</span>
-      </div>
-    </div>
+      className="relative w-full h-full overflow-hidden bg-transparent select-none pointer-events-none"
+    />
   )
 }
