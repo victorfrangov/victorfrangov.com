@@ -351,6 +351,20 @@ export default function NavBar() {
                 isOpen ? "translate-y-0" : "-translate-y-[120%]"
               }`}
             >
+              {panel.href === "#about-me" && (
+                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                  <video
+                    src="/hello.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+                </div>
+              )}
               {panel.href === "#projects" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
