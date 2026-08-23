@@ -26,7 +26,7 @@ const PROJECTS: Project[] = [
   {
     slug: "papagal",
     category: "systems",
-    image: "/projects/papagal.png",
+    image: "/projects/papagal.webp",
     tags: ["Swift", "AppKit", "MetalKit", "SQLite", "Parquet", "macOS"],
     links: [
       { key: "website", href: "https://papagal.dev" },

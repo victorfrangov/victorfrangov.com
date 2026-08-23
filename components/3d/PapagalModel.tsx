@@ -16,8 +16,8 @@ export default function PapagalModel() {
     const width = container.clientWidth || 600
     const height = container.clientHeight || 375
 
-    const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100)
-    camera.position.set(0, 0.1, 7.5)
+    const camera = new THREE.PerspectiveCamera(34, width / height, 0.1, 100)
+    camera.position.set(0, 0.1, 6.8)
     camera.lookAt(0, 0, 0)
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
@@ -28,245 +28,315 @@ export default function PapagalModel() {
     renderer.shadowMap.type = THREE.PCFSoftShadowMap
     container.appendChild(renderer.domElement)
 
-    // Studio Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4)
+    // Soft Studio Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.8)
     scene.add(ambientLight)
 
-    const keyLight = new THREE.DirectionalLight(0xffffff, 3.2)
-    keyLight.position.set(5, 8, 6)
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.8)
+    keyLight.position.set(4, 7, 5)
     keyLight.castShadow = true
     scene.add(keyLight)
 
-    const emeraldRim = new THREE.DirectionalLight(0x34d399, 2.8)
-    emeraldRim.position.set(-6, 3, -4)
+    const warmFill = new THREE.DirectionalLight(0xfef08a, 1.6)
+    warmFill.position.set(-5, 4, 3)
+    scene.add(warmFill)
+
+    const emeraldRim = new THREE.DirectionalLight(0x4ade80, 2.2)
+    emeraldRim.position.set(0, 4, -5)
     scene.add(emeraldRim)
 
-    const cyanRim = new THREE.DirectionalLight(0x38bdf8, 2.0)
-    cyanRim.position.set(6, -2, -3)
-    scene.add(cyanRim)
+    const bottomGlow = new THREE.PointLight(0x34d399, 1.8, 4)
+    bottomGlow.position.set(0, -1.2, 1.2)
+    scene.add(bottomGlow)
 
-    const underGlow = new THREE.PointLight(0x34d399, 2.5, 4.5)
-    underGlow.position.set(0, -1.2, 1.2)
-    scene.add(underGlow)
-
-    // Master assembly group (rotates smoothly in 3D)
+    // Master assembly group (rotates continuously in 3D)
     const rootGroup = new THREE.Group()
     scene.add(rootGroup)
 
-    // ==========================================
-    // Stylized Low-Poly / Geometric 3D Parrot ("Papagal")
-    // ==========================================
+    // Entire Parrot Character Group
     const parrotGroup = new THREE.Group()
-    parrotGroup.position.set(0, 0.1, 0)
+    parrotGroup.position.set(0, -0.1, 0)
     rootGroup.add(parrotGroup)
 
-    // Materials Palette
-    const emeraldBodyMat = new THREE.MeshPhysicalMaterial({
-      color: 0x10b981,
-      roughness: 0.25,
-      metalness: 0.15,
-      clearcoat: 0.6,
-      clearcoatRoughness: 0.2,
-      flatShading: true,
+    // =========================================================
+    // High-Quality Organic Materials (Smooth Shading, Non-Cubic)
+    // =========================================================
+    const limeGreenMat = new THREE.MeshStandardMaterial({
+      color: 0x65a30d, // Rich lime green body
+      roughness: 0.45,
+      metalness: 0.05,
     })
 
-    const yellowChestMat = new THREE.MeshPhysicalMaterial({
-      color: 0xfbbf24,
-      roughness: 0.3,
-      metalness: 0.1,
-      clearcoat: 0.5,
-      flatShading: true,
+    const brightLimeMat = new THREE.MeshStandardMaterial({
+      color: 0x84cc16, // Bright lime upper wing
+      roughness: 0.4,
+      metalness: 0.05,
     })
 
-    const cyanWingMat = new THREE.MeshPhysicalMaterial({
-      color: 0x0284c7,
-      roughness: 0.2,
-      metalness: 0.25,
-      clearcoat: 0.7,
-      flatShading: true,
+    const yellowHeadMat = new THREE.MeshStandardMaterial({
+      color: 0xfacc15, // Warm golden yellow head
+      roughness: 0.4,
+      metalness: 0.05,
     })
 
-    const tealAccentMat = new THREE.MeshPhysicalMaterial({
-      color: 0x06b6d4,
-      roughness: 0.25,
-      metalness: 0.2,
-      clearcoat: 0.6,
-      flatShading: true,
+    const coralRedCrownMat = new THREE.MeshStandardMaterial({
+      color: 0xf43f5e, // Vibrant coral red forehead patch
+      roughness: 0.4,
+      metalness: 0.05,
+    })
+
+    const yellowWingMat = new THREE.MeshStandardMaterial({
+      color: 0xeab308, // Golden mid-wing feathers
+      roughness: 0.4,
+      metalness: 0.05,
+    })
+
+    const orangeFlightMat = new THREE.MeshStandardMaterial({
+      color: 0xf97316, // Bright orange lower flight feathers
+      roughness: 0.4,
+      metalness: 0.05,
+    })
+
+    const redWingTipMat = new THREE.MeshStandardMaterial({
+      color: 0xe11d48, // Crimson tip accents
+      roughness: 0.4,
+      metalness: 0.05,
     })
 
     const beakMat = new THREE.MeshStandardMaterial({
-      color: 0x1e293b,
+      color: 0x334155, // Dark slate/charcoal beak
       roughness: 0.35,
-      metalness: 0.3,
-      flatShading: true,
+      metalness: 0.15,
     })
 
-    const eyeWhiteMat = new THREE.MeshBasicMaterial({ color: 0xf8fafc })
-    const pupilMat = new THREE.MeshBasicMaterial({ color: 0x09090b })
+    const eyeRingMat = new THREE.MeshStandardMaterial({
+      color: 0xe2e8f0, // Light off-white eye ring
+      roughness: 0.5,
+    })
 
-    // 1. Torso / Body (Tapered geometric cone-cylinder)
-    const bodyGeo = new THREE.CylinderGeometry(0.55, 0.38, 1.35, 10)
-    const bodyMesh = new THREE.Mesh(bodyGeo, emeraldBodyMat)
-    bodyMesh.position.set(0, -0.15, 0)
+    const eyeGlossMat = new THREE.MeshStandardMaterial({
+      color: 0x09090b, // Deep glossy black eye
+      roughness: 0.1,
+      metalness: 0.8,
+    })
+
+    const feetMat = new THREE.MeshStandardMaterial({
+      color: 0x475569, // Slate gray legs and claws
+      roughness: 0.55,
+    })
+
+    // =========================================================
+    // 1. Torso / Body (Smooth Organic Oval/Capsule Shape)
+    // =========================================================
+    const bodyGeo = new THREE.SphereGeometry(0.72, 32, 32)
+    const bodyMesh = new THREE.Mesh(bodyGeo, limeGreenMat)
+    bodyMesh.scale.set(0.78, 1.25, 0.88)
+    bodyMesh.rotation.x = 0.28
+    bodyMesh.position.set(0, -0.05, -0.05)
     bodyMesh.castShadow = true
     parrotGroup.add(bodyMesh)
 
-    // Chest Front Plate (Warm golden plumage)
-    const chestGeo = new THREE.ConeGeometry(0.48, 1.1, 8)
-    const chestMesh = new THREE.Mesh(chestGeo, yellowChestMat)
-    chestMesh.position.set(0, -0.18, 0.22)
-    chestMesh.rotation.x = 0.1
+    // Smooth Chest Volume
+    const chestGeo = new THREE.SphereGeometry(0.55, 32, 32)
+    const chestMesh = new THREE.Mesh(chestGeo, limeGreenMat)
+    chestMesh.scale.set(0.72, 1.05, 0.82)
+    chestMesh.position.set(0, 0.08, 0.18)
     parrotGroup.add(chestMesh)
 
-    // 2. Head Assembly
+    // =========================================================
+    // 2. Head & Facial Features (Matching Papagal Logo)
+    // =========================================================
     const headGroup = new THREE.Group()
-    headGroup.position.set(0, 0.72, 0.08)
+    headGroup.position.set(0, 0.82, 0.22)
     parrotGroup.add(headGroup)
 
-    const headGeo = new THREE.DodecahedronGeometry(0.46, 1)
-    const headMesh = new THREE.Mesh(headGeo, emeraldBodyMat)
+    // Round Yellow Head
+    const headGeo = new THREE.SphereGeometry(0.52, 32, 32)
+    const headMesh = new THREE.Mesh(headGeo, yellowHeadMat)
+    headMesh.scale.set(0.88, 1.02, 0.95)
     headMesh.castShadow = true
     headGroup.add(headMesh)
 
-    // Feather Crest / Tuft on top of head
-    for (let c = 0; c < 3; c++) {
-      const crestGeo = new THREE.ConeGeometry(0.08, 0.45 - c * 0.08, 5)
-      const crestMesh = new THREE.Mesh(crestGeo, c % 2 === 0 ? yellowChestMat : tealAccentMat)
-      crestMesh.position.set(0, 0.42 + c * 0.05, -0.08 - c * 0.1)
-      crestMesh.rotation.x = -0.35 - c * 0.2
-      headGroup.add(crestMesh)
-    }
+    // Coral / Red Forehead & Crown Patch (Distinctive Logo Feature)
+    const crownGeo = new THREE.SphereGeometry(0.32, 24, 24)
+    const crownMesh = new THREE.Mesh(crownGeo, coralRedCrownMat)
+    crownMesh.scale.set(0.68, 0.72, 0.65)
+    crownMesh.position.set(0, 0.34, 0.24)
+    crownMesh.rotation.x = -0.35
+    headGroup.add(crownMesh)
 
-    // Curved Hooked Beak
-    const upperBeakGeo = new THREE.ConeGeometry(0.2, 0.52, 6)
+    // Curved Upper Beak (Hooked Mandible)
+    const beakGroup = new THREE.Group()
+    beakGroup.position.set(0, 0.02, 0.44)
+    headGroup.add(beakGroup)
+
+    const upperBeakGeo = new THREE.ConeGeometry(0.24, 0.62, 32)
     const upperBeak = new THREE.Mesh(upperBeakGeo, beakMat)
-    upperBeak.position.set(0, -0.05, 0.46)
-    upperBeak.rotation.x = Math.PI / 2.6
-    headGroup.add(upperBeak)
+    upperBeak.scale.set(0.75, 1.0, 0.85)
+    upperBeak.rotation.x = Math.PI / 2.35
+    upperBeak.position.set(0, -0.06, 0.12)
+    beakGroup.add(upperBeak)
 
-    const lowerBeakGeo = new THREE.ConeGeometry(0.12, 0.24, 6)
+    // Lower Beak Mandible
+    const lowerBeakGeo = new THREE.ConeGeometry(0.15, 0.28, 32)
     const lowerBeak = new THREE.Mesh(lowerBeakGeo, beakMat)
-    lowerBeak.position.set(0, -0.22, 0.38)
+    lowerBeak.scale.set(0.75, 1.0, 0.8)
     lowerBeak.rotation.x = Math.PI / 2.1
-    headGroup.add(lowerBeak)
+    lowerBeak.position.set(0, -0.22, 0.06)
+    beakGroup.add(lowerBeak)
 
-    // Eyes (Left & Right with white facial rings)
+    // Eyes (Left & Right with White Ring & Specular Highlight)
     for (const side of [-1, 1]) {
-      // Facial white patch
-      const patchGeo = new THREE.CircleGeometry(0.16, 8)
-      const patch = new THREE.Mesh(patchGeo, eyeWhiteMat)
-      patch.position.set(side * 0.4, 0.08, 0.2)
-      patch.rotation.y = side * (Math.PI / 2.8)
-      headGroup.add(patch)
+      const eyeSubGroup = new THREE.Group()
+      eyeSubGroup.position.set(side * 0.38, 0.12, 0.22)
+      eyeSubGroup.rotation.y = side * 0.42
+      headGroup.add(eyeSubGroup)
 
-      // Black Pupil
-      const pupilGeo = new THREE.SphereGeometry(0.06, 8, 8)
-      const pupil = new THREE.Mesh(pupilGeo, pupilMat)
-      pupil.position.set(side * 0.43, 0.08, 0.22)
-      headGroup.add(pupil)
+      // Outer Ring
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.1, 0.025, 16, 32), eyeRingMat)
+      ring.rotation.y = Math.PI / 2
+      eyeSubGroup.add(ring)
+
+      // Glossy Eyeball
+      const eyeball = new THREE.Mesh(new THREE.SphereGeometry(0.09, 24, 24), eyeGlossMat)
+      eyeSubGroup.add(eyeball)
+
+      // White Specular Reflection Dot
+      const spec = new THREE.Mesh(new THREE.SphereGeometry(0.024, 12, 12), eyeRingMat)
+      spec.position.set(side * 0.02, 0.035, 0.075)
+      eyeSubGroup.add(spec)
     }
 
-    // 3. Wings (Folded multi-tiered geometric plumage)
+    // =========================================================
+    // 3. Smooth Layered Wings (Green -> Yellow -> Orange -> Red)
+    // =========================================================
     const wingLeftGroup = new THREE.Group()
-    wingLeftGroup.position.set(-0.55, 0.3, 0)
+    wingLeftGroup.position.set(-0.52, 0.32, -0.05)
     parrotGroup.add(wingLeftGroup)
 
     const wingRightGroup = new THREE.Group()
-    wingRightGroup.position.set(0.55, 0.3, 0)
+    wingRightGroup.position.set(0.52, 0.32, -0.05)
     parrotGroup.add(wingRightGroup)
 
-    // Build wing feathers for each side
-    ;[wingLeftGroup, wingRightGroup].forEach((wGroup, idx) => {
-      const dir = idx === 0 ? -1 : 1
+    const buildOrganicWing = (group: THREE.Group, isLeft: boolean) => {
+      const dir = isLeft ? -1 : 1
 
-      // Top Primary Wing
-      const w1Geo = new THREE.ConeGeometry(0.28, 1.45, 6)
-      const w1 = new THREE.Mesh(w1Geo, cyanWingMat)
-      w1.position.set(dir * 0.05, -0.65, -0.05)
-      w1.rotation.z = dir * 0.18
-      w1.rotation.x = -0.25
-      wGroup.add(w1)
+      // Layer 1: Upper Shoulder / Coverts (Bright Lime Green)
+      const w1Geo = new THREE.SphereGeometry(0.48, 24, 24)
+      const w1 = new THREE.Mesh(w1Geo, brightLimeMat)
+      w1.scale.set(0.42, 1.25, 0.72)
+      w1.position.set(dir * 0.06, -0.32, -0.06)
+      w1.rotation.z = dir * 0.22
+      w1.rotation.x = -0.32
+      group.add(w1)
 
-      // Secondary Turquoise Layer
-      const w2Geo = new THREE.ConeGeometry(0.22, 1.2, 6)
-      const w2 = new THREE.Mesh(w2Geo, tealAccentMat)
-      w2.position.set(dir * 0.08, -0.5, 0.06)
-      w2.rotation.z = dir * 0.22
-      w2.rotation.x = -0.15
-      wGroup.add(w2)
+      // Layer 2: Mid-Wing Secondary Feathers (Golden Yellow)
+      const w2Geo = new THREE.ConeGeometry(0.32, 1.35, 24)
+      const w2 = new THREE.Mesh(w2Geo, yellowWingMat)
+      w2.scale.set(0.55, 1.0, 0.85)
+      w2.position.set(dir * 0.08, -0.72, -0.18)
+      w2.rotation.z = dir * 0.24
+      w2.rotation.x = -0.42
+      group.add(w2)
 
-      // Golden Accent Shoulder
-      const shoulderGeo = new THREE.SphereGeometry(0.22, 6, 6)
-      const shoulder = new THREE.Mesh(shoulderGeo, yellowChestMat)
-      shoulder.position.set(dir * 0.02, -0.05, 0.05)
-      wGroup.add(shoulder)
-    })
+      // Layer 3: Lower Flight Feathers (Vibrant Orange)
+      const w3Geo = new THREE.ConeGeometry(0.24, 1.25, 24)
+      const w3 = new THREE.Mesh(w3Geo, orangeFlightMat)
+      w3.scale.set(0.52, 1.0, 0.78)
+      w3.position.set(dir * 0.09, -1.05, -0.32)
+      w3.rotation.z = dir * 0.26
+      w3.rotation.x = -0.52
+      group.add(w3)
 
-    // 4. Long Geometric Macaw Tail Feathers
-    const tailGroup = new THREE.Group()
-    tailGroup.position.set(0, -0.8, -0.2)
-    parrotGroup.add(tailGroup)
-
-    // Center Long Tail Feather
-    const tail1Geo = new THREE.ConeGeometry(0.18, 1.9, 6)
-    const tail1 = new THREE.Mesh(tail1Geo, cyanWingMat)
-    tail1.position.set(0, -0.9, 0)
-    tail1.rotation.x = 0.22
-    tailGroup.add(tail1)
-
-    // Left & Right Tail Accents
-    const tail2 = new THREE.Mesh(new THREE.ConeGeometry(0.12, 1.5, 6), tealAccentMat)
-    tail2.position.set(-0.14, -0.7, 0.05)
-    tail2.rotation.x = 0.26
-    tail2.rotation.z = 0.08
-    tailGroup.add(tail2)
-
-    const tail3 = new THREE.Mesh(new THREE.ConeGeometry(0.12, 1.5, 6), tealAccentMat)
-    tail3.position.set(0.14, -0.7, 0.05)
-    tail3.rotation.x = 0.26
-    tail3.rotation.z = -0.08
-    tailGroup.add(tail3)
-
-    // 5. Perch Ring Orbit
-    const perchRingGeo = new THREE.TorusGeometry(1.85, 0.02, 16, 64)
-    const perchRingMat = new THREE.MeshStandardMaterial({
-      color: 0x34d399,
-      metalness: 0.9,
-      roughness: 0.15,
-      emissive: 0x059669,
-      emissiveIntensity: 0.4,
-    })
-    const perchRing = new THREE.Mesh(perchRingGeo, perchRingMat)
-    perchRing.rotation.x = Math.PI / 2.3
-    perchRing.position.set(0, -0.85, 0)
-    rootGroup.add(perchRing)
-
-    // Floating Data Energy Sparks
-    const sparkCount = 28
-    const sparkGeo = new THREE.BufferGeometry()
-    const sparkPos = new Float32Array(sparkCount * 3)
-
-    for (let s = 0; s < sparkCount; s++) {
-      const angle = (s / sparkCount) * Math.PI * 2
-      const radius = 1.4 + Math.random() * 0.8
-      sparkPos[s * 3] = Math.cos(angle) * radius
-      sparkPos[s * 3 + 1] = (Math.random() - 0.5) * 2.2
-      sparkPos[s * 3 + 2] = Math.sin(angle) * radius
+      // Layer 4: Tip Primary Accents (Coral Red)
+      const w4Geo = new THREE.ConeGeometry(0.16, 0.95, 24)
+      const w4 = new THREE.Mesh(w4Geo, redWingTipMat)
+      w4.scale.set(0.45, 1.0, 0.72)
+      w4.position.set(dir * 0.08, -1.35, -0.48)
+      w4.rotation.z = dir * 0.28
+      w4.rotation.x = -0.6
+      group.add(w4)
     }
 
-    sparkGeo.setAttribute("position", new THREE.BufferAttribute(sparkPos, 3))
-    const sparkMat = new THREE.PointsMaterial({
-      color: 0x34d399,
-      size: 0.065,
-      transparent: true,
-      opacity: 0.85,
-    })
-    const sparks = new THREE.Points(sparkGeo, sparkMat)
-    rootGroup.add(sparks)
+    buildOrganicWing(wingLeftGroup, true)
+    buildOrganicWing(wingRightGroup, false)
 
-    // ==========================================
+    // =========================================================
+    // 4. Smooth Tapering Tail Feathers (Lime / Emerald Green)
+    // =========================================================
+    const tailGroup = new THREE.Group()
+    tailGroup.position.set(0, -0.75, -0.35)
+    parrotGroup.add(tailGroup)
+
+    // Long Center Tail Feather
+    const tailGeo = new THREE.ConeGeometry(0.22, 1.75, 24)
+    const tailMain = new THREE.Mesh(tailGeo, limeGreenMat)
+    tailMain.scale.set(0.65, 1.0, 0.9)
+    tailMain.position.set(0, -0.85, -0.22)
+    tailMain.rotation.x = 0.55
+    tailGroup.add(tailMain)
+
+    // Side Accent Feathers
+    for (const side of [-1, 1]) {
+      const tailSide = new THREE.Mesh(new THREE.ConeGeometry(0.14, 1.35, 24), brightLimeMat)
+      tailSide.scale.set(0.6, 1.0, 0.85)
+      tailSide.position.set(side * 0.12, -0.72, -0.16)
+      tailSide.rotation.x = 0.52
+      tailSide.rotation.z = side * 0.12
+      tailGroup.add(tailSide)
+    }
+
+    // =========================================================
+    // 5. Perched Legs & Talons
+    // =========================================================
+    const legsGroup = new THREE.Group()
+    legsGroup.position.set(0, -0.75, 0.12)
+    parrotGroup.add(legsGroup)
+
+    for (const side of [-1, 1]) {
+      const leg = new THREE.Group()
+      leg.position.set(side * 0.22, 0, 0)
+      legsGroup.add(leg)
+
+      // Thigh / Leg Stem
+      const thigh = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.055, 0.45, 16), feetMat)
+      thigh.position.set(0, -0.18, -0.04)
+      thigh.rotation.x = -0.15
+      leg.add(thigh)
+
+      // 3 Front Claws & 1 Back Claw
+      for (let c = -1; c <= 1; c++) {
+        const claw = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.26, 12), feetMat)
+        claw.position.set(c * 0.065, -0.38, 0.08)
+        claw.rotation.x = Math.PI / 2.3
+        claw.rotation.y = c * 0.3
+        leg.add(claw)
+      }
+
+      // Back Claw
+      const backClaw = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.22, 12), feetMat)
+      backClaw.position.set(0, -0.38, -0.12)
+      backClaw.rotation.x = -Math.PI / 2.4
+      leg.add(backClaw)
+    }
+
+    // Sleek Glowing Perch Orbit Ring
+    const perchRingGeo = new THREE.TorusGeometry(1.65, 0.018, 16, 64)
+    const perchRingMat = new THREE.MeshStandardMaterial({
+      color: 0x34d399,
+      emissive: 0x059669,
+      emissiveIntensity: 0.5,
+      metalness: 0.8,
+      roughness: 0.2,
+    })
+    const perchRing = new THREE.Mesh(perchRingGeo, perchRingMat)
+    perchRing.rotation.x = Math.PI / 2.35
+    perchRing.position.set(0, -1.18, 0.1)
+    rootGroup.add(perchRing)
+
+    // =========================================================
     // 6. Smooth Animation Loop
-    // ==========================================
+    // =========================================================
     let reqId: number
     const clock = new THREE.Clock()
 
@@ -274,27 +344,20 @@ export default function PapagalModel() {
       reqId = requestAnimationFrame(animate)
       const elapsed = clock.getElapsedTime()
 
-      // Primary continuous 3D rotation of entire assembly
-      rootGroup.rotation.y = elapsed * 0.75
-      rootGroup.rotation.x = Math.sin(elapsed * 0.6) * 0.12
-      rootGroup.rotation.z = Math.cos(elapsed * 0.4) * 0.05
+      // Primary continuous 3D rotation
+      rootGroup.rotation.y = elapsed * 0.62
+      rootGroup.rotation.x = Math.sin(elapsed * 0.45) * 0.06
+      rootGroup.rotation.z = Math.cos(elapsed * 0.35) * 0.03
 
-      // Subtle breathing & hovering motion
-      parrotGroup.position.y = 0.08 + Math.sin(elapsed * 1.8) * 0.06
+      // Gentle organic breathing/hovering
+      parrotGroup.position.y = -0.08 + Math.sin(elapsed * 1.8) * 0.04
 
-      // Head curious micro-tilt
-      headGroup.rotation.y = Math.sin(elapsed * 1.2) * 0.14
-      headGroup.rotation.z = Math.sin(elapsed * 0.8) * 0.06
+      // Curious subtle head tilt
+      headGroup.rotation.y = Math.sin(elapsed * 1.1) * 0.12
+      headGroup.rotation.z = Math.sin(elapsed * 0.7) * 0.05
 
-      // Wing micro-flutter
-      wingLeftGroup.rotation.z = -0.05 + Math.sin(elapsed * 2.4) * 0.04
-      wingRightGroup.rotation.z = 0.05 - Math.sin(elapsed * 2.4) * 0.04
-
-      // Orbit ring spin
-      perchRing.rotation.z = elapsed * 0.35
-
-      // Pulse spark opacity
-      sparkMat.opacity = 0.6 + Math.sin(elapsed * 3) * 0.3
+      // Perch ring counter-rotation
+      perchRing.rotation.z = elapsed * 0.25
 
       renderer.render(scene, camera)
     }
