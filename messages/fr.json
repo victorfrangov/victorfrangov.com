@@ -149,6 +149,12 @@
     "external": "Liens",
     "altLanguageName": "English",
     "lausanne": "Lausanne",
-    "montreal": "Montréal"
+    "montreal": "Montréal",
+    "github": "github",
+    "linkedin": "linkedin",
+    "email": "email",
+    "situsDigital": "situs digital",
+    "rightsReserved": "Tous Droits Réservés",
+    "madeWithSitus": "fait avec situs digital"
   }
 }
