@@ -204,14 +204,16 @@ export default function PapagalModel() {
     }
 
     // =========================================================
-    // 4. Layered Wings (Pointy Tips Buried Inside Upper Shoulder)
+    // 4. Layered Wings (Turned 45 Degrees)
     // =========================================================
     const wingLeftGroup = new THREE.Group()
     wingLeftGroup.position.set(-0.52, 0.32, -0.05)
+    wingLeftGroup.rotation.y = Math.PI / 4 // Turned 45 degrees
     parrotGroup.add(wingLeftGroup)
 
     const wingRightGroup = new THREE.Group()
     wingRightGroup.position.set(0.52, 0.32, -0.05)
+    wingRightGroup.rotation.y = -Math.PI / 4 // Turned 45 degrees
     parrotGroup.add(wingRightGroup)
 
     const buildOrganicWing = (group: THREE.Group, isLeft: boolean) => {
@@ -317,20 +319,6 @@ export default function PapagalModel() {
       leg.add(backClaw)
     }
 
-    // Clean Subtle Base Ring Positioned Cleanly Underneath the Feet
-    const perchRingGeo = new THREE.TorusGeometry(1.65, 0.015, 16, 64)
-    const perchRingMat = new THREE.MeshStandardMaterial({
-      color: 0x34d399,
-      emissive: 0x059669,
-      emissiveIntensity: 0.35,
-      metalness: 0.8,
-      roughness: 0.2,
-    })
-    const perchRing = new THREE.Mesh(perchRingGeo, perchRingMat)
-    perchRing.rotation.x = Math.PI / 2.35
-    perchRing.position.set(0, -1.35, 0) // Far below the feet
-    rootGroup.add(perchRing)
-
     // =========================================================
     // 7. Smooth Animation Loop
     // =========================================================
@@ -352,9 +340,6 @@ export default function PapagalModel() {
       // Curious subtle head tilt
       headGroup.rotation.y = Math.sin(elapsed * 1.1) * 0.1
       headGroup.rotation.z = Math.sin(elapsed * 0.7) * 0.04
-
-      // Perch ring counter-rotation
-      perchRing.rotation.z = elapsed * 0.25
 
       renderer.render(scene, camera)
     }
