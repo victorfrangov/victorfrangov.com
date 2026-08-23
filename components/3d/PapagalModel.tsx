@@ -226,31 +226,31 @@ export default function PapagalModel() {
       w1.rotation.x = -0.32
       group.add(w1)
 
-      // Layer 2: Mid-Wing (Golden Yellow) - Tip buried high inside shoulder
+      // Layer 2: Mid-Wing (Golden Yellow) - Flipped
       const w2Geo = new THREE.ConeGeometry(0.35, 1.4, 24)
       const w2 = new THREE.Mesh(w2Geo, yellowWingMat)
       w2.scale.set(0.55, 1.0, 0.85)
       w2.position.set(dir * 0.08, -0.45, -0.12)
       w2.rotation.z = dir * 0.24
-      w2.rotation.x = Math.PI - 0.42 // Tip points UP inside shoulder!
+      w2.rotation.x = -0.42 // Flipped
       group.add(w2)
 
-      // Layer 3: Lower Flight (Sunset Orange) - Tip buried inside upper layers
+      // Layer 3: Lower Flight (Sunset Orange) - Flipped
       const w3Geo = new THREE.ConeGeometry(0.28, 1.3, 24)
       const w3 = new THREE.Mesh(w3Geo, orangeFlightMat)
       w3.scale.set(0.52, 1.0, 0.78)
       w3.position.set(dir * 0.09, -0.65, -0.22)
       w3.rotation.z = dir * 0.26
-      w3.rotation.x = Math.PI - 0.52 // Tip points UP!
+      w3.rotation.x = -0.52 // Flipped
       group.add(w3)
 
-      // Layer 4: Tip Accent (Coral Red) - Tip buried inside orange layer
+      // Layer 4: Tip Accent (Coral Red) - Flipped
       const w4Geo = new THREE.ConeGeometry(0.2, 1.0, 24)
       const w4 = new THREE.Mesh(w4Geo, redWingTipMat)
       w4.scale.set(0.45, 1.0, 0.72)
       w4.position.set(dir * 0.08, -0.85, -0.32)
       w4.rotation.z = dir * 0.28
-      w4.rotation.x = Math.PI - 0.6 // Tip points UP!
+      w4.rotation.x = -0.6 // Flipped
       group.add(w4)
     }
 
