@@ -129,40 +129,48 @@ export default function NavBar() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [isOpen])
 
-  // Navigation transition: Immediately jumps to the section, displays full-screen background with footer wordmark, and smoothly fades out
+  // Navigation transition: Smooth Fade In -> Exact Section Jump (offset 0) -> Smooth Fade Out
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault()
 
-      // 1. Immediately activate overlay and set to full opacity
+      // 1. Mount overlay at opacity-0
       setIsFading(true)
-      setFadeVisible(true)
+      setFadeVisible(false)
 
-      // 2. Immediately close hamburger menu
-      setIsOpen(false)
+      // 2. Trigger smooth fade-in to opacity-1
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setFadeVisible(true)
+        })
+      })
 
-      // 3. Immediately unlock page scroll
-      document.documentElement.style.overflow = ""
-      document.body.style.overflow = ""
-      window.dispatchEvent(new CustomEvent("lenis:start"))
-
-      // 4. INSTANTLY jump directly to the target section (0 delay!)
-      const target = document.querySelector(href) as HTMLElement | null
-      if (target) {
-        if (typeof window !== "undefined" && (window as any).__lenis) {
-          ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: -60 })
-        } else {
-          window.scrollTo(0, target.offsetTop - 60)
-        }
-      }
-
-      // 5. Hold solid background for 220ms, then smoothly fade out over 800ms
+      // 3. Once fully covered (350ms), jump directly to the EXACT section boundary (offset 0)
       setTimeout(() => {
-        setFadeVisible(false)
+        // Close menu & unlock scroll
+        setIsOpen(false)
+        document.documentElement.style.overflow = ""
+        document.body.style.overflow = ""
+        window.dispatchEvent(new CustomEvent("lenis:start"))
+
+        const target = document.querySelector(href) as HTMLElement | null
+        if (target) {
+          if (typeof window !== "undefined" && (window as any).__lenis) {
+            ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: 0 })
+          } else {
+            const y = target.getBoundingClientRect().top + window.scrollY
+            window.scrollTo({ top: y, behavior: "instant" as any })
+          }
+        }
+
+        // 4. Smoothly fade out to reveal the section
         setTimeout(() => {
-          setIsFading(false)
-        }, 850)
-      }, 220)
+          setFadeVisible(false)
+          setTimeout(() => {
+            setIsFading(false)
+          }, 450)
+        }, 80)
+      }, 350)
     }
   }
 
@@ -180,7 +188,7 @@ export default function NavBar() {
       {/* Full Page Transition Overlay with Victor Frangov Wordmark at bottom */}
       {isFading && (
         <div
-          className={`fixed inset-0 z-[100] bg-background flex flex-col justify-end pointer-events-none transition-opacity duration-800 ease-in-out ${
+          className={`fixed inset-0 z-[100] bg-background flex flex-col justify-end pointer-events-auto transition-opacity duration-350 ease-in-out ${
             fadeVisible ? "opacity-100" : "opacity-0"
           }`}
           aria-hidden="true"
