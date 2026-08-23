@@ -12,7 +12,19 @@ export function LanguageSwitcher() {
 
   const switchLocale = (newLocale: "en" | "fr") => {
     if (newLocale !== locale) {
-      router.replace(pathname, { locale: newLocale })
+      const scrollY = window.scrollY
+      router.replace(pathname, { locale: newLocale, scroll: false })
+      
+      // Preserve scroll position without jumping to top
+      requestAnimationFrame(() => {
+        if (typeof window !== "undefined") {
+          if ((window as any).__lenis) {
+            ;(window as any).__lenis.scrollTo(scrollY, { immediate: true })
+          } else {
+            window.scrollTo(0, scrollY)
+          }
+        }
+      })
     }
   }
 

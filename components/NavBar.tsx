@@ -127,6 +127,23 @@ export default function NavBar() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [isOpen])
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      const target = document.querySelector(href) as HTMLElement | null
+      if (target) {
+        e.preventDefault()
+        if (isOpen) {
+          setIsOpen(false)
+        }
+        if (typeof window !== "undefined" && (window as any).__lenis) {
+          ;(window as any).__lenis.scrollTo(target, { offset: -60, duration: 1.4 })
+        } else {
+          target.scrollIntoView({ behavior: "smooth" })
+        }
+      }
+    }
+  }
+
   // 5 Brutalist Navigation Panels (Cascading heights, flush zero-gap grid)
   const navPanels = [
     { href: "#main", num: 1, label: t("nav.overview"), heightClass: "h-[54vh] sm:h-[60vh]" },
@@ -166,6 +183,16 @@ export default function NavBar() {
           <div className="flex items-center gap-4 sm:gap-6 shrink-0">
             <Link
               href={`/${locale}`}
+              onClick={(e) => {
+                if (window.location.pathname.endsWith(`/${locale}`) || window.location.pathname === "/") {
+                  e.preventDefault()
+                  if (typeof window !== "undefined" && (window as any).__lenis) {
+                    ;(window as any).__lenis.scrollTo(0, { duration: 1.4 })
+                  } else {
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
+                }
+              }}
               className="font-medium tracking-tight hover:opacity-70 transition-opacity flex items-center gap-1.5 shrink-0 select-none"
             >
               <span className="font-extrabold uppercase tracking-wider text-xs sm:text-sm">Victor Frangov</span>
@@ -198,13 +225,25 @@ export default function NavBar() {
           {/* Right: Inline nav links, switches, and Let's talk */}
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
             <nav className="hidden md:flex items-center gap-5 mr-2 font-mono text-xs uppercase tracking-wider text-foreground/70">
-              <Link href="#expertise" className="hover:text-foreground transition-colors">
+              <Link
+                href="#expertise"
+                onClick={(e) => handleNavClick(e, "#expertise")}
+                className="hover:text-foreground transition-colors"
+              >
                 {t("nav.expertise")}
               </Link>
-              <Link href="#projects" className="hover:text-foreground transition-colors">
+              <Link
+                href="#projects"
+                onClick={(e) => handleNavClick(e, "#projects")}
+                className="hover:text-foreground transition-colors"
+              >
                 {t("nav.projects")}
               </Link>
-              <Link href="#contact" className="hover:text-foreground transition-colors">
+              <Link
+                href="#contact"
+                onClick={(e) => handleNavClick(e, "#contact")}
+                className="hover:text-foreground transition-colors"
+              >
                 {t("nav.contact")}
               </Link>
             </nav>
@@ -214,6 +253,7 @@ export default function NavBar() {
 
             <Link
               href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
               className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-foreground/30 text-xs font-mono uppercase tracking-tight hover:bg-foreground hover:text-background transition-all duration-200"
             >
               <span>{t("nav.letsTalk")}</span>
@@ -239,7 +279,7 @@ export default function NavBar() {
             <Link
               key={panel.num}
               href={panel.href}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, panel.href)}
               style={{
                 transitionDelay: isOpen ? `${idx * 110}ms` : `${(4 - idx) * 75}ms`,
               }}

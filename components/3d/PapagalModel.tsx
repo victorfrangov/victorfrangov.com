@@ -234,7 +234,7 @@ export default function PapagalModel() {
       w2.scale.set(0.55, 1.0, 0.85)
       w2.position.set(dir * 0.08, -0.45, -0.12)
       w2.rotation.z = dir * 0.24
-      w2.rotation.x = -0.42 // Flipped
+      w2.rotation.x = -0.22 // Flipped
       group.add(w2)
 
       // Layer 3: Lower Flight (Sunset Orange) - Flipped
@@ -243,7 +243,7 @@ export default function PapagalModel() {
       w3.scale.set(0.52, 1.0, 0.78)
       w3.position.set(dir * 0.09, -0.65, -0.22)
       w3.rotation.z = dir * 0.26
-      w3.rotation.x = -0.52 // Flipped
+      w3.rotation.x = -0.22 // Flipped
       group.add(w3)
 
       // Layer 4: Tip Accent (Coral Red) - Flipped
@@ -252,7 +252,7 @@ export default function PapagalModel() {
       w4.scale.set(0.45, 1.0, 0.72)
       w4.position.set(dir * 0.08, -0.85, -0.32)
       w4.rotation.z = dir * 0.28
-      w4.rotation.x = -0.6 // Flipped
+      w4.rotation.x = 0.2 // Flipped
       group.add(w4)
     }
 
