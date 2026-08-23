@@ -174,6 +174,27 @@ export default function NavBar() {
     }
   }
 
+  // Hamburger menu panel click: Instantly jumps to the section in the background and scrolls the menu rectangles back up
+  const handlePanelClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault()
+
+      // 1. Jump instantly to the section in the background underneath the open menu
+      const target = document.querySelector(href) as HTMLElement | null
+      if (target) {
+        if (typeof window !== "undefined" && (window as any).__lenis) {
+          ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: 0 })
+        } else {
+          const y = target.getBoundingClientRect().top + window.scrollY
+          window.scrollTo({ top: y, behavior: "instant" as any })
+        }
+      }
+
+      // 2. Trigger the hamburger menu rectangles to scroll back up
+      setIsOpen(false)
+    }
+  }
+
   // 5 Brutalist Navigation Panels (Cascading heights, flush zero-gap grid)
   const navPanels = [
     { href: "#main", num: 1, label: t("nav.overview"), heightClass: "h-[54vh] sm:h-[60vh]" },
@@ -316,7 +337,7 @@ export default function NavBar() {
             <Link
               key={panel.num}
               href={panel.href}
-              onClick={(e) => handleNavClick(e, panel.href)}
+              onClick={(e) => handlePanelClick(e, panel.href)}
               style={{
                 transitionDelay: isOpen ? `${idx * 110}ms` : `${(4 - idx) * 75}ms`,
               }}
@@ -371,7 +392,7 @@ export default function NavBar() {
 
             <Link
               href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
+              onClick={(e) => handlePanelClick(e, "#contact")}
               className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-foreground/40 bg-background hover:bg-foreground hover:text-background text-xs font-mono uppercase tracking-tight transition-all duration-200 shadow-sm"
             >
               <span>{t("nav.letsTalk")}</span>
