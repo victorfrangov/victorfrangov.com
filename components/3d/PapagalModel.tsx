@@ -17,7 +17,7 @@ export default function PapagalModel() {
     const height = container.clientHeight || 375
 
     const camera = new THREE.PerspectiveCamera(34, width / height, 0.1, 100)
-    camera.position.set(0, 0.1, 6.8)
+    camera.position.set(0, 0.05, 6.8)
     camera.lookAt(0, 0, 0)
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
@@ -204,7 +204,7 @@ export default function PapagalModel() {
     }
 
     // =========================================================
-    // 4. Layered Wings (Green -> Yellow -> Orange -> Red)
+    // 4. Layered Wings (Pointy Tips Buried Inside Upper Shoulder)
     // =========================================================
     const wingLeftGroup = new THREE.Group()
     wingLeftGroup.position.set(-0.52, 0.32, -0.05)
@@ -217,7 +217,7 @@ export default function PapagalModel() {
     const buildOrganicWing = (group: THREE.Group, isLeft: boolean) => {
       const dir = isLeft ? -1 : 1
 
-      // Layer 1: Upper Shoulder / Coverts (Bright Lime Green)
+      // Layer 1: Upper Shoulder (Smooth Sphere Covert)
       const w1Geo = new THREE.SphereGeometry(0.48, 24, 24)
       const w1 = new THREE.Mesh(w1Geo, brightLimeMat)
       w1.scale.set(0.42, 1.25, 0.72)
@@ -226,31 +226,31 @@ export default function PapagalModel() {
       w1.rotation.x = -0.32
       group.add(w1)
 
-      // Layer 2: Mid-Wing Secondary Feathers (Golden Yellow)
-      const w2Geo = new THREE.ConeGeometry(0.32, 1.35, 24)
+      // Layer 2: Mid-Wing (Golden Yellow) - Tip buried high inside shoulder
+      const w2Geo = new THREE.ConeGeometry(0.35, 1.4, 24)
       const w2 = new THREE.Mesh(w2Geo, yellowWingMat)
       w2.scale.set(0.55, 1.0, 0.85)
-      w2.position.set(dir * 0.08, -0.72, -0.18)
+      w2.position.set(dir * 0.08, -0.45, -0.12)
       w2.rotation.z = dir * 0.24
-      w2.rotation.x = -0.42
+      w2.rotation.x = Math.PI - 0.42 // Tip points UP inside shoulder!
       group.add(w2)
 
-      // Layer 3: Lower Flight Feathers (Vibrant Orange)
-      const w3Geo = new THREE.ConeGeometry(0.24, 1.25, 24)
+      // Layer 3: Lower Flight (Sunset Orange) - Tip buried inside upper layers
+      const w3Geo = new THREE.ConeGeometry(0.28, 1.3, 24)
       const w3 = new THREE.Mesh(w3Geo, orangeFlightMat)
       w3.scale.set(0.52, 1.0, 0.78)
-      w3.position.set(dir * 0.09, -1.05, -0.32)
+      w3.position.set(dir * 0.09, -0.65, -0.22)
       w3.rotation.z = dir * 0.26
-      w3.rotation.x = -0.52
+      w3.rotation.x = Math.PI - 0.52 // Tip points UP!
       group.add(w3)
 
-      // Layer 4: Tip Primary Accents (Coral Red)
-      const w4Geo = new THREE.ConeGeometry(0.16, 0.95, 24)
+      // Layer 4: Tip Accent (Coral Red) - Tip buried inside orange layer
+      const w4Geo = new THREE.ConeGeometry(0.2, 1.0, 24)
       const w4 = new THREE.Mesh(w4Geo, redWingTipMat)
       w4.scale.set(0.45, 1.0, 0.72)
-      w4.position.set(dir * 0.08, -1.35, -0.48)
+      w4.position.set(dir * 0.08, -0.85, -0.32)
       w4.rotation.z = dir * 0.28
-      w4.rotation.x = -0.6
+      w4.rotation.x = Math.PI - 0.6 // Tip points UP!
       group.add(w4)
     }
 
@@ -258,27 +258,28 @@ export default function PapagalModel() {
     buildOrganicWing(wingRightGroup, false)
 
     // =========================================================
-    // 5. Smooth Tapering Tail Feathers (Lime / Emerald Green)
+    // 5. Tail Feathers (Pointy Tips Buried High Inside Lower Body)
     // =========================================================
     const tailGroup = new THREE.Group()
-    tailGroup.position.set(0, -0.75, -0.35)
+    // Positioned deep inside the body so tips remain hidden inside the torso
+    tailGroup.position.set(0, -0.15, -0.25)
     parrotGroup.add(tailGroup)
 
-    // Long Center Tail Feather
-    const tailGeo = new THREE.ConeGeometry(0.22, 1.75, 24)
+    // Center Tail Feather (Inverted so sharp tip is inside torso, wide base extends out)
+    const tailGeo = new THREE.ConeGeometry(0.24, 1.8, 24)
     const tailMain = new THREE.Mesh(tailGeo, limeGreenMat)
     tailMain.scale.set(0.65, 1.0, 0.9)
-    tailMain.position.set(0, -0.85, -0.22)
-    tailMain.rotation.x = 0.55
+    tailMain.position.set(0, -0.45, -0.15)
+    tailMain.rotation.x = Math.PI + 0.55 // Sharp tip points UP inside the body!
     tailGroup.add(tailMain)
 
-    // Side Accent Feathers
+    // Side Accent Feathers (Tips buried inside body)
     for (const side of [-1, 1]) {
-      const tailSide = new THREE.Mesh(new THREE.ConeGeometry(0.14, 1.35, 24), brightLimeMat)
+      const tailSide = new THREE.Mesh(new THREE.ConeGeometry(0.16, 1.45, 24), brightLimeMat)
       tailSide.scale.set(0.6, 1.0, 0.85)
-      tailSide.position.set(side * 0.12, -0.72, -0.16)
-      tailSide.rotation.x = 0.52
-      tailSide.rotation.z = side * 0.12
+      tailSide.position.set(side * 0.12, -0.35, -0.1)
+      tailSide.rotation.x = Math.PI + 0.52
+      tailSide.rotation.z = -side * 0.12
       tailGroup.add(tailSide)
     }
 
@@ -316,18 +317,18 @@ export default function PapagalModel() {
       leg.add(backClaw)
     }
 
-    // Sleek Glowing Perch Orbit Ring Placed Cleanly Underneath
-    const perchRingGeo = new THREE.TorusGeometry(1.65, 0.016, 16, 64)
+    // Clean Subtle Base Ring Positioned Cleanly Underneath the Feet
+    const perchRingGeo = new THREE.TorusGeometry(1.65, 0.015, 16, 64)
     const perchRingMat = new THREE.MeshStandardMaterial({
       color: 0x34d399,
       emissive: 0x059669,
-      emissiveIntensity: 0.4,
+      emissiveIntensity: 0.35,
       metalness: 0.8,
       roughness: 0.2,
     })
     const perchRing = new THREE.Mesh(perchRingGeo, perchRingMat)
     perchRing.rotation.x = Math.PI / 2.35
-    perchRing.position.set(0, -1.35, 0)
+    perchRing.position.set(0, -1.35, 0) // Far below the feet
     rootGroup.add(perchRing)
 
     // =========================================================
