@@ -360,7 +360,7 @@ export default function NavBar() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity duration-300"
+                    className="w-full h-full object-cover group-hover:opacity-95 transition-opacity duration-300"
                   />
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
@@ -374,7 +374,7 @@ export default function NavBar() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity duration-300"
+                    className="w-full h-full object-cover object-[70%_center] group-hover:opacity-95 transition-opacity duration-300"
                   />
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
@@ -388,7 +388,7 @@ export default function NavBar() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity duration-300"
+                    className="w-full h-full object-cover group-hover:opacity-95 transition-opacity duration-300"
                   />
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
@@ -398,10 +398,10 @@ export default function NavBar() {
 
               {/* Bottom: Big Section Title */}
               <div className="space-y-1 relative z-10">
-                <span className="block text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground group-hover:translate-x-1 transition-transform duration-200">
+                <span className="block text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform duration-200">
                   {panel.label}
                 </span>
-                <span className="text-[10px] sm:text-xs font-mono text-foreground/70 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-[10px] sm:text-xs font-mono text-white/70 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <span>Jump</span>
                   <ArrowDown className="w-3 h-3" />
                 </span>
