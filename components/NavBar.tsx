@@ -89,16 +89,20 @@ export default function NavBar() {
 
   return (
     <>
-      {/* 1. Plain Text Menu Button in Total Top-Right ONLY when Scrolled Down and Menu Closed */}
-      {isScrolled && !isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed top-4 right-4 sm:top-6 sm:right-8 z-50 text-xs sm:text-sm font-mono uppercase tracking-widest font-bold text-foreground hover:opacity-70 transition-opacity select-none cursor-pointer bg-transparent border-0 p-0 shadow-none animate-in fade-in duration-200"
-          aria-label={t("nav.menu")}
-        >
-          {t("nav.menu")}
-        </button>
-      )}
+      {/* 1. Plain Text MENU / CLOSE Button in Total Top-Right Corner */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`fixed top-4 right-4 sm:top-6 sm:right-8 z-[60] text-xs sm:text-sm font-mono uppercase tracking-widest font-bold text-foreground hover:opacity-70 transition-all duration-500 select-none cursor-pointer bg-transparent border-0 p-0 shadow-none ${
+          isOpen
+            ? "opacity-100 pointer-events-auto translate-y-0"
+            : isScrolled
+            ? "opacity-100 pointer-events-auto translate-y-0"
+            : "opacity-0 pointer-events-none -translate-y-2"
+        }`}
+        aria-label={isOpen ? t("nav.close") : t("nav.menu")}
+      >
+        {isOpen ? t("nav.close") : t("nav.menu")}
+      </button>
 
       {/* 2. Top Header Bar (Sitting at top, NO menu button, disappears completely on scroll or when menu open) */}
       <header
@@ -188,24 +192,7 @@ export default function NavBar() {
                 isOpen ? "translate-y-0" : "-translate-y-[115%]"
               }`}
             >
-              {/* Top: Number Badge & Close button in Column 5 */}
-              <div className="flex items-center justify-between">
-
-                {panel.num === 5 && (
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      setIsOpen(false)
-                    }}
-                    className="px-3.5 py-1.5 rounded-full border border-foreground bg-foreground text-background hover:bg-background hover:text-foreground text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-200 flex items-center gap-1 cursor-pointer shadow-sm"
-                  >
-                    <span>{t("nav.close")}</span>
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                )}
-              </div>
+              <div />
 
               {/* Bottom: Big Section Title */}
               <div className="space-y-1">
