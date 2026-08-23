@@ -89,15 +89,14 @@ export default function NavBar() {
 
   return (
     <>
-      {/* 1. Floating Menu Button in Top-Right ONLY when Scrolled Down and Menu Closed */}
+      {/* 1. Plain Text Menu Button in Total Top-Right ONLY when Scrolled Down and Menu Closed */}
       {isScrolled && !isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed top-4 right-4 sm:top-6 sm:right-8 z-50 group flex items-center gap-2 px-5 py-2 rounded-full border border-foreground bg-foreground text-background hover:bg-background hover:text-foreground text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 shadow-xl select-none cursor-pointer animate-in fade-in zoom-in-95 duration-200"
+          className="fixed top-4 right-4 sm:top-6 sm:right-8 z-50 text-xs sm:text-sm font-mono uppercase tracking-widest font-bold text-foreground hover:opacity-70 transition-opacity select-none cursor-pointer bg-transparent border-0 p-0 shadow-none animate-in fade-in duration-200"
           aria-label={t("nav.menu")}
         >
-          <span className="w-2 h-2 rounded-full bg-background group-hover:bg-foreground transition-colors shrink-0" />
-          <span>{t("nav.menu")}</span>
+          {t("nav.menu")}
         </button>
       )}
 
@@ -191,9 +190,6 @@ export default function NavBar() {
             >
               {/* Top: Number Badge & Close button in Column 5 */}
               <div className="flex items-center justify-between">
-                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-foreground text-background font-mono text-xs font-bold flex items-center justify-center shadow-sm">
-                  {panel.num}
-                </span>
 
                 {panel.num === 5 && (
                   <button
