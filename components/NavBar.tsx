@@ -4,8 +4,8 @@ import Link from "next/link"
 import { useTranslations, useLocale } from "next-intl"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler"
-import { useEffect, useState } from "react"
-import { ArrowDown, ArrowUpRight } from "lucide-react"
+import { useEffect, useState, useRef } from "react"
+import { ArrowDown, ArrowUpRight, X } from "lucide-react"
 
 export default function NavBar() {
   const t = useTranslations()
@@ -15,6 +15,7 @@ export default function NavBar() {
   const [mtlTime, setMtlTime] = useState("")
   const [lsnTime, setLsnTime] = useState("")
   const currentYear = new Date().getFullYear()
+  const lastScrollY = useRef(0)
 
   // Track live city clocks
   useEffect(() => {
@@ -43,14 +44,23 @@ export default function NavBar() {
     return () => clearInterval(interval)
   }, [])
 
-  // Track scroll position
+  // Track scroll position: hide top navbar on scroll, swipe up menu if user scrolls down
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
+      const currentScroll = window.scrollY
+
+      if (currentScroll > 40) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
       }
+
+      // If user scrolls down while menu is open, smoothly swipe up and close
+      if (currentScroll > lastScrollY.current + 20 && currentScroll > 80) {
+        setIsOpen(false)
+      }
+
+      lastScrollY.current = currentScroll
     }
 
     handleScroll()
@@ -68,40 +78,50 @@ export default function NavBar() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [isOpen])
 
-  const navItems = [
-    { href: "#main", num: 1, label: t("nav.overview") },
-    { href: "#about-me", num: 2, label: t("nav.aboutMe") },
-    { href: "#expertise", num: 3, label: t("nav.expertise") },
-    { href: "#projects", num: 4, label: t("nav.projects") },
-    { href: "#contact", num: 5, label: t("nav.contact") },
+  // 5 Staggered Navigation Panels (Cascading heights like bleibtgleich)
+  const navPanels = [
+    { href: "#main", num: 1, label: t("nav.overview"), heightClass: "h-[56vh] sm:h-[62vh]" },
+    { href: "#about-me", num: 2, label: t("nav.aboutMe"), heightClass: "h-[50vh] sm:h-[56vh]" },
+    { href: "#expertise", num: 3, label: t("nav.expertise"), heightClass: "h-[44vh] sm:h-[50vh]" },
+    { href: "#projects", num: 4, label: t("nav.projects"), heightClass: "h-[38vh] sm:h-[44vh]" },
+    { href: "#contact", num: 5, label: t("nav.contact"), heightClass: "h-[32vh] sm:h-[38vh]" },
   ]
 
   return (
     <>
-      {/* 1. Floating Menu Trigger in the Absolute Top Left Corner when Scrolled or Open */}
-      {(isScrolled || isOpen) && (
+      {/* 1. Floating Menu Button in Absolute Top-Left when Scrolled & Menu Closed */}
+      {isScrolled && !isOpen && (
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen(true)}
           className="fixed top-4 left-4 sm:top-6 sm:left-8 z-50 group flex items-center gap-2 px-4 py-2 rounded-full border border-foreground bg-foreground text-background hover:bg-background hover:text-foreground text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 shadow-xl select-none cursor-pointer animate-in fade-in zoom-in-95 duration-200"
-          aria-label={isOpen ? t("nav.close") : t("nav.menu")}
-          aria-expanded={isOpen}
+          aria-label={t("nav.menu")}
         >
           <span className="w-2 h-2 rounded-full bg-background group-hover:bg-foreground transition-colors shrink-0" />
-          <span>{isOpen ? t("nav.close") : t("nav.menu")}</span>
+          <span>{t("nav.menu")}</span>
         </button>
       )}
 
-      {/* 2. Full Header Bar sitting at the Top (Hides when scrolled down) */}
+      {/* 2. Top Header Bar (Full information: Brand, Clocks, Status, Links, Switches) */}
       <header
-        className={`fixed top-0 left-0 right-0 z-40 bg-background/85 backdrop-blur-md border-b border-foreground/10 transition-all duration-400 ${
+        className={`fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10 transition-all duration-500 ${
           isScrolled && !isOpen
             ? "-translate-y-full opacity-0 pointer-events-none"
             : "translate-y-0 opacity-100"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between text-sm">
-          {/* Left: Brand Identity */}
+          {/* Left: Brand Identity & Menu Trigger button */}
           <div className="flex items-center gap-4 sm:gap-6 shrink-0">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="group flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-semibold text-foreground/80 hover:text-foreground transition-colors select-none cursor-pointer"
+              aria-label={isOpen ? t("nav.close") : t("nav.menu")}
+              aria-expanded={isOpen}
+            >
+              <span className={`w-2 h-2 rounded-full border border-current transition-all shrink-0 ${isOpen ? "bg-current" : "group-hover:bg-current"}`} />
+              <span>{isOpen ? t("nav.close") : t("nav.menu")}</span>
+            </button>
+
             <Link
               href={`/${locale}`}
               onClick={() => setIsOpen(false)}
@@ -128,7 +148,7 @@ export default function NavBar() {
             </div>
           </div>
 
-          {/* Right: Inline nav links, Language switcher, Theme toggle, Let's talk */}
+          {/* Right: Inline Nav Links + Switches + Let's Talk */}
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
             <nav className="hidden md:flex items-center gap-5 mr-2 font-mono text-xs uppercase tracking-wider text-foreground/70">
               <Link href="#expertise" className="hover:text-foreground transition-colors">
@@ -156,61 +176,106 @@ export default function NavBar() {
         </div>
       </header>
 
-      {/* 3. Slide-Down 5-Panel Columns Menu Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-background/90 backdrop-blur-2xl flex flex-col justify-between pt-20 sm:pt-24 pb-4 sm:pb-8 px-4 sm:px-8 animate-in fade-in duration-300 overflow-hidden"
-          role="dialog"
-          aria-modal="true"
-        >
-          {/* Top: 5 Vertical Slide-Down Panel Cards */}
-          <div className="max-w-7xl mx-auto w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 pt-4 sm:pt-6 relative z-10">
-            {navItems.map((item, idx) => (
-              <Link
-                key={item.num}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                style={{
-                  animationDelay: `${idx * 60}ms`,
-                  animationFillMode: "backwards",
-                }}
-                className="group flex flex-col justify-between p-4 sm:p-6 lg:p-7 min-h-[42vh] sm:min-h-[50vh] md:min-h-[56vh] bg-neutral-200/90 dark:bg-neutral-800/90 hover:bg-neutral-300/95 dark:hover:bg-neutral-700/95 border border-foreground/10 rounded-b-2xl sm:rounded-b-3xl shadow-xl transition-all duration-300 hover:-translate-y-1.5 animate-in slide-in-from-top-12 duration-500 select-none cursor-pointer"
-              >
-                {/* Number Badge at Top */}
-                <div className="flex items-center justify-between">
-                  <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-foreground text-background font-mono text-xs font-bold flex items-center justify-center shadow-sm">
-                    {item.num}
-                  </span>
-                  <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-foreground/40 group-hover:text-foreground transition-colors">
-                    ( 0{item.num} )
-                  </span>
-                </div>
-
-                {/* Section Title at Bottom */}
-                <div className="space-y-1">
-                  <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground group-hover:translate-x-1 transition-transform duration-200">
-                    {item.label}
-                  </span>
-                  <span className="text-[10px] sm:text-xs font-mono text-foreground/50 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span>Jump to section</span>
-                    <ArrowDown className="w-3 h-3" />
-                  </span>
-                </div>
-              </Link>
-            ))}
+      {/* 3. Slide-Down & Swipe-Up Column Cards Overlay (Inspired by bleibtgleich) */}
+      <div
+        className={`fixed inset-0 z-40 bg-background/90 backdrop-blur-2xl flex flex-col justify-between pt-16 sm:pt-20 pb-4 sm:pb-6 px-4 sm:px-8 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
+          isOpen
+            ? "translate-y-0 opacity-100 pointer-events-auto"
+            : "-translate-y-full opacity-0 pointer-events-none"
+        }`}
+        role="dialog"
+        aria-modal="true"
+      >
+        {/* Top Header inside Menu: Clocks, Available status, Language, Theme, Close button */}
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-between pt-2 pb-2 text-xs font-mono border-b border-foreground/10 relative z-20">
+          {/* Status & Clocks */}
+          <div className="flex items-center gap-4 text-foreground/70">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-foreground/90 font-medium hidden sm:inline">
+                {t("nav.availableForProjects")}
+              </span>
+            </div>
+            <span className="opacity-30">/</span>
+            <div className="flex items-center gap-2.5">
+              <span>MTL {mtlTime || "--:--"}</span>
+              <span className="opacity-40">·</span>
+              <span>LSN {lsnTime || "--:--"}</span>
+            </div>
           </div>
 
-          {/* Bottom: Victor Frangov with Copyright Watermark */}
-          <div
-            className="w-full max-w-7xl mx-auto overflow-hidden select-none relative z-0 pt-4 flex items-end justify-center"
-            aria-hidden="true"
-          >
-            <h2 className="text-[12vw] sm:text-[13vw] font-extrabold tracking-[-0.055em] leading-[0.82] uppercase text-black dark:text-white text-center w-full whitespace-nowrap">
-              VICTORFRANGOV©{currentYear}
-            </h2>
+          {/* Switches, Let's talk & Close Button */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <LanguageSwitcher />
+            <AnimatedThemeToggler />
+
+            <Link
+              href="#contact"
+              onClick={() => setIsOpen(false)}
+              className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-foreground/30 text-xs font-mono uppercase tracking-tight hover:bg-foreground hover:text-background transition-all duration-200"
+            >
+              <span>{t("nav.letsTalk")}</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </Link>
+
+            <button
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-1.5 rounded-full border border-foreground bg-foreground text-background hover:bg-transparent hover:text-foreground text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-200 cursor-pointer flex items-center gap-1.5"
+            >
+              <span>{t("nav.close")}</span>
+              <X className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
-      )}
+
+        {/* Middle: 5 Cascading Slide-Down Column Cards (Staggered ceiling dropdown) */}
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 lg:gap-5 pt-2 items-start relative z-10">
+          {navPanels.map((panel, idx) => (
+            <Link
+              key={panel.num}
+              href={panel.href}
+              onClick={() => setIsOpen(false)}
+              style={{
+                transitionDelay: isOpen ? `${idx * 45}ms` : `${(4 - idx) * 30}ms`,
+              }}
+              className={`group flex flex-col justify-between p-4 sm:p-6 lg:p-7 ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800/95 hover:bg-neutral-400 dark:hover:bg-neutral-700/95 border border-foreground/10 rounded-b-2xl sm:rounded-b-3xl shadow-xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 select-none cursor-pointer ${
+                isOpen ? "translate-y-0 opacity-100" : "-translate-y-[120%] opacity-0"
+              }`}
+            >
+              {/* Number Badge at Top */}
+              <div className="flex items-center justify-between">
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-foreground text-background font-mono text-xs font-bold flex items-center justify-center shadow-sm">
+                  {panel.num}
+                </span>
+                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-foreground/40 group-hover:text-foreground transition-colors">
+                  ( 0{panel.num} )
+                </span>
+              </div>
+
+              {/* Section Title at Bottom */}
+              <div className="space-y-1">
+                <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground group-hover:translate-x-1 transition-transform duration-200">
+                  {panel.label}
+                </span>
+                <span className="text-[10px] sm:text-xs font-mono text-foreground/50 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span>Jump to section</span>
+                  <ArrowDown className="w-3 h-3" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Bottom: Fully Scaled Victor Frangov Wordmark (100% width, no cutoff) */}
+        <div
+          className="w-full max-w-7xl mx-auto overflow-hidden select-none relative z-0 pt-2 pb-1 flex items-end justify-center"
+          aria-hidden="true"
+        >
+          <h2 className="text-[7.5vw] sm:text-[8.2vw] md:text-[8.8vw] lg:text-[9.2vw] font-black tracking-[-0.045em] leading-[0.85] uppercase text-black dark:text-white text-center w-full whitespace-nowrap">
+            VICTORFRANGOV©{currentYear}
+          </h2>
+        </div>
+      </div>
     </>
   )
 }
