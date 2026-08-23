@@ -43,10 +43,10 @@ export default function NavBar() {
     return () => clearInterval(interval)
   }, [])
 
-  // Track scroll position to transition navbar into hamburger mode
+  // Track scroll position
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 40) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
@@ -78,27 +78,30 @@ export default function NavBar() {
 
   return (
     <>
-      {/* Fixed Top Navigation Bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10 transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between text-sm">
-          
-          {/* Left: Brand Identity & Menu Trigger on Scrolled */}
-          <div className="flex items-center gap-4 sm:gap-6 shrink-0">
-            {/* Hamburger Trigger (Always visible or visible when scrolled / clicked) */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`group flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 select-none cursor-pointer ${
-                isScrolled || isOpen
-                  ? "px-3.5 py-1.5 rounded-full border border-foreground bg-foreground text-background hover:bg-transparent hover:text-foreground"
-                  : "text-foreground/80 hover:text-foreground"
-              }`}
-              aria-label={isOpen ? t("nav.close") : t("nav.menu")}
-              aria-expanded={isOpen}
-            >
-              <span className={`w-2 h-2 rounded-full border border-current transition-all shrink-0 ${isOpen ? "bg-current" : "group-hover:bg-current"}`} />
-              <span>{isOpen ? t("nav.close") : t("nav.menu")}</span>
-            </button>
+      {/* 1. Floating Menu Trigger in the Absolute Top Left Corner when Scrolled or Open */}
+      {(isScrolled || isOpen) && (
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="fixed top-4 left-4 sm:top-6 sm:left-8 z-50 group flex items-center gap-2 px-4 py-2 rounded-full border border-foreground bg-foreground text-background hover:bg-background hover:text-foreground text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 shadow-xl select-none cursor-pointer animate-in fade-in zoom-in-95 duration-200"
+          aria-label={isOpen ? t("nav.close") : t("nav.menu")}
+          aria-expanded={isOpen}
+        >
+          <span className="w-2 h-2 rounded-full bg-background group-hover:bg-foreground transition-colors shrink-0" />
+          <span>{isOpen ? t("nav.close") : t("nav.menu")}</span>
+        </button>
+      )}
 
+      {/* 2. Full Header Bar sitting at the Top (Hides when scrolled down) */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 bg-background/85 backdrop-blur-md border-b border-foreground/10 transition-all duration-400 ${
+          isScrolled && !isOpen
+            ? "-translate-y-full opacity-0 pointer-events-none"
+            : "translate-y-0 opacity-100"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between text-sm">
+          {/* Left: Brand Identity */}
+          <div className="flex items-center gap-4 sm:gap-6 shrink-0">
             <Link
               href={`/${locale}`}
               onClick={() => setIsOpen(false)}
@@ -109,8 +112,8 @@ export default function NavBar() {
             </Link>
           </div>
 
-          {/* Center: Live dual-city timezones & status indicator (Visible at top) */}
-          <div className="hidden lg:flex items-center gap-6 text-xs font-mono text-foreground/70 transition-opacity duration-300">
+          {/* Center: Live dual-city timezones & status indicator */}
+          <div className="hidden lg:flex items-center gap-6 text-xs font-mono text-foreground/70">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-foreground/90 font-medium">
@@ -125,14 +128,9 @@ export default function NavBar() {
             </div>
           </div>
 
-          {/* Right: Inline nav links when at top, switches and action button */}
+          {/* Right: Inline nav links, Language switcher, Theme toggle, Let's talk */}
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-            {/* Inline Navigation Links (Visible when at top, collapses into hamburger when scrolled) */}
-            <nav
-              className={`hidden md:flex items-center gap-5 mr-2 font-mono text-xs uppercase tracking-wider text-foreground/70 transition-all duration-300 ${
-                isScrolled ? "opacity-0 pointer-events-none -translate-x-2 hidden" : "opacity-100 translate-x-0"
-              }`}
-            >
+            <nav className="hidden md:flex items-center gap-5 mr-2 font-mono text-xs uppercase tracking-wider text-foreground/70">
               <Link href="#expertise" className="hover:text-foreground transition-colors">
                 {t("nav.expertise")}
               </Link>
@@ -158,7 +156,7 @@ export default function NavBar() {
         </div>
       </header>
 
-      {/* Slide-Down Column Panels Menu Overlay (Only 5 Sections + Victor Frangov at Bottom) */}
+      {/* 3. Slide-Down 5-Panel Columns Menu Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-background/90 backdrop-blur-2xl flex flex-col justify-between pt-20 sm:pt-24 pb-4 sm:pb-8 px-4 sm:px-8 animate-in fade-in duration-300 overflow-hidden"
@@ -202,7 +200,7 @@ export default function NavBar() {
             ))}
           </div>
 
-          {/* Bottom: Victor Frangov with Copyright Watermark taking up the bottom space */}
+          {/* Bottom: Victor Frangov with Copyright Watermark */}
           <div
             className="w-full max-w-7xl mx-auto overflow-hidden select-none relative z-0 pt-4 flex items-end justify-center"
             aria-hidden="true"
