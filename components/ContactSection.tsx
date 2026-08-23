@@ -7,7 +7,6 @@ import { SwissCross } from "./SwissCross"
 export default async function ContactSection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale })
   const year = new Date().getFullYear()
-  const shortYear = year.toString().slice(-2)
 
   const cvHref =
     locale === "fr"
@@ -20,7 +19,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
     <footer
       id="contact"
       aria-labelledby="contact-heading"
-      className="w-full bg-background text-foreground h-[100dvh] max-h-[100dvh] overflow-hidden pt-6 sm:pt-8 md:pt-10 pb-3 sm:pb-4 px-4 sm:px-8 md:px-12 border-t border-foreground/10 flex flex-col justify-between select-none"
+      className="w-full bg-background text-foreground h-[100dvh] max-h-[100dvh] overflow-hidden pt-6 sm:pt-8 md:pt-10 pb-0 px-4 sm:px-8 md:px-12 border-t border-foreground/10 flex flex-col justify-between select-none"
     >
       {/* 1. Top Section: Staggered Links Grid + Big Corner Copyright */}
       <div className="max-w-7xl mx-auto w-full grid grid-cols-12 gap-x-4 sm:gap-x-8 gap-y-4 items-start">
@@ -77,7 +76,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
         {/* Center / Big Corner Copyright Accent */}
         <div className="hidden md:flex md:col-span-2 justify-center items-start pt-2">
           <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground/20 hover:text-foreground/80 transition-colors cursor-default">
-            &apos;{shortYear}&copy;
+            &apos;26&copy;
           </span>
         </div>
 
@@ -118,13 +117,16 @@ export default async function ContactSection({ locale }: { locale: string }) {
               <ArrowUpRight className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7 opacity-30 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all self-center" />
             </a>
 
-            {/* Line 4: Situs Digital */}
+            {/* Line 4: Situs Digital (with "made by" in light gray) */}
             <a
               href="https://situsdigital.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-baseline gap-1.5 text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight lowercase leading-[0.92] text-foreground hover:translate-x-1.5 transition-transform duration-200"
+              className="group inline-flex items-baseline gap-2 text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight lowercase leading-[0.92] text-foreground hover:translate-x-1.5 transition-transform duration-200"
             >
+              <span className="text-sm sm:text-lg md:text-xl font-mono font-normal text-foreground/40 lowercase">
+                made by
+              </span>
               <span>{t("contact.situsDigital")}</span>
               <ArrowUpRight className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7 opacity-30 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all self-center" />
             </a>
@@ -160,7 +162,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
         </div>
       </div>
 
-      {/* 3. Big Victor Frangov Wordmark (Matching Hamburger Menu layout & typography) */}
+      {/* 3. Big Victor Frangov Wordmark (At the absolute bottom, matching Hamburger Menu) */}
       <div
         className="w-full overflow-hidden select-none relative z-0 px-4 sm:px-8 pb-3 pt-1 flex items-end justify-center"
         aria-hidden="true"
@@ -168,23 +170,6 @@ export default async function ContactSection({ locale }: { locale: string }) {
         <h2 className="text-[7.2vw] font-black tracking-[-0.04em] leading-[0.85] uppercase text-black dark:text-white text-center w-full whitespace-nowrap">
           VICTORFRANGOV©{year}
         </h2>
-      </div>
-
-      {/* 4. Bottom Tiny Corners */}
-      <div className="w-full max-w-7xl mx-auto pt-2 border-t border-foreground/10 flex items-center justify-between text-[10px] sm:text-xs font-mono text-foreground/60">
-        <div>
-          &apos;{shortYear} &copy; {t("contact.rightsReserved")}
-        </div>
-        <div>
-          <a
-            href="https://situsdigital.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground"
-          >
-            {t("contact.madeWithSitus")}
-          </a>
-        </div>
       </div>
     </footer>
   )
