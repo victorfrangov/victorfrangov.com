@@ -156,15 +156,13 @@ export default function NavBar() {
         }
       }
 
-      // 5. Smoothly fade out the background overlay, revealing the section already in place
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setFadeVisible(false)
-          setTimeout(() => {
-            setIsFading(false)
-          }, 550)
-        })
-      })
+      // 5. Hold solid background for 220ms, then smoothly fade out over 800ms
+      setTimeout(() => {
+        setFadeVisible(false)
+        setTimeout(() => {
+          setIsFading(false)
+        }, 850)
+      }, 220)
     }
   }
 
@@ -182,7 +180,7 @@ export default function NavBar() {
       {/* Full Page Transition Overlay with Victor Frangov Wordmark at bottom */}
       {isFading && (
         <div
-          className={`fixed inset-0 z-[100] bg-background flex flex-col justify-end pointer-events-none transition-opacity duration-500 ease-out ${
+          className={`fixed inset-0 z-[100] bg-background flex flex-col justify-end pointer-events-none transition-opacity duration-800 ease-in-out ${
             fadeVisible ? "opacity-100" : "opacity-0"
           }`}
           aria-hidden="true"
