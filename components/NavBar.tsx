@@ -138,12 +138,12 @@ export default function NavBar() {
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-1.5">
                 <MontrealLogo className="w-3.5 h-3.5 inline-block shrink-0" />
-                <span>{mtlTime || "--:--"}</span>
+                <span className="font-bold text-foreground">{mtlTime || "--:--"}</span>
               </span>
               <span className="opacity-40">·</span>
               <span className="inline-flex items-center gap-1.5">
                 <SwissCross className="w-3.5 h-3.5 inline-block shrink-0" />
-                <span>{lsnTime || "--:--"}</span>
+                <span className="font-bold text-foreground">{lsnTime || "--:--"}</span>
               </span>
             </div>
           </div>
@@ -230,12 +230,12 @@ export default function NavBar() {
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-1.5">
                 <MontrealLogo className="w-3.5 h-3.5 inline-block shrink-0" />
-                <span>{mtlTime || "--:--"}</span>
+                <span className="font-bold text-foreground">{mtlTime || "--:--"}</span>
               </span>
               <span className="opacity-40">·</span>
               <span className="inline-flex items-center gap-1.5">
                 <SwissCross className="w-3.5 h-3.5 inline-block shrink-0" />
-                <span>{lsnTime || "--:--"}</span>
+                <span className="font-bold text-foreground">{lsnTime || "--:--"}</span>
               </span>
             </div>
           </div>
