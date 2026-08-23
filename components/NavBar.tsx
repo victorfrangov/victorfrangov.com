@@ -365,6 +365,20 @@ export default function NavBar() {
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
+              {panel.href === "#expertise" && (
+                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                  <video
+                    src="/interstellar.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+                </div>
+              )}
               {panel.href === "#projects" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
