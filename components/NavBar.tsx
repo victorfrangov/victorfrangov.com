@@ -129,41 +129,42 @@ export default function NavBar() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [isOpen])
 
-  // Cinematic crossfade section navigation: Fades in to theme background, changes section, fades out
+  // Navigation transition: Immediately jumps to the section, displays full-screen background with footer wordmark, and smoothly fades out
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault()
 
-      // 1. Mount overlay and smoothly fade in to solid background (black/white)
+      // 1. Immediately activate overlay and set to full opacity
       setIsFading(true)
-      requestAnimationFrame(() => {
-        setFadeVisible(true)
-      })
+      setFadeVisible(true)
 
-      // 2. When screen is completely black/white (400ms), jump directly to section and close menu
-      setTimeout(() => {
-        setIsOpen(false)
-        document.documentElement.style.overflow = ""
-        document.body.style.overflow = ""
-        window.dispatchEvent(new CustomEvent("lenis:start"))
+      // 2. Immediately close hamburger menu
+      setIsOpen(false)
 
-        const target = document.querySelector(href) as HTMLElement | null
-        if (target) {
-          if (typeof window !== "undefined" && (window as any).__lenis) {
-            ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: -60 })
-          } else {
-            window.scrollTo(0, target.offsetTop - 60)
-          }
+      // 3. Immediately unlock page scroll
+      document.documentElement.style.overflow = ""
+      document.body.style.overflow = ""
+      window.dispatchEvent(new CustomEvent("lenis:start"))
+
+      // 4. INSTANTLY jump directly to the target section (0 delay!)
+      const target = document.querySelector(href) as HTMLElement | null
+      if (target) {
+        if (typeof window !== "undefined" && (window as any).__lenis) {
+          ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: -60 })
+        } else {
+          window.scrollTo(0, target.offsetTop - 60)
         }
+      }
 
-        // 3. Smoothly fade out the overlay to reveal the new section
-        setTimeout(() => {
+      // 5. Smoothly fade out the background overlay, revealing the section already in place
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
           setFadeVisible(false)
           setTimeout(() => {
             setIsFading(false)
-          }, 450)
-        }, 60)
-      }, 400)
+          }, 550)
+        })
+      })
     }
   }
 
@@ -178,14 +179,20 @@ export default function NavBar() {
 
   return (
     <>
-      {/* Full Screen Cinematic Crossfade Overlay (Fade In -> Section Load -> Fade Out) */}
+      {/* Full Page Transition Overlay with Victor Frangov Wordmark at bottom */}
       {isFading && (
         <div
-          className={`fixed inset-0 z-[100] bg-background pointer-events-auto transition-opacity duration-400 ease-in-out ${
+          className={`fixed inset-0 z-[100] bg-background flex flex-col justify-end pointer-events-none transition-opacity duration-500 ease-out ${
             fadeVisible ? "opacity-100" : "opacity-0"
           }`}
           aria-hidden="true"
-        />
+        >
+          <div className="w-full overflow-hidden select-none px-4 sm:px-8 pb-3 pt-1 flex items-end justify-center">
+            <h2 className="text-[7.2vw] font-black tracking-[-0.04em] leading-[0.85] uppercase text-black dark:text-white text-center w-full whitespace-nowrap">
+              VICTORFRANGOV©{currentYear}
+            </h2>
+          </div>
+        </div>
       )}
 
       {/* 1. Plain Text MENU / CLOSE Button in Total Top-Right Corner (mix-blend-difference ensures white on black, black on white) */}
