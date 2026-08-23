@@ -6,6 +6,8 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler"
 import { useEffect, useState, useRef } from "react"
 import { ArrowDown, ArrowUpRight, X } from "lucide-react"
+import { MontrealLogo } from "./MontrealLogo"
+import { SwissCross } from "./SwissCross"
 
 export default function NavBar() {
   const t = useTranslations()
@@ -134,9 +136,15 @@ export default function NavBar() {
             </div>
             <span className="opacity-30">/</span>
             <div className="flex items-center gap-3">
-              <span>MTL {mtlTime || "--:--"}</span>
+              <span className="inline-flex items-center gap-1.5">
+                <MontrealLogo className="w-3.5 h-3.5 inline-block shrink-0" />
+                <span>{mtlTime || "--:--"}</span>
+              </span>
               <span className="opacity-40">·</span>
-              <span>LSN {lsnTime || "--:--"}</span>
+              <span className="inline-flex items-center gap-1.5">
+                <SwissCross className="w-3.5 h-3.5 inline-block shrink-0" />
+                <span>{lsnTime || "--:--"}</span>
+              </span>
             </div>
           </div>
 
@@ -220,9 +228,15 @@ export default function NavBar() {
             </div>
             <span className="opacity-30">/</span>
             <div className="flex items-center gap-3">
-              <span>MTL {mtlTime || "--:--"}</span>
+              <span className="inline-flex items-center gap-1.5">
+                <MontrealLogo className="w-3.5 h-3.5 inline-block shrink-0" />
+                <span>{mtlTime || "--:--"}</span>
+              </span>
               <span className="opacity-40">·</span>
-              <span>LSN {lsnTime || "--:--"}</span>
+              <span className="inline-flex items-center gap-1.5">
+                <SwissCross className="w-3.5 h-3.5 inline-block shrink-0" />
+                <span>{lsnTime || "--:--"}</span>
+              </span>
             </div>
           </div>
 

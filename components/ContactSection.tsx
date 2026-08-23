@@ -64,9 +64,6 @@ export default async function ContactSection({ locale }: { locale: string }) {
               className="group inline-flex items-baseline gap-2 text-3xl sm:text-5xl md:text-6xl lg:text-[4.2vw] font-bold tracking-tight lowercase leading-none text-foreground/90 hover:text-foreground hover:translate-x-2 transition-all duration-200 pl-8 sm:pl-18 whitespace-nowrap"
             >
               <span>{t("contact.altLanguageName")}</span>
-              <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest px-2 py-0.5 rounded-full border border-foreground/30 opacity-60 group-hover:opacity-100 group-hover:border-foreground self-center transition-all">
-                {altLocale}
-              </span>
             </Link>
           </nav>
         </div>
