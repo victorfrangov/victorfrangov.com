@@ -360,7 +360,7 @@ export default function NavBar() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover group-hover:opacity-95 transition-opacity duration-300"
+                    className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
@@ -374,7 +374,7 @@ export default function NavBar() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover object-[70%_center] group-hover:opacity-95 transition-opacity duration-300"
+                    className="w-full h-full object-cover object-[70%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
@@ -388,7 +388,7 @@ export default function NavBar() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover group-hover:opacity-95 transition-opacity duration-300"
+                    className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
