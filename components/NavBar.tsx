@@ -14,30 +14,12 @@ export default function NavBar() {
   const locale = useLocale()
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isFlashActive, setIsFlashActive] = useState(false)
+  const [isFlashVisible, setIsFlashVisible] = useState(false)
   const [mtlTime, setMtlTime] = useState("")
   const [lsnTime, setLsnTime] = useState("")
   const currentYear = new Date().getFullYear()
   const lastScrollY = useRef(0)
-
-  // Restore menu state across in-place locale toggles
-  useEffect(() => {
-    try {
-      if (sessionStorage.getItem("nav_menu_open") === "true") {
-        setIsOpen(true)
-      }
-    } catch (_) {}
-  }, [])
-
-  // Sync menu state to sessionStorage
-  useEffect(() => {
-    try {
-      if (isOpen) {
-        sessionStorage.setItem("nav_menu_open", "true")
-      } else {
-        sessionStorage.removeItem("nav_menu_open")
-      }
-    } catch (_) {}
-  }, [isOpen])
 
   // Track live city clocks
   useEffect(() => {
@@ -126,7 +108,7 @@ export default function NavBar() {
         window.removeEventListener("touchmove", handleTouchMove)
       }
     } else {
-      // Menu closed naturally: unlock scroll after panel glide completes
+      // Menu just closed: keep scroll locked until the 1300ms + stagger slide-up animation completes
       const unlockTimer = setTimeout(() => {
         window.dispatchEvent(new CustomEvent("lenis:start"))
         document.documentElement.style.overflow = ""
@@ -147,33 +129,42 @@ export default function NavBar() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [isOpen])
 
-  // Unified smooth section navigation handler
+  // Screen-cut navigation: Turns screen black/white and jumps directly to section
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault()
-      try {
-        sessionStorage.removeItem("nav_menu_open")
-      } catch (_) {}
 
-      if (isOpen) {
-        setIsOpen(false)
-      }
+      // 1. Immediately activate full-screen background overlay (black in dark mode, white in light mode)
+      setIsFlashActive(true)
+      setIsFlashVisible(true)
 
-      // Immediately unlock scroll so navigation starts right away
+      // 2. Close hamburger menu if open
+      setIsOpen(false)
+
+      // 3. Unlock scroll immediately
       document.documentElement.style.overflow = ""
       document.body.style.overflow = ""
       window.dispatchEvent(new CustomEvent("lenis:start"))
 
-      const target = document.querySelector(href) as HTMLElement | null
-      if (target) {
-        requestAnimationFrame(() => {
+      // 4. Instantly jump directly to destination section while screen is black/white
+      setTimeout(() => {
+        const target = document.querySelector(href) as HTMLElement | null
+        if (target) {
           if (typeof window !== "undefined" && (window as any).__lenis) {
-            ;(window as any).__lenis.scrollTo(target, { offset: -60, duration: 1.4 })
+            ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: -60 })
           } else {
-            target.scrollIntoView({ behavior: "smooth" })
+            target.scrollIntoView({ behavior: "instant" as any })
           }
-        })
-      }
+        }
+
+        // 5. Fade out the screen overlay to reveal the new section
+        setTimeout(() => {
+          setIsFlashVisible(false)
+          setTimeout(() => {
+            setIsFlashActive(false)
+          }, 300)
+        }, 80)
+      }, 60)
     }
   }
 
@@ -188,6 +179,16 @@ export default function NavBar() {
 
   return (
     <>
+      {/* Full Page Flash Overlay: Turns whole page black or white (theme-dependent) and loads directly on section */}
+      {isFlashActive && (
+        <div
+          className={`fixed inset-0 z-[100] bg-background pointer-events-none transition-opacity duration-300 ease-out ${
+            isFlashVisible ? "opacity-100" : "opacity-0"
+          }`}
+          aria-hidden="true"
+        />
+      )}
+
       {/* 1. Plain Text MENU / CLOSE Button in Total Top-Right Corner (mix-blend-difference ensures white on black, black on white) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -215,17 +216,8 @@ export default function NavBar() {
           {/* Left: Brand Identity (No menu button) */}
           <div className="flex items-center gap-4 sm:gap-6 shrink-0">
             <Link
-              href={`/${locale}`}
-              onClick={(e) => {
-                if (typeof window !== "undefined") {
-                  e.preventDefault()
-                  if ((window as any).__lenis) {
-                    ;(window as any).__lenis.scrollTo(0, { duration: 1.4 })
-                  } else {
-                    window.scrollTo({ top: 0, behavior: "smooth" })
-                  }
-                }
-              }}
+              href="#main"
+              onClick={(e) => handleNavClick(e, "#main")}
               className="font-medium tracking-tight hover:opacity-70 transition-opacity flex items-center gap-1.5 shrink-0 select-none"
             >
               <span className="font-extrabold uppercase tracking-wider text-xs sm:text-sm">Victor Frangov</span>
