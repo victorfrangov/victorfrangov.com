@@ -12,19 +12,7 @@ export function LanguageSwitcher() {
 
   const switchLocale = (newLocale: "en" | "fr") => {
     if (newLocale !== locale) {
-      const scrollY = window.scrollY
-      router.replace(pathname, { locale: newLocale, scroll: false })
-      
-      // Preserve scroll position without jumping to top
-      requestAnimationFrame(() => {
-        if (typeof window !== "undefined") {
-          if ((window as any).__lenis) {
-            ;(window as any).__lenis.scrollTo(scrollY, { immediate: true })
-          } else {
-            window.scrollTo(0, scrollY)
-          }
-        }
-      })
+      router.replace(pathname, { locale: newLocale })
     }
   }
 
@@ -32,22 +20,20 @@ export function LanguageSwitcher() {
     <div className="inline-flex items-center rounded-full border border-foreground/30 p-0.5 text-xs font-mono tracking-tight">
       <button
         onClick={() => switchLocale("en")}
-        className={`px-2.5 py-0.5 rounded-full transition-all duration-200 ${
-          locale === "en"
+        className={`px-2.5 py-0.5 rounded-full transition-all duration-200 ${locale === "en"
             ? "bg-foreground text-background font-semibold"
             : "text-foreground/60 hover:text-foreground"
-        }`}
+          }`}
         aria-label="Switch to English"
       >
         EN
       </button>
       <button
         onClick={() => switchLocale("fr")}
-        className={`px-2.5 py-0.5 rounded-full transition-all duration-200 ${
-          locale === "fr"
+        className={`px-2.5 py-0.5 rounded-full transition-all duration-200 ${locale === "fr"
             ? "bg-foreground text-background font-semibold"
             : "text-foreground/60 hover:text-foreground"
-        }`}
+          }`}
         aria-label="Passer au Français"
       >
         FR

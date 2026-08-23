@@ -13,7 +13,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
   useEffect(() => {
     // Initialize Lenis smooth scroll
     const lenis = new Lenis({
-      duration: 1.3,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
@@ -31,23 +31,18 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
     const rafId = requestAnimationFrame(raf)
 
-    // Handle all internal in-page hash links smoothly
+    // Handle internal anchor clicks smoothly
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null
       const anchor = target?.closest("a")
       if (!anchor) return
-      
-      const href = anchor.getAttribute("href")
-      if (!href) return
 
-      if (href.startsWith("#") || (href.includes("#") && !href.startsWith("http"))) {
-        const hash = href.slice(href.indexOf("#"))
-        if (hash.length > 1) {
-          const elem = document.querySelector(hash)
-          if (elem) {
-            e.preventDefault()
-            lenis.scrollTo(elem as HTMLElement, { offset: -60, duration: 1.4 })
-          }
+      const href = anchor.getAttribute("href")
+      if (href?.startsWith("#") && href.length > 1) {
+        const elem = document.querySelector(href)
+        if (elem) {
+          e.preventDefault()
+          lenis.scrollTo(elem as HTMLElement, { offset: -80, duration: 1.4 })
         }
       }
     }
@@ -57,14 +52,12 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
     window.addEventListener("lenis:stop", handleStop)
     window.addEventListener("lenis:start", handleStart)
-    document.addEventListener("click", handleAnchorClick, { capture: true })
-
     if (typeof window !== "undefined") {
-      ;(window as any).__lenis = lenis
+      ; (window as any).__lenis = lenis
     }
 
     return () => {
-      document.removeEventListener("click", handleAnchorClick, { capture: true })
+      document.removeEventListener("click", handleAnchorClick)
       window.removeEventListener("lenis:stop", handleStop)
       window.removeEventListener("lenis:start", handleStart)
       cancelAnimationFrame(rafId)

@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from "next-intl"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler"
 import { useEffect, useState, useRef } from "react"
-import { ArrowDown, ArrowUpRight, X } from "lucide-react"
+import { ArrowDown, ArrowUpRight } from "lucide-react"
 import { MontrealLogo } from "./MontrealLogo"
 import { SwissCross } from "./SwissCross"
 
@@ -18,6 +18,26 @@ export default function NavBar() {
   const [lsnTime, setLsnTime] = useState("")
   const currentYear = new Date().getFullYear()
   const lastScrollY = useRef(0)
+
+  // Restore menu state across in-place locale toggles
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("nav_menu_open") === "true") {
+        setIsOpen(true)
+      }
+    } catch (_) {}
+  }, [])
+
+  // Sync menu state to sessionStorage
+  useEffect(() => {
+    try {
+      if (isOpen) {
+        sessionStorage.setItem("nav_menu_open", "true")
+      } else {
+        sessionStorage.removeItem("nav_menu_open")
+      }
+    } catch (_) {}
+  }, [isOpen])
 
   // Track live city clocks
   useEffect(() => {
@@ -106,7 +126,7 @@ export default function NavBar() {
         window.removeEventListener("touchmove", handleTouchMove)
       }
     } else {
-      // Menu just closed: keep scroll locked until the 1300ms + stagger slide-up animation completes
+      // Menu closed naturally: unlock scroll after panel glide completes
       const unlockTimer = setTimeout(() => {
         window.dispatchEvent(new CustomEvent("lenis:start"))
         document.documentElement.style.overflow = ""
@@ -127,19 +147,32 @@ export default function NavBar() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [isOpen])
 
+  // Unified smooth section navigation handler
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
+      e.preventDefault()
+      try {
+        sessionStorage.removeItem("nav_menu_open")
+      } catch (_) {}
+
+      if (isOpen) {
+        setIsOpen(false)
+      }
+
+      // Immediately unlock scroll so navigation starts right away
+      document.documentElement.style.overflow = ""
+      document.body.style.overflow = ""
+      window.dispatchEvent(new CustomEvent("lenis:start"))
+
       const target = document.querySelector(href) as HTMLElement | null
       if (target) {
-        e.preventDefault()
-        if (isOpen) {
-          setIsOpen(false)
-        }
-        if (typeof window !== "undefined" && (window as any).__lenis) {
-          ;(window as any).__lenis.scrollTo(target, { offset: -60, duration: 1.4 })
-        } else {
-          target.scrollIntoView({ behavior: "smooth" })
-        }
+        requestAnimationFrame(() => {
+          if (typeof window !== "undefined" && (window as any).__lenis) {
+            ;(window as any).__lenis.scrollTo(target, { offset: -60, duration: 1.4 })
+          } else {
+            target.scrollIntoView({ behavior: "smooth" })
+          }
+        })
       }
     }
   }
@@ -184,9 +217,9 @@ export default function NavBar() {
             <Link
               href={`/${locale}`}
               onClick={(e) => {
-                if (window.location.pathname.endsWith(`/${locale}`) || window.location.pathname === "/") {
+                if (typeof window !== "undefined") {
                   e.preventDefault()
-                  if (typeof window !== "undefined" && (window as any).__lenis) {
+                  if ((window as any).__lenis) {
                     ;(window as any).__lenis.scrollTo(0, { duration: 1.4 })
                   } else {
                     window.scrollTo({ top: 0, behavior: "smooth" })
@@ -334,7 +367,7 @@ export default function NavBar() {
 
             <Link
               href="#contact"
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, "#contact")}
               className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-foreground/40 bg-background hover:bg-foreground hover:text-background text-xs font-mono uppercase tracking-tight transition-all duration-200 shadow-sm"
             >
               <span>{t("nav.letsTalk")}</span>
