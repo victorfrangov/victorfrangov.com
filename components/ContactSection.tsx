@@ -24,7 +24,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
     >
       {/* 1. Main Section: 3-Column Layout (Left Navigation, Center Year & Stacked Locations, Right Social Links) */}
       <div className="w-full max-w-7xl mx-auto grid grid-cols-12 gap-x-4 sm:gap-x-8 items-stretch flex-1 py-4 sm:py-6 md:py-8">
-        
+
         {/* Left: 5 Main Navigation Links (Evenly distributed vertically) */}
         <div className="col-span-5 flex flex-col h-full">
           <nav aria-label="Footer navigation" className="flex flex-col justify-between h-full w-full">
@@ -61,7 +61,6 @@ export default async function ContactSection({ locale }: { locale: string }) {
 
             <Link
               href={`/${altLocale}`}
-              scroll={false}
               className="group inline-flex items-baseline gap-2 text-3xl sm:text-5xl md:text-6xl lg:text-[4.2vw] font-bold tracking-tight lowercase leading-none text-foreground/90 hover:text-foreground hover:translate-x-2 transition-all duration-200 pl-8 sm:pl-18 whitespace-nowrap"
             >
               <span>{t("contact.altLanguageName")}</span>
