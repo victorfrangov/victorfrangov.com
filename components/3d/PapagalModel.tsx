@@ -265,21 +265,21 @@ export default function PapagalModel() {
     tailGroup.position.set(0, -0.15, -0.25)
     parrotGroup.add(tailGroup)
 
-    // Center Tail Feather (Inverted so sharp tip is inside torso, wide base extends out)
+    // Center Tail Feather (Flipped)
     const tailGeo = new THREE.ConeGeometry(0.24, 1.8, 24)
     const tailMain = new THREE.Mesh(tailGeo, limeGreenMat)
     tailMain.scale.set(0.65, 1.0, 0.9)
     tailMain.position.set(0, -0.45, -0.15)
-    tailMain.rotation.x = Math.PI + 0.55 // Sharp tip points UP inside the body!
+    tailMain.rotation.x = 0.55 // Flipped
     tailGroup.add(tailMain)
 
-    // Side Accent Feathers (Tips buried inside body)
+    // Side Accent Feathers (Flipped)
     for (const side of [-1, 1]) {
       const tailSide = new THREE.Mesh(new THREE.ConeGeometry(0.16, 1.45, 24), brightLimeMat)
       tailSide.scale.set(0.6, 1.0, 0.85)
       tailSide.position.set(side * 0.12, -0.35, -0.1)
-      tailSide.rotation.x = Math.PI + 0.52
-      tailSide.rotation.z = -side * 0.12
+      tailSide.rotation.x = 0.52 // Flipped
+      tailSide.rotation.z = side * 0.12
       tailGroup.add(tailSide)
     }
 
