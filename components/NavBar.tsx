@@ -91,10 +91,10 @@ export default function NavBar() {
 
   return (
     <>
-      {/* 1. Plain Text MENU / CLOSE Button in Total Top-Right Corner */}
+      {/* 1. Plain Text MENU / CLOSE Button in Total Top-Right Corner (mix-blend-difference ensures white on black, black on white) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed top-4 right-4 sm:top-6 sm:right-8 z-[60] text-xs sm:text-sm font-mono uppercase tracking-widest font-bold text-foreground hover:opacity-70 transition-all duration-500 select-none cursor-pointer bg-transparent border-0 p-0 shadow-none ${
+        className={`fixed top-4 right-4 sm:top-6 sm:right-8 z-[60] text-xs sm:text-sm font-mono uppercase tracking-widest font-bold mix-blend-difference text-white hover:opacity-70 transition-all duration-500 select-none cursor-pointer bg-transparent border-0 p-0 shadow-none ${
           isOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : isScrolled
