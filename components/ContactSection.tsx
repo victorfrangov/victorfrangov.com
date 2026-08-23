@@ -7,6 +7,7 @@ import { SwissCross } from "./SwissCross"
 export default async function ContactSection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale })
   const year = new Date().getFullYear()
+  const shortYear = year.toString().slice(-2)
 
   const cvHref =
     locale === "fr"
@@ -76,7 +77,7 @@ export default async function ContactSection({ locale }: { locale: string }) {
         {/* Center / Big Corner Copyright Accent */}
         <div className="hidden md:flex md:col-span-2 justify-center items-start pt-2">
           <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground/20 hover:text-foreground/80 transition-colors cursor-default">
-            &apos;26&copy;
+            &apos;{shortYear}&copy;
           </span>
         </div>
 
@@ -117,15 +118,15 @@ export default async function ContactSection({ locale }: { locale: string }) {
               <ArrowUpRight className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7 opacity-30 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all self-center" />
             </a>
 
-            {/* Line 4: Situs Digital (with "made by" in light gray) */}
+            {/* Line 4: Situs Digital (with "made by" in same font and size) */}
             <a
               href="https://situsdigital.com"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-baseline gap-2 text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight lowercase leading-[0.92] text-foreground hover:translate-x-1.5 transition-transform duration-200"
             >
-              <span className="text-sm sm:text-lg md:text-xl font-mono font-normal text-foreground/40 lowercase">
-                made by
+              <span className="text-foreground/40">
+                {locale === "fr" ? "fait par " : "made by "}
               </span>
               <span>{t("contact.situsDigital")}</span>
               <ArrowUpRight className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7 opacity-30 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all self-center" />
