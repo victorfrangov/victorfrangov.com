@@ -179,18 +179,24 @@ export default function NavBar() {
     if (href.startsWith("#")) {
       e.preventDefault()
 
-      // 1. Jump instantly to the section in the background underneath the open menu
+      // 1. Immediately unlock overflow and resume Lenis so the browser permits instant section positioning
+      document.documentElement.style.overflow = ""
+      document.body.style.overflow = ""
+      window.dispatchEvent(new CustomEvent("lenis:start"))
+      if (typeof window !== "undefined" && (window as any).__lenis) {
+        ;(window as any).__lenis.start()
+      }
+
+      // 2. Jump instantly to the section in the background underneath the open menu
       const target = document.querySelector(href) as HTMLElement | null
       if (target) {
+        target.scrollIntoView({ behavior: "instant" as any, block: "start" })
         if (typeof window !== "undefined" && (window as any).__lenis) {
-          ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: 0 })
-        } else {
-          const y = target.getBoundingClientRect().top + window.scrollY
-          window.scrollTo({ top: y, behavior: "instant" as any })
+          ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: 0, force: true })
         }
       }
 
-      // 2. Trigger the hamburger menu rectangles to scroll back up
+      // 3. Trigger the hamburger menu rectangles to scroll back up
       setIsOpen(false)
     }
   }
