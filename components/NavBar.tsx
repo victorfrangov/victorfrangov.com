@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from "next-intl"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler"
 import { useEffect, useState } from "react"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowDown, ArrowUpRight } from "lucide-react"
 
 export default function NavBar() {
   const t = useTranslations()
@@ -14,6 +14,11 @@ export default function NavBar() {
   const [mtlTime, setMtlTime] = useState("")
   const [lsnTime, setLsnTime] = useState("")
   const currentYear = new Date().getFullYear()
+
+  const cvHref =
+    locale === "fr"
+      ? "https://cv.victorfrangov.com/cv_fr.pdf"
+      : "https://cv.victorfrangov.com/cv_en.pdf"
 
   useEffect(() => {
     const updateClocks = () => {
@@ -43,35 +48,35 @@ export default function NavBar() {
 
   useEffect(() => {
     if (!isOpen) return
-    const onScroll = () => setIsOpen(false)
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false)
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
   }, [isOpen])
+
+  const navItems = [
+    { href: "#main", num: 1, label: t("nav.overview") },
+    { href: "#about-me", num: 2, label: t("nav.aboutMe") },
+    { href: "#expertise", num: 3, label: t("nav.expertise") },
+    { href: "#projects", num: 4, label: t("nav.projects") },
+    { href: "#contact", num: 5, label: t("nav.contact") },
+  ]
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10 transition-colors">
+      {/* Top Header Bar - Minimal & Clean */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-foreground/10 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between text-sm">
-          {/* Left: Brand Identity & Fixed-Width Menu Trigger (Zero Layout Shift) */}
-          <div className="flex items-center gap-4 sm:gap-6 shrink-0">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="group flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-foreground/80 hover:text-foreground transition-colors w-[80px] text-left shrink-0 select-none cursor-pointer"
-              aria-label={isOpen ? t("nav.close") : t("nav.menu")}
-              aria-expanded={isOpen}
-            >
-              <span className="w-2 h-2 rounded-full border border-foreground group-hover:bg-foreground transition-colors shrink-0" />
-              <span className="w-[54px] inline-block shrink-0">{isOpen ? t("nav.close") : t("nav.menu")}</span>
-            </button>
-
-            <Link
-              href={`/${locale}`}
-              className="font-medium tracking-tight hover:opacity-70 transition-opacity flex items-center gap-1.5 shrink-0"
-            >
-              <span className="font-bold uppercase tracking-wider text-xs sm:text-sm">Victor Frangov</span>
-              <span className="text-[10px] font-mono opacity-60">®</span>
-            </Link>
-          </div>
+          {/* Left: Brand Identity */}
+          <Link
+            href={`/${locale}`}
+            onClick={() => setIsOpen(false)}
+            className="font-medium tracking-tight hover:opacity-70 transition-opacity flex items-center gap-1.5 shrink-0 select-none"
+          >
+            <span className="font-extrabold uppercase tracking-wider text-xs sm:text-sm">Victor Frangov</span>
+            <span className="text-[10px] font-mono opacity-60">®</span>
+          </Link>
 
           {/* Center: Live dual-city timezones & status indicator */}
           <div className="hidden lg:flex items-center gap-6 text-xs font-mono text-foreground/70">
@@ -89,144 +94,115 @@ export default function NavBar() {
             </div>
           </div>
 
-          {/* Right: Quick actions & switches */}
+          {/* Right: Language, Theme & Slide-Down Menu Trigger */}
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-            <nav className="hidden md:flex items-center gap-6 mr-2 font-mono text-xs uppercase tracking-wider text-foreground/70">
-              <Link href="#expertise" className="hover:text-foreground transition-colors">
-                {t("nav.expertise")}
-              </Link>
-              <Link href="#projects" className="hover:text-foreground transition-colors">
-                {t("nav.projects")}
-              </Link>
-              <Link href="#contact" className="hover:text-foreground transition-colors">
-                {t("nav.contact")}
-              </Link>
-            </nav>
-
             <LanguageSwitcher />
             <AnimatedThemeToggler />
 
-            <Link
-              href="#contact"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border border-foreground/30 text-xs font-mono uppercase tracking-tight hover:bg-foreground hover:text-background transition-all duration-200"
+            {/* Menu Trigger Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="px-4 py-1.5 sm:px-5 sm:py-2 rounded-full border border-foreground bg-foreground text-background hover:bg-transparent hover:text-foreground text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-200 cursor-pointer select-none"
+              aria-label={isOpen ? t("nav.close") : t("nav.menu")}
+              aria-expanded={isOpen}
             >
-              <span>{t("nav.letsTalk")}</span>
-              <ArrowUpRight className="w-3 h-3" />
-            </Link>
+              {isOpen ? t("nav.close") : t("nav.menu")}
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Full-screen / Drawer Locomotive-style Menu Overlay */}
+      {/* Slide-Down Column Panels Menu Overlay (Inspired by bleibtgleich) */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl pt-24 px-6 sm:px-12 flex flex-col justify-between pb-12 animate-in fade-in duration-300"
+          className="fixed inset-0 z-40 bg-background/90 backdrop-blur-2xl flex flex-col justify-between pt-20 sm:pt-24 pb-4 sm:pb-8 px-4 sm:px-8 animate-in fade-in duration-300 overflow-hidden"
           role="dialog"
           aria-modal="true"
         >
-          <div className="max-w-7xl mx-auto w-full grid md:grid-cols-12 gap-8 pt-8 relative z-10">
-            <div className="md:col-span-8 space-y-4">
-              <span className="text-xs font-mono text-foreground/50 tracking-widest uppercase">
-                ( {t("nav.mainNav")} )
-              </span>
-              <ul className="space-y-3 pt-4 list-none m-0 p-0">
-                {[
-                  { href: "#main", num: "01", label: t("nav.overview") },
-                  { href: "#about-me", num: "02", label: t("nav.aboutMe") },
-                  { href: "#expertise", num: "03", label: t("nav.expertise") },
-                  { href: "#projects", num: "04", label: t("nav.projects") },
-                  { href: "#contact", num: "05", label: t("nav.contact") },
-                ].map((item) => (
-                  <li key={item.num}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="group flex items-baseline gap-4 text-3xl sm:text-5xl md:text-6xl font-bold tracking-tighter hover:translate-x-3 transition-transform duration-300"
-                    >
-                      <span className="text-xs sm:text-sm font-mono text-foreground/40 group-hover:text-foreground">
-                        ({item.num})
-                      </span>
-                      <span className="underline-offset-8 group-hover:underline">{item.label}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          {/* Top: 5 Vertical Slide-Down Panel Cards */}
+          <div className="max-w-7xl mx-auto w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 pt-2 sm:pt-4 relative z-10">
+            {navItems.map((item, idx) => (
+              <Link
+                key={item.num}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                style={{
+                  animationDelay: `${idx * 60}ms`,
+                  animationFillMode: "backwards",
+                }}
+                className="group flex flex-col justify-between p-4 sm:p-6 lg:p-7 min-h-[38vh] sm:min-h-[48vh] md:min-h-[54vh] bg-neutral-200/90 dark:bg-neutral-800/90 hover:bg-neutral-300/95 dark:hover:bg-neutral-700/95 border border-foreground/10 rounded-b-2xl sm:rounded-b-3xl shadow-xl transition-all duration-300 hover:-translate-y-1.5 animate-in slide-in-from-top-12 duration-500 select-none cursor-pointer"
+              >
+                {/* Number Badge at Top */}
+                <div className="flex items-center justify-between">
+                  <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-foreground text-background font-mono text-xs font-bold flex items-center justify-center shadow-sm">
+                    {item.num}
+                  </span>
+                  <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-foreground/40 group-hover:text-foreground transition-colors">
+                    ( 0{item.num} )
+                  </span>
+                </div>
+
+                {/* Section Title at Bottom */}
+                <div className="space-y-1">
+                  <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground group-hover:translate-x-1 transition-transform duration-200">
+                    {item.label}
+                  </span>
+                  <span className="text-[10px] sm:text-xs font-mono text-foreground/50 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span>Jump to section</span>
+                    <ArrowDown className="w-3 h-3" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Middle: Quick Action Pills (CV / Résumé, Situs Digital, Connect) */}
+          <div className="max-w-7xl mx-auto w-full flex flex-wrap items-center justify-center sm:justify-between gap-3 sm:gap-4 py-2 relative z-10 text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <a
+                href={cvHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-full border border-foreground/30 bg-background hover:bg-foreground hover:text-background transition-all duration-200 flex items-center gap-1.5 shadow-sm"
+              >
+                <span>CV / Résumé</span>
+                <ArrowDown className="w-3.5 h-3.5" />
+              </a>
+
+              <a
+                href="https://situsdigital.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-full border border-foreground/30 bg-background hover:bg-foreground hover:text-background transition-all duration-200 flex items-center gap-1.5 shadow-sm"
+              >
+                <span>Situs Digital</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
             </div>
 
-            <div className="md:col-span-4 flex flex-col justify-between space-y-8 border-t md:border-t-0 md:border-l border-foreground/10 pt-8 md:pt-0 md:pl-8">
-              <div className="space-y-6">
-                <span className="text-xs font-mono text-foreground/50 tracking-widest uppercase">
-                  ( {t("nav.locations")} )
-                </span>
-                <div className="space-y-3 font-mono text-sm">
-                  <div>
-                    <div className="font-semibold">{t("nav.locationLsn")}</div>
-                    <div className="text-xs text-foreground/60">{t("nav.locationLsnSub")}</div>
-                  </div>
-                  <div>
-                    <div className="font-semibold">{t("nav.locationMtl")}</div>
-                    <div className="text-xs text-foreground/60">{t("nav.locationMtlSub")}</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <span className="text-xs font-mono text-foreground/50 tracking-widest uppercase">
-                  ( {t("nav.connect")} )
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  <a
-                    href="https://github.com/victorfrangov"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="loco-pill text-xs font-mono"
-                  >
-                    GitHub ↗
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/victor-frangov/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="loco-pill text-xs font-mono"
-                  >
-                    LinkedIn ↗
-                  </a>
-                  <a
-                    href="mailto:v@victorfrangov.com"
-                    className="loco-pill text-xs font-mono"
-                  >
-                    Email ↗
-                  </a>
-                </div>
-              </div>
+            <div className="flex items-center gap-3 text-foreground/70">
+              <a href="https://github.com/victorfrangov" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                GitHub ↗
+              </a>
+              <span>·</span>
+              <a href="https://www.linkedin.com/in/victor-frangov/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                LinkedIn ↗
+              </a>
+              <span>·</span>
+              <a href="mailto:v@victorfrangov.com" className="hover:text-foreground transition-colors">
+                Email ↗
+              </a>
             </div>
           </div>
 
-          {/* Giant Background Watermark Name */}
+          {/* Bottom: Giant Background Watermark Name */}
           <div
-            className="absolute bottom-0 left-0 right-0 pointer-events-none select-none overflow-hidden z-0 px-4 sm:px-8 pb-2 flex items-end justify-center"
+            className="w-full max-w-7xl mx-auto overflow-hidden select-none relative z-0 pt-1 flex items-end justify-center"
             aria-hidden="true"
           >
-            <svg
-              viewBox="0 0 1700 150"
-              className="w-full h-auto max-h-[25vh] text-black dark:text-white"
-            >
-              <text
-                x="50%"
-                y="80%"
-                textAnchor="middle"
-                fill="currentColor"
-                className="font-black uppercase select-none"
-                style={{
-                  fontSize: "135px",
-                  fontWeight: 900,
-                  letterSpacing: "-0.04em",
-                  fontFamily: "var(--font-sans, inherit)",
-                }}
-              >
-                VICTORFRANGOV©{currentYear}
-              </text>
-            </svg>
+            <h2 className="text-[12vw] sm:text-[13vw] font-extrabold tracking-[-0.055em] leading-[0.82] uppercase text-black dark:text-white text-center w-full whitespace-nowrap">
+              VICTORFRANGOV©{currentYear}
+            </h2>
           </div>
         </div>
       )}
