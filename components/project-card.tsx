@@ -77,10 +77,22 @@ export default function ProjectCard({
             <video
               ref={videoRef}
               src={image}
+              autoPlay
               muted
               loop
               playsInline
-              preload="none"
+              preload="auto"
+              onEnded={(e) => {
+                e.currentTarget.currentTime = 0
+                e.currentTarget.play().catch(() => {})
+              }}
+              onTimeUpdate={(e) => {
+                const v = e.currentTarget
+                if (v.duration && v.currentTime >= v.duration - 0.1) {
+                  v.currentTime = 0
+                  v.play().catch(() => {})
+                }
+              }}
               className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
             />
           ) : (

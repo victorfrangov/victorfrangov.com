@@ -211,7 +211,7 @@ export default function NavBar() {
       {/* 1. Plain Text MENU / CLOSE Button in Total Top-Right Corner */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 right-4 sm:top-6 sm:right-8 z-[60] text-xs sm:text-sm font-mono uppercase tracking-widest font-bold mix-blend-difference text-white hover:opacity-70 transition-all duration-500 select-none cursor-pointer bg-transparent border-0 p-0 shadow-none opacity-100 pointer-events-auto translate-y-0"
+        className="fixed top-4 right-4 sm:top-6 sm:right-8 z-[60] text-sm sm:text-base md:text-lg font-mono uppercase tracking-widest font-extrabold mix-blend-difference text-white hover:opacity-70 transition-all duration-300 select-none cursor-pointer bg-transparent border-0 p-0 shadow-none opacity-100 pointer-events-auto translate-y-0"
         aria-label={isOpen ? t("nav.close") : t("nav.menu")}
       >
         {isOpen ? t("nav.close") : t("nav.menu")}
@@ -230,8 +230,8 @@ export default function NavBar() {
         {/* Top Wrapper: Compact top safe area for FERMER + 5 Panels grouped together with zero black gap */}
         <div className="w-full flex flex-col relative z-10">
           {/* Mobile Top Row: Gives FERMER its own dedicated row, no left logo */}
-          <div className="w-full flex md:hidden items-center justify-end px-4 pt-3.5 pb-2">
-            <div className="w-16 h-5" />
+          <div className="w-full flex md:hidden items-center justify-end px-4 pt-4 pb-2.5">
+            <div className="w-20 h-6" />
           </div>
 
           {/* 5 Brutalist Panels (Horizontal stacked on mobile, Vertical cascading on desktop) */}
@@ -258,6 +258,17 @@ export default function NavBar() {
                       muted
                       playsInline
                       preload="auto"
+                      onEnded={(e) => {
+                        e.currentTarget.currentTime = 0
+                        e.currentTarget.play().catch(() => {})
+                      }}
+                      onTimeUpdate={(e) => {
+                        const v = e.currentTarget
+                        if (v.duration && v.currentTime >= v.duration - 0.1) {
+                          v.currentTime = 0
+                          v.play().catch(() => {})
+                        }
+                      }}
                       className="w-full h-full object-cover object-[56%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                     />
                     <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
@@ -272,6 +283,17 @@ export default function NavBar() {
                       muted
                       playsInline
                       preload="auto"
+                      onEnded={(e) => {
+                        e.currentTarget.currentTime = 0
+                        e.currentTarget.play().catch(() => {})
+                      }}
+                      onTimeUpdate={(e) => {
+                        const v = e.currentTarget
+                        if (v.duration && v.currentTime >= v.duration - 0.1) {
+                          v.currentTime = 0
+                          v.play().catch(() => {})
+                        }
+                      }}
                       className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                     />
                     <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
@@ -286,6 +308,17 @@ export default function NavBar() {
                       muted
                       playsInline
                       preload="auto"
+                      onEnded={(e) => {
+                        e.currentTarget.currentTime = 0
+                        e.currentTarget.play().catch(() => {})
+                      }}
+                      onTimeUpdate={(e) => {
+                        const v = e.currentTarget
+                        if (v.duration && v.currentTime >= v.duration - 0.1) {
+                          v.currentTime = 0
+                          v.play().catch(() => {})
+                        }
+                      }}
                       className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                     />
                     <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
@@ -300,6 +333,17 @@ export default function NavBar() {
                       muted
                       playsInline
                       preload="auto"
+                      onEnded={(e) => {
+                        e.currentTarget.currentTime = 0
+                        e.currentTarget.play().catch(() => {})
+                      }}
+                      onTimeUpdate={(e) => {
+                        const v = e.currentTarget
+                        if (v.duration && v.currentTime >= v.duration - 0.1) {
+                          v.currentTime = 0
+                          v.play().catch(() => {})
+                        }
+                      }}
                       className="w-full h-full object-cover object-[70%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                     />
                     <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
@@ -314,6 +358,17 @@ export default function NavBar() {
                       muted
                       playsInline
                       preload="auto"
+                      onEnded={(e) => {
+                        e.currentTarget.currentTime = 0
+                        e.currentTarget.play().catch(() => {})
+                      }}
+                      onTimeUpdate={(e) => {
+                        const v = e.currentTarget
+                        if (v.duration && v.currentTime >= v.duration - 0.1) {
+                          v.currentTime = 0
+                          v.play().catch(() => {})
+                        }
+                      }}
                       className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                     />
                     <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
