@@ -13,6 +13,7 @@ export default function NavBar() {
   const t = useTranslations()
   const locale = useLocale()
   const [isOpen, setIsOpen] = useState(false)
+  const [renderVideos, setRenderVideos] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isFading, setIsFading] = useState(false)
   const [fadeVisible, setFadeVisible] = useState(false)
@@ -20,6 +21,19 @@ export default function NavBar() {
   const [lsnTime, setLsnTime] = useState("")
   const currentYear = new Date().getFullYear()
   const lastScrollY = useRef(0)
+
+  // Keep videos active while menu is open and during the full slide-up closing transition
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+    if (isOpen) {
+      setRenderVideos(true)
+    } else {
+      timeout = setTimeout(() => {
+        setRenderVideos(false)
+      }, 1500)
+    }
+    return () => clearTimeout(timeout)
+  }, [isOpen])
 
   // Track live city clocks
   useEffect(() => {
@@ -351,7 +365,7 @@ export default function NavBar() {
                 isOpen ? "translate-y-0" : "-translate-y-[120%]"
               }`}
             >
-              {isOpen && panel.href === "#main" && (
+              {renderVideos && panel.href === "#main" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
                     src="/rum.webm"
@@ -360,16 +374,12 @@ export default function NavBar() {
                     muted
                     playsInline
                     preload="auto"
-                    onEnded={(e) => {
-                      e.currentTarget.currentTime = 0
-                      e.currentTarget.play().catch(() => {})
-                    }}
-                    className="w-full h-full object-cover object-[35%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
+                    className="w-full h-full object-cover object-[56%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
-              {isOpen && panel.href === "#about-me" && (
+              {renderVideos && panel.href === "#about-me" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
                     src="/hello.webm"
@@ -383,7 +393,7 @@ export default function NavBar() {
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
-              {isOpen && panel.href === "#expertise" && (
+              {renderVideos && panel.href === "#expertise" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
                     src="/interstellar.webm"
@@ -397,7 +407,7 @@ export default function NavBar() {
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
-              {isOpen && panel.href === "#projects" && (
+              {renderVideos && panel.href === "#projects" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
                     src="/tonystark.webm"
@@ -411,7 +421,7 @@ export default function NavBar() {
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
-              {isOpen && panel.href === "#contact" && (
+              {renderVideos && panel.href === "#contact" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
                     src="/jamesbond.webm"
