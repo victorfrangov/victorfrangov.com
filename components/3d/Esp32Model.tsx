@@ -392,21 +392,31 @@ export default function Esp32Model() {
     }
     container.addEventListener("touchmove", handleTouchMove, { passive: true })
 
+    let isVisible = false
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+      },
+      { threshold: 0.05 }
+    )
+    observer.observe(container)
+
     const animate = () => {
       reqId = requestAnimationFrame(animate)
+      if (!isVisible) return
+
       const elapsed = clock.getElapsedTime()
 
-      // Smooth rotation lerp
+      // Smooth rotation lerp with gentle continuous 360° spin
       currentRotY += (targetRotY - currentRotY) * 0.06
       currentRotX += (targetRotX - currentRotX) * 0.06
 
-      // Continuous 360° spin around vertical axis with dynamic tilt (slow and smooth)
-      rootGroup.rotation.y = elapsed * 0.3 + currentRotY
+      // Slow, smooth continuous 360° spin around vertical axis + interactive tilt
+      rootGroup.rotation.y = elapsed * 0.32 + currentRotY
       rootGroup.rotation.x = currentRotX + Math.sin(elapsed * 0.35) * 0.06
       rootGroup.rotation.z = Math.cos(elapsed * 0.3) * 0.03
 
-      // Pulse the status LEDs & display glow
-      ledBlueMat.color.setHex(Math.sin(elapsed * 5.0) > 0 ? 0x38bdf8 : 0x0369a1)
+      // Pulsing OLED screen backlight
       oledGlowLight.intensity = 2.0 + Math.sin(elapsed * 3.0) * 0.8
 
       renderer.render(scene, camera)
@@ -427,13 +437,31 @@ export default function Esp32Model() {
 
     return () => {
       cancelAnimationFrame(reqId)
+      observer.disconnect()
       window.removeEventListener("resize", handleResize)
       container.removeEventListener("mousemove", handleMouseMove)
       container.removeEventListener("touchmove", handleTouchMove)
+
+      scene.traverse((object: any) => {
+        if (object.geometry) object.geometry.dispose()
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach((mat: any) => {
+              if (mat.map) mat.map.dispose()
+              mat.dispose()
+            })
+          } else {
+            if (object.material.map) object.material.map.dispose()
+            object.material.dispose()
+          }
+        }
+      })
+
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement)
       }
       renderer.dispose()
+      renderer.forceContextLoss()
     }
   }, [])
 

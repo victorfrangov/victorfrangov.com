@@ -1,5 +1,6 @@
 "use client"
 
+import React, { useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
@@ -29,10 +30,30 @@ export default function ProjectCard({
   customComponent,
   links,
 }: Props) {
+  const videoRef = useRef<HTMLVideoElement>(null)
   const isVideo =
     !!image &&
     (image.toLowerCase().endsWith(".webm") ||
       image.toLowerCase().endsWith(".mp4"))
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {})
+        } else {
+          video.pause()
+        }
+      },
+      { threshold: 0.05 }
+    )
+
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <article className="group relative w-full h-[50vh] sm:h-[52vh] md:h-[50vh] min-h-[400px] overflow-hidden border-b md:border-r border-foreground/20 bg-background select-none">
@@ -41,12 +62,12 @@ export default function ProjectCard({
         {image &&
           (isVideo ? (
             <video
+              ref={videoRef}
               src={image}
-              autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
             />
           ) : (

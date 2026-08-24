@@ -321,32 +321,46 @@ export default function StockChartModel() {
       }
     }
     container.addEventListener("touchmove", handleTouchMove, { passive: true })
+    let isVisible = false
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+      },
+      { threshold: 0.05 }
+    )
+    observer.observe(container)
 
     const animate = () => {
       reqId = requestAnimationFrame(animate)
+      if (!isVisible) return
+
       const elapsed = clock.getElapsedTime()
 
-      // Smooth rotation lerp + continuous 360° spin (slow & elegant)
+      // Smooth interactive rotation lerp
       currentRotY += (targetRotY - currentRotY) * 0.06
       currentRotX += (targetRotX - currentRotX) * 0.06
 
-      rootGroup.rotation.y = elapsed * 0.3 + currentRotY
+      // Slow, smooth continuous 360° spin around vertical axis + interactive tilt
+      rootGroup.rotation.y = elapsed * 0.28 + currentRotY
       rootGroup.rotation.x = currentRotX + Math.sin(elapsed * 0.35) * 0.06
       rootGroup.rotation.z = Math.cos(elapsed * 0.3) * 0.03
 
-      // Animate individual candle price vibrations & live updates
-      candles.forEach((c, idx) => {
-        const tick = Math.sin(elapsed * c.speed + c.phase) * 0.05
-        const dynamicOpen = c.baseOpen
-        const dynamicClose = c.baseClose + tick
+      // Dynamic Price Action Animation (Candles live-breathing and oscillating)
+      candles.forEach((c) => {
+        const delta = Math.sin(elapsed * c.speed + c.phase) * 0.05
+        const close = c.baseClose + delta
+        const high = Math.max(c.baseHigh + delta * 0.5, close, c.baseOpen)
+        const low = Math.min(c.baseLow - delta * 0.5, close, c.baseOpen)
+        const isGreen = close >= c.baseOpen
 
-        const bodyHeight = Math.max(Math.abs(dynamicClose - dynamicOpen), 0.08)
-        const bodyCenterY = (dynamicOpen + dynamicClose) / 2
+        c.bodyMesh.material = isGreen ? greenMat : redMat
+        c.wickMesh.material = isGreen ? greenMat : redMat
+
+        const bodyHeight = Math.max(Math.abs(close - c.baseOpen), 0.1)
+        const bodyCenterY = (close + c.baseOpen) / 2
         c.bodyMesh.position.y = bodyCenterY
         c.bodyMesh.scale.y = bodyHeight
 
-        const high = Math.max(dynamicOpen, dynamicClose) + 0.14 + Math.sin(elapsed * 2 + idx) * 0.03
-        const low = Math.min(dynamicOpen, dynamicClose) - 0.14 - Math.cos(elapsed * 2 + idx) * 0.03
         const wickHeight = Math.max(high - low, 0.15)
         const wickCenterY = (high + low) / 2
         c.wickMesh.position.y = wickCenterY
@@ -386,13 +400,31 @@ export default function StockChartModel() {
 
     return () => {
       cancelAnimationFrame(reqId)
+      observer.disconnect()
       window.removeEventListener("resize", handleResize)
       container.removeEventListener("mousemove", handleMouseMove)
       container.removeEventListener("touchmove", handleTouchMove)
+
+      scene.traverse((object: any) => {
+        if (object.geometry) object.geometry.dispose()
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach((mat: any) => {
+              if (mat.map) mat.map.dispose()
+              mat.dispose()
+            })
+          } else {
+            if (object.material.map) object.material.map.dispose()
+            object.material.dispose()
+          }
+        }
+      })
+
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement)
       }
       renderer.dispose()
+      renderer.forceContextLoss()
     }
   }, [])
 

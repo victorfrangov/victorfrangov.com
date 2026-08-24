@@ -351,7 +351,7 @@ export default function NavBar() {
                 isOpen ? "translate-y-0" : "-translate-y-[120%]"
               }`}
             >
-              {panel.href === "#about-me" && (
+              {isOpen && panel.href === "#about-me" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
                     src="/hello.webm"
@@ -365,7 +365,7 @@ export default function NavBar() {
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
-              {panel.href === "#expertise" && (
+              {isOpen && panel.href === "#expertise" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
                     src="/interstellar.webm"
@@ -379,7 +379,7 @@ export default function NavBar() {
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
-              {panel.href === "#projects" && (
+              {isOpen && panel.href === "#projects" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
                     src="/tonystark.webm"
@@ -393,7 +393,7 @@ export default function NavBar() {
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
               )}
-              {panel.href === "#contact" && (
+              {isOpen && panel.href === "#contact" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
                     src="/jamesbond.webm"

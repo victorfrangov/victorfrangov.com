@@ -226,8 +226,19 @@ export default function SitusModel() {
     }
     container.addEventListener("touchmove", handleTouchMove, { passive: true })
 
+    let isVisible = false
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+      },
+      { threshold: 0.05 }
+    )
+    observer.observe(container)
+
     const animate = () => {
       reqId = requestAnimationFrame(animate)
+      if (!isVisible) return
+
       const elapsed = clock.getElapsedTime()
 
       // Smooth rotation lerp
@@ -282,13 +293,31 @@ export default function SitusModel() {
 
     return () => {
       cancelAnimationFrame(reqId)
+      observer.disconnect()
       window.removeEventListener("resize", handleResize)
       container.removeEventListener("mousemove", handleMouseMove)
       container.removeEventListener("touchmove", handleTouchMove)
+
+      scene.traverse((object: any) => {
+        if (object.geometry) object.geometry.dispose()
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach((mat: any) => {
+              if (mat.map) mat.map.dispose()
+              mat.dispose()
+            })
+          } else {
+            if (object.material.map) object.material.map.dispose()
+            object.material.dispose()
+          }
+        }
+      })
+
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement)
       }
       renderer.dispose()
+      renderer.forceContextLoss()
     }
   }, [])
 
