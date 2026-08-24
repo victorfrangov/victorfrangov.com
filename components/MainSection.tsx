@@ -92,9 +92,9 @@ export default function MainSection() {
 
         {/* Main Hero Typography - Tight, bold, pure Swiss Grotesque */}
         <div className="space-y-2 sm:space-y-4">
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-[-0.045em] leading-[0.88] uppercase">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7.2vw] 2xl:text-[7.4rem] font-extrabold tracking-[-0.045em] leading-[0.88] uppercase">
             <div>{t("main.hero.title.line1")}</div>
-            <div className="flex flex-wrap items-baseline gap-x-4">
+            <div className="flex flex-wrap items-baseline gap-x-3 sm:gap-x-4">
               <span className="italic font-light lowercase font-serif">{t("main.hero.title.emphasis")}</span>
               <span>{t("main.hero.title.line2")}</span>
             </div>
