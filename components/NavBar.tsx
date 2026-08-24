@@ -351,6 +351,20 @@ export default function NavBar() {
                 isOpen ? "translate-y-0" : "-translate-y-[120%]"
               }`}
             >
+              {isOpen && panel.href === "#main" && (
+                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                  <video
+                    src="/rum.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+                </div>
+              )}
               {isOpen && panel.href === "#about-me" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
