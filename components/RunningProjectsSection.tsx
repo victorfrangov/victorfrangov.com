@@ -1,14 +1,16 @@
 "use client"
 
 import React, { useState } from "react"
+import dynamic from "next/dynamic"
 import { useTranslations } from "next-intl"
 import ProjectCard from "./project-card"
-import PapagalModel from "./3d/PapagalModel"
-import Esp32Model from "./3d/Esp32Model"
-import PongModel from "./3d/PongModel"
-import FluidSimModel from "./3d/FluidSimModel"
-import StockChartModel from "./3d/StockChartModel"
-import SitusModel from "./3d/SitusModel"
+
+const PapagalModel = dynamic(() => import("./3d/PapagalModel"), { ssr: false })
+const Esp32Model = dynamic(() => import("./3d/Esp32Model"), { ssr: false })
+const PongModel = dynamic(() => import("./3d/PongModel"), { ssr: false })
+const FluidSimModel = dynamic(() => import("./3d/FluidSimModel"), { ssr: false })
+const StockChartModel = dynamic(() => import("./3d/StockChartModel"), { ssr: false })
+const SitusModel = dynamic(() => import("./3d/SitusModel"), { ssr: false })
 
 type ProjectCategory = "all" | "web" | "systems" | "embedded"
 

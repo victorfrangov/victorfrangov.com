@@ -5,12 +5,27 @@ import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import SmoothScroll from "@/components/SmoothScroll";
+import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans-fallback",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-mono-fallback",
+  display: "swap",
+});
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const locale = "en"; // root uses default; actual pages will be generated per-locale by Next with i18n
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className={`${plusJakartaSans.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased bg-background text-foreground selection:bg-foreground selection:text-background">
         <ThemeProvider
           attribute="class"

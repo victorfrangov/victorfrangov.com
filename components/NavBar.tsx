@@ -350,6 +350,7 @@ export default function NavBar() {
         }`}
         role="dialog"
         aria-modal="true"
+        aria-label="Navigation menu"
       >
         {/* Top: 5 Brutalist Contiguous Rectangles with smooth physical Slide-Down & Swipe-Up animation */}
         <div className="w-full grid grid-cols-5 gap-0 items-start border-b border-foreground/20 relative z-10">
