@@ -360,7 +360,11 @@ export default function NavBar() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
+                    onEnded={(e) => {
+                      e.currentTarget.currentTime = 0
+                      e.currentTarget.play().catch(() => {})
+                    }}
+                    className="w-full h-full object-cover object-[35%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
                   <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
                 </div>
