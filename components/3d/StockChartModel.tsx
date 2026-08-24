@@ -12,7 +12,6 @@ export default function StockChartModel() {
 
     // Scene setup with transparent background
     const scene = new THREE.Scene()
-
     const width = container.clientWidth || 600
     const height = container.clientHeight || 375
 
