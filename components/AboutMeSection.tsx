@@ -32,9 +32,9 @@ export default function AboutMeSection() {
             {t("title.line1")} {t("title.line2")}.
           </h2>
 
-          <div className="grid sm:grid-cols-3 gap-8 pt-8 border-t border-foreground/10">
-            <div className="space-y-1">
-              <div className="text-4xl sm:text-6xl font-extrabold font-mono tracking-tighter text-foreground">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 pt-12 sm:pt-8 pb-4 sm:pb-0 border-t border-foreground/10 text-center sm:text-left">
+            <div className="space-y-2 sm:space-y-1 flex flex-col items-center sm:items-start">
+              <div className="text-5xl sm:text-6xl font-extrabold font-mono tracking-tighter text-foreground">
                 {t("metrics.yearsValue")}
               </div>
               <div className="text-xs font-mono text-foreground/60 uppercase tracking-wider">
@@ -42,8 +42,8 @@ export default function AboutMeSection() {
               </div>
             </div>
 
-            <div className="space-y-1">
-              <div className="text-4xl sm:text-6xl font-extrabold font-mono tracking-tighter text-foreground">
+            <div className="space-y-2 sm:space-y-1 flex flex-col items-center sm:items-start">
+              <div className="text-5xl sm:text-6xl font-extrabold font-mono tracking-tighter text-foreground">
                 {t("metrics.projectsValue")}
               </div>
               <div className="text-xs font-mono text-foreground/60 uppercase tracking-wider">
@@ -51,9 +51,9 @@ export default function AboutMeSection() {
               </div>
             </div>
 
-            <div className="space-y-1">
-              <div className="h-[40px] sm:h-[60px] flex items-center">
-                <EpflLogo className="h-8 sm:h-12 w-auto" />
+            <div className="space-y-2 sm:space-y-1 flex flex-col items-center sm:items-start">
+              <div className="h-[50px] sm:h-[60px] flex items-center justify-center sm:justify-start">
+                <EpflLogo className="h-10 sm:h-12 w-auto" />
               </div>
               <div className="text-xs font-mono text-foreground/60 uppercase tracking-wider">
                 {t("metrics.role")}
