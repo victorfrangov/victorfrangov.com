@@ -188,6 +188,7 @@ html.lenis, html.lenis body {
   font-family: "Serif Italic";
   src: local("Times New Roman Italic"), local("Georgia Italic");
   font-style: italic;
+  font-display: swap;
 }
 
 /* Animations */

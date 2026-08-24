@@ -1,39 +1,28 @@
 "use client"
 
 import Link from "next/link"
-import { useTranslations, useLocale } from "next-intl"
+import { useTranslations } from "next-intl"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { ArrowDown, ArrowUpRight } from "lucide-react"
 import { MontrealLogo } from "./MontrealLogo"
 import { SwissCross } from "./SwissCross"
 
 export default function NavBar() {
   const t = useTranslations()
-  const locale = useLocale()
   const [isOpen, setIsOpen] = useState(false)
-  const [renderVideos, setRenderVideos] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const [isFading, setIsFading] = useState(false)
   const [fadeVisible, setFadeVisible] = useState(false)
   const [mtlTime, setMtlTime] = useState("")
   const [lsnTime, setLsnTime] = useState("")
   const currentYear = new Date().getFullYear()
-  const lastScrollY = useRef(0)
 
-  // Keep videos active while menu is open and during the full slide-up closing transition
+  // Pre-warm client mounting for instant zero-lag menu opening
   useEffect(() => {
-    let timeout: NodeJS.Timeout
-    if (isOpen) {
-      setRenderVideos(true)
-    } else {
-      timeout = setTimeout(() => {
-        setRenderVideos(false)
-      }, 1500)
-    }
-    return () => clearTimeout(timeout)
-  }, [isOpen])
+    setMounted(true)
+  }, [])
 
   // Track live city clocks
   useEffect(() => {
@@ -60,23 +49,6 @@ export default function NavBar() {
     updateClocks()
     const interval = setInterval(updateClocks, 1000)
     return () => clearInterval(interval)
-  }, [])
-
-  // Track scroll position to reveal the MENU button when scrolled past top
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScroll = window.scrollY
-      if (currentScroll > 40) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
-      lastScrollY.current = currentScroll
-    }
-
-    handleScroll()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   // When menu is open, lock page scroll and intercept any scroll (UP or DOWN) to only close menu without scrolling the page
@@ -163,7 +135,7 @@ export default function NavBar() {
         const target = document.querySelector(href) as HTMLElement | null
         if (target) {
           if (typeof window !== "undefined" && (window as any).__lenis) {
-            ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: 0 })
+            ; (window as any).__lenis.scrollTo(target, { immediate: true, offset: 0 })
           } else {
             const y = target.getBoundingClientRect().top + window.scrollY
             window.scrollTo({ top: y, behavior: "instant" as any })
@@ -191,14 +163,14 @@ export default function NavBar() {
       document.body.style.overflow = ""
       window.dispatchEvent(new CustomEvent("lenis:start"))
       if (typeof window !== "undefined" && (window as any).__lenis) {
-        ;(window as any).__lenis.start()
+        ; (window as any).__lenis.start()
       }
 
       // 2. Jump to the target section
       const target = document.querySelector(href) as HTMLElement | null
       if (target) {
         if (typeof window !== "undefined" && (window as any).__lenis) {
-          ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: 0, force: true })
+          ; (window as any).__lenis.scrollTo(target, { immediate: true, offset: 0, force: true })
         } else {
           const y = target.getBoundingClientRect().top + window.scrollY
           window.scrollTo({ top: y, behavior: "instant" as any })
@@ -224,9 +196,8 @@ export default function NavBar() {
       {/* Full Page Transition Overlay with Victor Frangov Wordmark at bottom */}
       {isFading && (
         <div
-          className={`fixed inset-0 z-[100] bg-background flex flex-col justify-end pointer-events-auto transition-opacity duration-350 ease-in-out ${
-            fadeVisible ? "opacity-100" : "opacity-0"
-          }`}
+          className={`fixed inset-0 z-[100] bg-background flex flex-col justify-end pointer-events-auto transition-opacity duration-350 ease-in-out ${fadeVisible ? "opacity-100" : "opacity-0"
+            }`}
           aria-hidden="true"
         >
           <div className="w-full overflow-hidden select-none px-4 sm:px-8 pb-3 pt-1 flex items-end justify-center">
@@ -248,11 +219,10 @@ export default function NavBar() {
 
       {/* 3. Full-Screen Brutalist Slide-Down Overlay */}
       <div
-        className={`fixed inset-0 z-50 bg-background/95 backdrop-blur-2xl flex flex-col justify-between p-0 transition-all ${
-          isOpen
-            ? "opacity-100 pointer-events-auto duration-500 delay-0"
-            : "opacity-0 pointer-events-none duration-700 delay-700"
-        }`}
+        className={`fixed inset-0 z-50 bg-background/98 backdrop-blur-md flex flex-col justify-between p-0 transition-all ${isOpen
+          ? "opacity-100 pointer-events-auto duration-500 delay-0"
+          : "opacity-0 pointer-events-none duration-700 delay-700"
+          }`}
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
@@ -272,146 +242,145 @@ export default function NavBar() {
                 href={panel.href}
                 onClick={(e) => handlePanelClick(e, panel.href)}
                 style={{
-                  transitionDelay: isOpen ? `${idx * 90}ms` : `${(4 - idx) * 60}ms`,
+                  transitionDelay: isOpen ? `${idx * 80}ms` : `${(4 - idx) * 50}ms`,
                 }}
-                className={`group relative overflow-hidden flex flex-row md:flex-col items-center md:items-stretch justify-between px-5 py-3.5 sm:px-6 sm:py-4 md:p-6 lg:p-8 h-[9vh] sm:h-[10.5vh] ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-b md:border-b-0 md:border-r border-foreground/20 rounded-none shadow-none transition-all duration-[900ms] md:duration-[1300ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${
-                  isOpen
-                    ? "translate-x-0 opacity-100 md:translate-y-0"
-                    : "-translate-x-full opacity-0 md:opacity-100 md:translate-x-0 md:-translate-y-[120%]"
-                }`}
+                className={`group relative overflow-hidden flex flex-row md:flex-col items-center md:items-stretch justify-between px-5 py-3.5 sm:px-6 sm:py-4 md:p-6 lg:p-8 h-[9vh] sm:h-[10.5vh] ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-b md:border-b-0 md:border-r border-foreground/20 rounded-none shadow-none will-change-transform transform-gpu transition-all duration-[800ms] md:duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${isOpen
+                  ? "translate-x-0 opacity-100 md:translate-y-0"
+                  : "-translate-x-full opacity-0 md:opacity-100 md:translate-x-0 md:-translate-y-[120%]"
+                  }`}
               >
-              {renderVideos && panel.href === "#main" && (
-                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                  <video
-                    src="/rum.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover object-[56%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
-                </div>
-              )}
-              {renderVideos && panel.href === "#about-me" && (
-                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                  <video
-                    src="/hello.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
-                </div>
-              )}
-              {renderVideos && panel.href === "#expertise" && (
-                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                  <video
-                    src="/interstellar.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
-                </div>
-              )}
-              {renderVideos && panel.href === "#projects" && (
-                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                  <video
-                    src="/tonystark.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover object-[70%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
-                </div>
-              )}
-              {renderVideos && panel.href === "#contact" && (
-                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                  <video
-                    src="/jamesbond.webm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
-                </div>
-              )}
+                {mounted && panel.href === "#main" && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                    <video
+                      src="/rum.webm"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
+                      className="w-full h-full object-cover object-[56%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
+                  </div>
+                )}
+                {mounted && panel.href === "#about-me" && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                    <video
+                      src="/hello.webm"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
+                      className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
+                  </div>
+                )}
+                {mounted && panel.href === "#expertise" && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                    <video
+                      src="/interstellar.webm"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
+                      className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
+                  </div>
+                )}
+                {mounted && panel.href === "#projects" && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                    <video
+                      src="/tonystark.webm"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
+                      className="w-full h-full object-cover object-[70%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
+                  </div>
+                )}
+                {mounted && panel.href === "#contact" && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                    <video
+                      src="/jamesbond.webm"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="auto"
+                      className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
+                  </div>
+                )}
 
-              {/* Number index badge on left/top */}
-              <div className="relative z-10 flex items-center md:items-start">
-                <span className="text-xs font-mono opacity-60 text-white md:block">
-                  0{panel.num}
-                </span>
-              </div>
+                {/* Number index badge on left/top */}
+                <div className="relative z-10 flex items-center md:items-start">
+                  <span className="text-xs font-mono opacity-60 text-white md:block">
+                    0{panel.num}
+                  </span>
+                </div>
 
-              {/* Section Title & Arrow Indicator */}
-              <div className="space-y-0.5 md:space-y-1 relative z-10 flex items-center md:block gap-3">
-                <span className="block text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform duration-200">
-                  {panel.label}
-                </span>
-                <span className="text-[10px] sm:text-xs font-mono text-white/70 flex items-center gap-1 opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="hidden md:inline">Jump</span>
-                  <ArrowDown className="w-3 h-3 hidden md:inline" />
-                  <ArrowUpRight className="w-3.5 h-3.5 md:hidden text-white/80" />
-                </span>
-              </div>
-            </Link>
-          ))}
+                {/* Section Title & Arrow Indicator */}
+                <div className="space-y-0.5 md:space-y-1 relative z-10 flex items-center md:block gap-3">
+                  <span className="block text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform duration-200">
+                    {panel.label}
+                  </span>
+                  <span className="text-[10px] sm:text-xs font-mono text-white/70 flex items-center gap-1 opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="hidden md:inline">Jump</span>
+                    <ArrowDown className="w-3 h-3 hidden md:inline" />
+                    <ArrowUpRight className="w-3.5 h-3.5 md:hidden text-white/80" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
 
-        {/* Middle: Interactive Utility Bar (Spaced cleanly on mobile and desktop) */}
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-8 py-3 sm:py-4 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 text-xs font-mono relative z-20 border-t border-foreground/10">
+        {/* Middle: Interactive Utility Bar (Bigger typography, clocks & toggles) */}
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-8 py-4 sm:py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 text-sm sm:text-base font-mono relative z-20 border-t border-foreground/15">
           {/* Status & Clocks */}
-          <div className="flex flex-wrap items-center justify-between md:justify-start gap-3 sm:gap-4 text-foreground/70">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-foreground/90 font-medium">
+          <div className="flex flex-wrap items-center justify-between md:justify-start gap-4 sm:gap-6 text-foreground/80">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-foreground font-semibold text-sm sm:text-base">
                 {t("nav.availableForProjects")}
               </span>
             </div>
-            <span className="opacity-30 hidden sm:inline">/</span>
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-1.5">
-                <MontrealLogo className="w-3.5 h-3.5 inline-block shrink-0" />
-                <span className="font-bold text-foreground">{mtlTime || "--:--"}</span>
+            <span className="opacity-30 hidden sm:inline text-base">/</span>
+            <div className="flex items-center gap-4">
+              <span className="inline-flex items-center gap-2">
+                <MontrealLogo className="w-5 h-5 inline-block shrink-0" />
+                <span className="font-bold text-foreground text-sm sm:text-base">{mtlTime || "--:--"}</span>
               </span>
               <span className="opacity-40">·</span>
-              <span className="inline-flex items-center gap-1.5">
-                <SwissCross className="w-3.5 h-3.5 inline-block shrink-0" />
-                <span className="font-bold text-foreground">{lsnTime || "--:--"}</span>
+              <span className="inline-flex items-center gap-2">
+                <SwissCross className="w-5 h-5 inline-block shrink-0" />
+                <span className="font-bold text-foreground text-sm sm:text-base">{lsnTime || "--:--"}</span>
               </span>
             </div>
           </div>
 
           {/* Language Switcher, Theme Toggler & Let's Talk */}
-          <div className="flex items-center justify-between md:justify-end gap-3 sm:gap-4 pt-1 md:pt-0 border-t border-foreground/5 md:border-t-0">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <LanguageSwitcher />
-              <AnimatedThemeToggler />
+          <div className="flex items-center justify-between md:justify-end gap-3 sm:gap-5 pt-2 md:pt-0 border-t border-foreground/10 md:border-t-0">
+            <div className="flex items-center gap-2.5 sm:gap-3.5">
+              <LanguageSwitcher className="text-sm sm:text-base" buttonClassName="px-3.5 py-1" />
+              <AnimatedThemeToggler className="p-2 sm:p-2.5 rounded-full border border-foreground/30 hover:bg-foreground/10 transition-colors flex items-center justify-center [&_svg]:w-5 [&_svg]:h-5" />
             </div>
 
             <Link
               href="#contact"
               onClick={(e) => handlePanelClick(e, "#contact")}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-foreground/40 bg-background hover:bg-foreground hover:text-background text-xs font-mono uppercase tracking-tight transition-all duration-200 shadow-sm"
+              className="inline-flex items-center gap-2 px-5 sm:px-6 py-2 sm:py-2.5 rounded-full border border-foreground/40 bg-background hover:bg-foreground hover:text-background text-sm sm:text-base font-mono uppercase font-bold tracking-tight transition-all duration-200 shadow-sm"
             >
               <span>{t("nav.letsTalk")}</span>
-              <ArrowUpRight className="w-3 h-3" />
+              <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

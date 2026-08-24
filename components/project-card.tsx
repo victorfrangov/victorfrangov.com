@@ -30,33 +30,46 @@ export default function ProjectCard({
   customComponent,
   links,
 }: Props) {
+  const cardRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [isInView, setIsInView] = React.useState(false)
+  const [isMobileActive, setIsMobileActive] = React.useState(false)
+
   const isVideo =
     !!image &&
     (image.toLowerCase().endsWith(".webm") ||
       image.toLowerCase().endsWith(".mp4"))
 
   useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
+    const card = cardRef.current
+    if (!card) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => {})
+          setIsInView(true)
+          if (videoRef.current) {
+            videoRef.current.play().catch(() => {})
+          }
         } else {
-          video.pause()
+          if (videoRef.current) {
+            videoRef.current.pause()
+          }
         }
       },
-      { threshold: 0.05 }
+      { rootMargin: "300px", threshold: 0.01 }
     )
 
-    observer.observe(video)
+    observer.observe(card)
     return () => observer.disconnect()
   }, [])
 
   return (
-    <article className="group relative w-full h-[50vh] sm:h-[52vh] md:h-[50vh] min-h-[400px] overflow-hidden border-b md:border-r border-foreground/20 bg-background select-none">
+    <article
+      ref={cardRef}
+      onClick={() => setIsMobileActive((prev) => !prev)}
+      className="group relative w-full h-[50vh] sm:h-[52vh] md:h-[50vh] min-h-[400px] overflow-hidden border-b md:border-r border-foreground/20 bg-background select-none cursor-pointer"
+    >
       {/* 1. Default Visual Canvas (Image / Video + 3D Model with pointer-events-none) */}
       <div className="absolute inset-0 w-full h-full overflow-hidden bg-foreground/[0.02] flex items-center justify-center">
         {image &&
@@ -84,16 +97,22 @@ export default function ProjectCard({
             />
           ))}
 
-        {/* 3D Model: Pointer events disabled so mouse passes directly through */}
-        {customComponent && (
+        {/* 3D Model: Pointer events disabled so mouse passes directly through, mounted only when in viewport */}
+        {customComponent && isInView && (
           <div className="absolute inset-0 z-10 pointer-events-none">
             {customComponent}
           </div>
         )}
       </div>
 
-      {/* 2. Hover State: Color Flip & Full Information Overlay */}
-      <div className="absolute inset-0 z-30 bg-foreground text-background p-6 sm:p-8 md:p-10 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none group-hover:pointer-events-auto">
+      {/* 2. Hover / Tap State: Color Flip & Full Information Overlay */}
+      <div
+        className={`absolute inset-0 z-30 bg-foreground text-background p-6 sm:p-8 md:p-10 flex flex-col justify-between transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isMobileActive
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
+        }`}
+      >
         {/* Top: Index & Dates */}
         <div className="flex items-center justify-between font-mono text-xs text-background/60 uppercase tracking-widest">
           <span className="font-bold">{index}</span>
@@ -133,6 +152,7 @@ export default function ProjectCard({
                 key={idx}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-background bg-background text-foreground hover:bg-transparent hover:text-background text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-200 shadow-sm"
               >
                 <span>{link.type}</span>

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React from "react"
 import dynamic from "next/dynamic"
 import { useTranslations } from "next-intl"
 import ProjectCard from "./project-card"
@@ -12,13 +12,11 @@ const FluidSimModel = dynamic(() => import("./3d/FluidSimModel"), { ssr: false }
 const StockChartModel = dynamic(() => import("./3d/StockChartModel"), { ssr: false })
 const SitusModel = dynamic(() => import("./3d/SitusModel"), { ssr: false })
 
-type ProjectCategory = "all" | "web" | "systems" | "embedded"
-
 type ProjectLinkKey = "website" | "sourceCode"
 
 type Project = {
   slug: string
-  category: ProjectCategory
+  category: "web" | "systems" | "embedded"
   image?: string
   tags: readonly string[]
   links: readonly { key: ProjectLinkKey; href: string }[]
@@ -83,12 +81,6 @@ const PROJECTS: Project[] = [
 
 export default function RunningProjectsSection() {
   const t = useTranslations()
-  const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all")
-
-  const filteredProjects = PROJECTS.filter((p) => {
-    if (activeFilter === "all") return true
-    return p.category === activeFilter
-  })
 
   return (
     <section
@@ -114,7 +106,7 @@ export default function RunningProjectsSection() {
 
       {/* 2-Column Full-Bleed Flush Brutalist Works Grid (Zero gap, zero padding) */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-l border-foreground/20">
-        {filteredProjects.map((p, idx) => {
+        {PROJECTS.map((p, idx) => {
           const indexFormatted = `( ${String(idx + 1).padStart(2, "0")} )`
           const title = t(`projects.${p.slug}.title`)
           const dates = t(`projects.${p.slug}.dates`)
