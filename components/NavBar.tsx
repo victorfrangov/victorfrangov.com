@@ -91,7 +91,7 @@ export default function NavBar() {
       const handleWheel = (e: WheelEvent) => {
         e.preventDefault()
         e.stopPropagation()
-        if (!isClosing && Math.abs(e.deltaY) > 3) {
+        if (!isClosing && Math.abs(e.deltaY) > 6) {
           isClosing = true
           setIsOpen(false)
         }
@@ -103,10 +103,8 @@ export default function NavBar() {
       }
 
       const handleTouchMove = (e: TouchEvent) => {
-        e.preventDefault()
-        e.stopPropagation()
         const touchDelta = touchStartY - e.touches[0].clientY
-        if (!isClosing && Math.abs(touchDelta) > 5) {
+        if (!isClosing && Math.abs(touchDelta) > 30) {
           isClosing = true
           setIsOpen(false)
         }
@@ -114,7 +112,7 @@ export default function NavBar() {
 
       window.addEventListener("wheel", handleWheel, { passive: false })
       window.addEventListener("touchstart", handleTouchStart, { passive: true })
-      window.addEventListener("touchmove", handleTouchMove, { passive: false })
+      window.addEventListener("touchmove", handleTouchMove, { passive: true })
 
       return () => {
         window.removeEventListener("wheel", handleWheel)
@@ -122,14 +120,9 @@ export default function NavBar() {
         window.removeEventListener("touchmove", handleTouchMove)
       }
     } else {
-      // Menu just closed: keep scroll locked until the 1300ms + stagger slide-up animation completes
-      const unlockTimer = setTimeout(() => {
-        window.dispatchEvent(new CustomEvent("lenis:start"))
-        document.documentElement.style.overflow = ""
-        document.body.style.overflow = ""
-      }, 1600)
-
-      return () => clearTimeout(unlockTimer)
+      window.dispatchEvent(new CustomEvent("lenis:start"))
+      document.documentElement.style.overflow = ""
+      document.body.style.overflow = ""
     }
   }, [isOpen])
 
@@ -201,27 +194,29 @@ export default function NavBar() {
         ;(window as any).__lenis.start()
       }
 
-      // 2. Jump instantly to the section in the background underneath the open menu
+      // 2. Jump to the target section
       const target = document.querySelector(href) as HTMLElement | null
       if (target) {
-        target.scrollIntoView({ behavior: "instant" as any, block: "start" })
         if (typeof window !== "undefined" && (window as any).__lenis) {
           ;(window as any).__lenis.scrollTo(target, { immediate: true, offset: 0, force: true })
+        } else {
+          const y = target.getBoundingClientRect().top + window.scrollY
+          window.scrollTo({ top: y, behavior: "instant" as any })
         }
       }
 
-      // 3. Trigger the hamburger menu rectangles to scroll back up
+      // 3. Trigger the hamburger menu to close
       setIsOpen(false)
     }
   }
 
-  // 5 Brutalist Navigation Panels (Cascading heights, flush zero-gap grid)
+  // 5 Brutalist Navigation Panels (Cascading heights on desktop, horizontal bars on mobile)
   const navPanels = [
-    { href: "#main", num: 1, label: t("nav.overview"), heightClass: "h-[54vh] sm:h-[60vh]" },
-    { href: "#about-me", num: 2, label: t("nav.aboutMe"), heightClass: "h-[48vh] sm:h-[54vh]" },
-    { href: "#expertise", num: 3, label: t("nav.expertise"), heightClass: "h-[42vh] sm:h-[48vh]" },
-    { href: "#projects", num: 4, label: t("nav.projects"), heightClass: "h-[36vh] sm:h-[42vh]" },
-    { href: "#contact", num: 5, label: t("nav.contact"), heightClass: "h-[30vh] sm:h-[36vh]" },
+    { href: "#main", num: 1, label: t("nav.overview"), heightClass: "md:h-[54vh] lg:h-[60vh]" },
+    { href: "#about-me", num: 2, label: t("nav.aboutMe"), heightClass: "md:h-[48vh] lg:h-[54vh]" },
+    { href: "#expertise", num: 3, label: t("nav.expertise"), heightClass: "md:h-[42vh] lg:h-[48vh]" },
+    { href: "#projects", num: 4, label: t("nav.projects"), heightClass: "md:h-[36vh] lg:h-[42vh]" },
+    { href: "#contact", num: 5, label: t("nav.contact"), heightClass: "md:h-[30vh] lg:h-[36vh]" },
   ]
 
   return (
@@ -242,7 +237,7 @@ export default function NavBar() {
         </div>
       )}
 
-      {/* 1. Plain Text MENU / CLOSE Button in Total Top-Right Corner (mix-blend-difference ensures white on black, black on white) */}
+      {/* 1. Plain Text MENU / CLOSE Button in Total Top-Right Corner */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-4 right-4 sm:top-6 sm:right-8 z-[60] text-xs sm:text-sm font-mono uppercase tracking-widest font-bold mix-blend-difference text-white hover:opacity-70 transition-all duration-500 select-none cursor-pointer bg-transparent border-0 p-0 shadow-none opacity-100 pointer-events-auto translate-y-0"
@@ -262,20 +257,29 @@ export default function NavBar() {
         aria-modal="true"
         aria-label="Navigation menu"
       >
-        {/* Top: 5 Brutalist Contiguous Rectangles with smooth physical Slide-Down & Swipe-Up animation */}
-        <div className="w-full grid grid-cols-5 gap-0 items-start border-b border-foreground/20 relative z-10">
-          {navPanels.map((panel, idx) => (
-            <Link
-              key={panel.num}
-              href={panel.href}
-              onClick={(e) => handlePanelClick(e, panel.href)}
-              style={{
-                transitionDelay: isOpen ? `${idx * 110}ms` : `${(4 - idx) * 75}ms`,
-              }}
-              className={`group relative overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-r border-b border-foreground/20 rounded-none shadow-none transition-all duration-[1300ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${
-                isOpen ? "translate-y-0" : "-translate-y-[120%]"
-              }`}
-            >
+        {/* Top Wrapper: Compact top safe area for FERMER + 5 Panels grouped together with zero black gap */}
+        <div className="w-full flex flex-col relative z-10">
+          {/* Mobile Top Row: Gives FERMER its own dedicated row, no left logo */}
+          <div className="w-full flex md:hidden items-center justify-end px-4 pt-3.5 pb-2">
+            <div className="w-16 h-5" />
+          </div>
+
+          {/* 5 Brutalist Panels (Horizontal stacked on mobile, Vertical cascading on desktop) */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-5 gap-0 items-stretch md:items-start border-b border-foreground/20">
+            {navPanels.map((panel, idx) => (
+              <Link
+                key={panel.num}
+                href={panel.href}
+                onClick={(e) => handlePanelClick(e, panel.href)}
+                style={{
+                  transitionDelay: isOpen ? `${idx * 90}ms` : `${(4 - idx) * 60}ms`,
+                }}
+                className={`group relative overflow-hidden flex flex-row md:flex-col items-center md:items-stretch justify-between px-5 py-3.5 sm:px-6 sm:py-4 md:p-6 lg:p-8 h-[9vh] sm:h-[10.5vh] ${panel.heightClass} bg-neutral-300 dark:bg-neutral-800 text-foreground border-b md:border-b-0 md:border-r border-foreground/20 rounded-none shadow-none transition-all duration-[900ms] md:duration-[1300ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-neutral-400/90 dark:hover:bg-neutral-700/90 select-none cursor-pointer transform ${
+                  isOpen
+                    ? "translate-x-0 opacity-100 md:translate-y-0"
+                    : "-translate-x-full opacity-0 md:opacity-100 md:translate-x-0 md:-translate-y-[120%]"
+                }`}
+              >
               {renderVideos && panel.href === "#main" && (
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                   <video
@@ -287,7 +291,7 @@ export default function NavBar() {
                     preload="auto"
                     className="w-full h-full object-cover object-[56%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
                 </div>
               )}
               {renderVideos && panel.href === "#about-me" && (
@@ -301,7 +305,7 @@ export default function NavBar() {
                     preload="auto"
                     className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
                 </div>
               )}
               {renderVideos && panel.href === "#expertise" && (
@@ -315,7 +319,7 @@ export default function NavBar() {
                     preload="auto"
                     className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
                 </div>
               )}
               {renderVideos && panel.href === "#projects" && (
@@ -329,7 +333,7 @@ export default function NavBar() {
                     preload="auto"
                     className="w-full h-full object-cover object-[70%_center] scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
                 </div>
               )}
               {renderVideos && panel.href === "#contact" && (
@@ -343,37 +347,44 @@ export default function NavBar() {
                     preload="auto"
                     className="w-full h-full object-cover scale-[1.02] group-hover:opacity-95 transition-opacity duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+                  <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
                 </div>
               )}
 
-              <div className="relative z-10" />
+              {/* Number index badge on left/top */}
+              <div className="relative z-10 flex items-center md:items-start">
+                <span className="text-xs font-mono opacity-60 text-white md:block">
+                  0{panel.num}
+                </span>
+              </div>
 
-              {/* Bottom: Big Section Title */}
-              <div className="space-y-1 relative z-10">
-                <span className="block text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform duration-200">
+              {/* Section Title & Arrow Indicator */}
+              <div className="space-y-0.5 md:space-y-1 relative z-10 flex items-center md:block gap-3">
+                <span className="block text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform duration-200">
                   {panel.label}
                 </span>
-                <span className="text-[10px] sm:text-xs font-mono text-white/70 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span>Jump</span>
-                  <ArrowDown className="w-3 h-3" />
+                <span className="text-[10px] sm:text-xs font-mono text-white/70 flex items-center gap-1 opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="hidden md:inline">Jump</span>
+                  <ArrowDown className="w-3 h-3 hidden md:inline" />
+                  <ArrowUpRight className="w-3.5 h-3.5 md:hidden text-white/80" />
                 </span>
               </div>
             </Link>
           ))}
         </div>
+      </div>
 
-        {/* Middle: Interactive Utility Bar (Placed cleanly right above the bottom name for 100% clickability) */}
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-4 text-xs font-mono relative z-20 border-t border-foreground/10">
+        {/* Middle: Interactive Utility Bar (Spaced cleanly on mobile and desktop) */}
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-8 py-3 sm:py-4 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 text-xs font-mono relative z-20 border-t border-foreground/10">
           {/* Status & Clocks */}
-          <div className="flex items-center gap-4 text-foreground/70">
+          <div className="flex flex-wrap items-center justify-between md:justify-start gap-3 sm:gap-4 text-foreground/70">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-foreground/90 font-medium">
                 {t("nav.availableForProjects")}
               </span>
             </div>
-            <span className="opacity-30">/</span>
+            <span className="opacity-30 hidden sm:inline">/</span>
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-1.5">
                 <MontrealLogo className="w-3.5 h-3.5 inline-block shrink-0" />
@@ -388,9 +399,11 @@ export default function NavBar() {
           </div>
 
           {/* Language Switcher, Theme Toggler & Let's Talk */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            <LanguageSwitcher />
-            <AnimatedThemeToggler />
+          <div className="flex items-center justify-between md:justify-end gap-3 sm:gap-4 pt-1 md:pt-0 border-t border-foreground/5 md:border-t-0">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <LanguageSwitcher />
+              <AnimatedThemeToggler />
+            </div>
 
             <Link
               href="#contact"
