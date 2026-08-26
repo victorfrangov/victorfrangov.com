@@ -15,37 +15,26 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function CvPage() {
   return (
     <div className="min-h-screen bg-[#fbfbfd] text-[#111115] flex flex-col justify-between p-6 sm:p-10 relative selection:bg-[#111115] selection:text-white font-sans">
-      {/* Subtle background dot grid pattern */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: "radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px)",
-          backgroundSize: "32px 32px"
-        }}
-      />
-
-      {/* Top Left Navigation Button */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex justify-start">
-        <Link
-          href="https://victorfrangov.com"
-          className="group inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-black/10 rounded-full text-sm font-semibold tracking-tight shadow-sm hover:border-black/25 hover:shadow-md transition-all duration-200 hover:-translate-x-0.5"
-          aria-label="Return to victorfrangov.com"
+      {/* Top Left Navigation Link */}
+      <Link
+        href="https://victorfrangov.com"
+        className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20 inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider text-[#111115] hover:opacity-60 transition-opacity"
+        aria-label="Return to victorfrangov.com"
+      >
+        <svg
+          className="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          <svg
-            className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="19" y1="12" x2="5" y2="12" />
-            <polyline points="12 19 5 12 12 5" />
-          </svg>
-          victorfrangov.com
-        </Link>
-      </div>
+          <line x1="19" y1="12" x2="5" y2="12" />
+          <polyline points="12 19 5 12 12 5" />
+        </svg>
+        VICTORFRANGOV.COM
+      </Link>
 
       {/* Main Content */}
       <main className="relative z-10 w-full max-w-[720px] mx-auto my-auto py-8 sm:py-12 flex flex-col items-center text-center">
