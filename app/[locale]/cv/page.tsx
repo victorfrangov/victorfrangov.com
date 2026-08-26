@@ -94,9 +94,14 @@ export default function CvPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 text-center text-xs text-muted-foreground">
-        <p>© 2026 Victor Frangov</p>
+      {/* Bottom: Victor Frangov Wordmark (matching hamburger menu) */}
+      <footer
+        className="w-full overflow-hidden select-none relative z-10 px-4 sm:px-8 pb-3 pt-4 flex items-end justify-center"
+        aria-hidden="true"
+      >
+        <h2 className="text-[7.2vw] font-black tracking-[-0.04em] leading-[0.85] uppercase text-black dark:text-white text-center w-full whitespace-nowrap">
+          VICTORFRANGOV©{new Date().getFullYear()}
+        </h2>
       </footer>
     </div>
   )
