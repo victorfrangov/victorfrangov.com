@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function CvPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col justify-between p-6 sm:p-10 relative selection:bg-foreground selection:text-background font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-background text-foreground flex flex-col justify-between p-0 relative selection:bg-foreground selection:text-background font-sans transition-colors duration-300">
       {/* Top Left Navigation Link */}
       <Link
         href="https://victorfrangov.com"
@@ -37,7 +37,7 @@ export default function CvPage() {
       </Link>
 
       {/* Main Content */}
-      <main className="relative z-10 w-full max-w-[720px] mx-auto my-auto py-8 sm:py-12 flex flex-col items-center text-center">
+      <main className="relative z-10 w-full max-w-[720px] mx-auto my-auto px-6 py-12 flex flex-col items-center text-center">
         <div className="mb-10 sm:mb-12 flex flex-col items-center gap-3">
           <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground bg-muted px-3.5 py-1.5 rounded-full border border-border">
             Victor Frangov
@@ -94,9 +94,9 @@ export default function CvPage() {
         </div>
       </main>
 
-      {/* Bottom: Victor Frangov Wordmark (matching hamburger menu) */}
+      {/* Bottom: Victor Frangov Wordmark (Sized to fit 100% width with zero cutoff) */}
       <footer
-        className="w-full overflow-hidden select-none relative z-10 px-4 sm:px-8 pb-3 pt-4 flex items-end justify-center"
+        className="w-full overflow-hidden select-none relative z-0 px-4 sm:px-8 pb-3 pt-1 flex items-end justify-center"
         aria-hidden="true"
       >
         <h2 className="text-[7.2vw] font-black tracking-[-0.04em] leading-[0.85] uppercase text-black dark:text-white text-center w-full whitespace-nowrap">
