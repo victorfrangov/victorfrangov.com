@@ -38,33 +38,29 @@ export default function CvPage() {
       </Link>
 
       {/* Main Content: Giant Language Links */}
-      <main className="relative z-10 w-full max-w-7xl mx-auto my-auto px-6 sm:px-12 py-16 flex flex-col items-center justify-center gap-4 sm:gap-8 text-center">
+      <main className="relative z-10 w-full max-w-7xl mx-auto my-auto px-6 sm:px-12 py-16 flex flex-col items-center justify-center gap-4 sm:gap-8 text-center overflow-visible">
         {/* English Link */}
         <a
           href="/cv_en.pdf"
-          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer"
+          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[1.08] py-2 uppercase text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer overflow-visible"
         >
-          <span>English</span>
-          <span className="inline-flex items-center justify-center shrink-0 pointer-events-none">
-            <ArrowUpRight
-              className="w-[0.6em] h-[0.6em] shrink-0 pointer-events-none"
-              strokeWidth={2.8}
-            />
-          </span>
+          <span className="overflow-visible">English</span>
+          <ArrowUpRight
+            className="w-[0.55em] h-[0.55em] shrink-0 pointer-events-none self-center"
+            strokeWidth={2.8}
+          />
         </a>
 
         {/* Français Link */}
         <a
           href="/cv_fr.pdf"
-          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer"
+          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[1.08] py-2 uppercase text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer overflow-visible"
         >
-          <span>Français</span>
-          <span className="inline-flex items-center justify-center shrink-0 pointer-events-none">
-            {/* <ArrowUpRight
-              className="w-[0.6em] h-[0.6em] shrink-0 pointer-events-none"
-              strokeWidth={2.8}
-            /> */}
-          </span>
+          <span className="overflow-visible">Français</span>
+          <ArrowUpRight
+            className="w-[0.55em] h-[0.55em] shrink-0 pointer-events-none self-center"
+            strokeWidth={2.8}
+          />
         </a>
       </main>
 
