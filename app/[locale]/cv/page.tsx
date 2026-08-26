@@ -14,11 +14,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function CvPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col justify-between p-0 relative selection:bg-foreground selection:text-background font-sans transition-colors duration-300">
+    <div className="h-screen h-[100dvh] max-h-[100dvh] w-full overflow-hidden bg-background text-foreground flex flex-col justify-between p-0 relative selection:bg-foreground selection:text-background font-sans transition-colors duration-300">
       {/* Top Left Navigation Link */}
       <Link
         href="https://victorfrangov.com"
-        className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20 inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider text-foreground hover:text-foreground/50 transition-colors duration-100 ease-out cursor-pointer"
+        className="absolute top-5 left-5 sm:top-8 sm:left-8 z-20 inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider text-foreground hover:text-foreground/50 transition-colors duration-100 ease-out cursor-pointer"
         aria-label="Return to victorfrangov.com"
       >
         <svg
@@ -37,11 +37,11 @@ export default function CvPage() {
       </Link>
 
       {/* Main Content: Giant Language Links */}
-      <main className="relative z-10 w-full max-w-7xl mx-auto my-auto px-6 sm:px-12 py-16 flex flex-col items-center justify-center gap-4 sm:gap-8 text-center [font-feature-settings:normal]">
+      <main className="relative z-10 w-full max-w-7xl mx-auto flex-1 flex flex-col items-center justify-center gap-2 sm:gap-8 px-4 sm:px-12 text-center [font-feature-settings:normal] overflow-hidden">
         {/* English Link */}
         <a
           href="/cv_en.pdf"
-          className="inline-block text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-tight py-2 text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer transform-gpu [font-feature-settings:normal]"
+          className="inline-block text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-tight py-1 text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer transform-gpu [font-feature-settings:normal]"
         >
           ENGLISH
         </a>
@@ -49,7 +49,7 @@ export default function CvPage() {
         {/* Français Link */}
         <a
           href="/cv_fr.pdf"
-          className="inline-block text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-tight py-2 text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer transform-gpu [font-feature-settings:normal]"
+          className="inline-block text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-tight py-1 text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer transform-gpu [font-feature-settings:normal]"
         >
           FRANÇAIS
         </a>
@@ -57,7 +57,7 @@ export default function CvPage() {
 
       {/* Bottom: Victor Frangov Wordmark (Sized to fit 100% width with zero cutoff) */}
       <footer
-        className="w-full overflow-hidden select-none relative z-0 px-4 sm:px-8 pb-3 pt-1 flex items-end justify-center"
+        className="w-full overflow-hidden select-none relative z-0 px-4 sm:px-8 pb-3 pt-1 flex items-end justify-center shrink-0"
         aria-hidden="true"
       >
         <h2 className="text-[7.2vw] font-black tracking-[-0.04em] leading-[0.85] uppercase text-black dark:text-white text-center w-full whitespace-nowrap">
