@@ -14,10 +14,7 @@ export default function proxy(request: Request) {
     // Handle requests to cv.victorfrangov.com subdomain
     if (host.startsWith("cv.")) {
         if (url.pathname === "/" || url.pathname === "") {
-            const acceptLang = request.headers.get("accept-language") || ""
-            const isFr = acceptLang.toLowerCase().includes("fr")
-            url.pathname = isFr ? "/cv_fr.pdf" : "/cv_en.pdf"
-            return NextResponse.redirect(url)
+            return NextResponse.rewrite(new URL("/index.html", request.url))
         }
         if (url.pathname === "/fr" || url.pathname === "/fr/") {
             url.pathname = "/cv_fr.pdf"

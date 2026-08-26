@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Victor Frangov — CV</title>
+  <meta name="description" content="Victor Frangov Curriculum Vitae - Select English or Français" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #fbfbfd;
+      --card-bg: #ffffff;
+      --card-hover: #ffffff;
+      --text-main: #111115;
+      --text-sub: #6e6e7d;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(0, 0, 0, 0.22);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.07);
+      --shadow-hover: 0 24px 48px -12px rgba(0, 0, 0, 0.12);
+      --primary: #111115;
+      --primary-fg: #ffffff;
+      --pill-border: rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow-x: hidden;
+      padding: 2rem;
+    }
+
+    /* Ambient background styling */
+    .bg-pattern {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* Top Left Nav */
+    .nav-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .top-left-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.15rem;
+      background: var(--card-bg);
+      border: 1px solid var(--pill-border);
+      border-radius: 9999px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .top-left-btn:hover {
+      border-color: var(--border-hover);
+      transform: translateX(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .top-left-btn svg {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .top-left-btn:hover svg {
+      transform: translateX(-3px);
+    }
+
+    /* Center Main Container */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 740px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2.5rem 0;
+    }
+
+    .header-group {
+      margin-bottom: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .name-badge {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-sub);
+      background: rgba(0, 0, 0, 0.04);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+    }
+
+    .headline {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.25rem, 6vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--text-main);
+    }
+
+    .subheadline {
+      font-size: 1.05rem;
+      color: var(--text-sub);
+      font-weight: 400;
+      max-width: 440px;
+    }
+
+    /* Big Choice Buttons Grid */
+    .buttons-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .big-choice-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 3rem 2rem;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      text-decoration: none;
+      color: var(--text-main);
+      box-shadow: var(--shadow-lg);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .big-choice-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      border: 2px solid var(--primary);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+
+    .big-choice-btn:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: transparent;
+    }
+
+    .big-choice-btn:hover::after {
+      opacity: 1;
+    }
+
+    .lang-flag {
+      font-size: 2.25rem;
+      line-height: 1;
+    }
+
+    .lang-label {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .action-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      background: var(--primary);
+      color: var(--primary-fg);
+      transition: transform 0.2s ease;
+    }
+
+    .big-choice-btn:hover .action-pill {
+      transform: scale(1.04);
+    }
+
+    /* Footer */
+    .footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      font-size: 0.825rem;
+      color: var(--text-sub);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1.25rem;
+      }
+      .buttons-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .big-choice-btn {
+        padding: 2.25rem 1.5rem;
+        border-radius: 20px;
+      }
+      .header-group {
+        margin-bottom: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+
+  <!-- Sleek Top Left Button -->
+  <div class="nav-wrapper">
+    <a href="https://victorfrangov.com" class="top-left-btn" aria-label="Return to victorfrangov.com">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      victorfrangov.com
+    </a>
+  </div>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <div class="header-group">
+      <span class="name-badge">Victor Frangov</span>
+      <h1 class="headline">Select Curriculum Vitae</h1>
+      <p class="subheadline">Choose your preferred language</p>
+    </div>
+
+    <!-- Big Buttons -->
+    <div class="buttons-container">
+      <!-- English Button -->
+      <a href="/cv_en.pdf" class="big-choice-btn">
+        <span class="lang-flag" role="img" aria-label="English">🇬🇧</span>
+        <span class="lang-label">English</span>
+        <span class="action-pill">
+          View CV
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </a>
+
+      <!-- Français Button -->
+      <a href="/cv_fr.pdf" class="big-choice-btn">
+        <span class="lang-flag" role="img" aria-label="Français">🇫🇷</span>
+        <span class="lang-label">Français</span>
+        <span class="action-pill">
+          Consulter CV
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </main>
+
+  <!-- Clean Minimal Footer -->
+  <footer class="footer">
+    <p>© 2026 Victor Frangov</p>
+  </footer>
+</body>
+</html>
