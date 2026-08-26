@@ -37,11 +37,11 @@ export default function CvPage() {
       </Link>
 
       {/* Main Content: Giant Language Links */}
-      <main className="relative z-10 w-full max-w-7xl mx-auto my-auto px-6 sm:px-12 py-16 flex flex-col items-center justify-center gap-4 sm:gap-8 text-center">
+      <main className="relative z-10 w-full max-w-7xl mx-auto my-auto px-6 sm:px-12 py-16 flex flex-col items-center justify-center gap-4 sm:gap-8 text-center [font-feature-settings:normal]">
         {/* English Link */}
         <a
           href="/cv_en.pdf"
-          className="inline-block text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-none py-2 text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer"
+          className="inline-block text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-tight py-2 text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer transform-gpu [font-feature-settings:normal]"
         >
           ENGLISH
         </a>
@@ -49,7 +49,7 @@ export default function CvPage() {
         {/* Français Link */}
         <a
           href="/cv_fr.pdf"
-          className="inline-block text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-none py-2 text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer"
+          className="inline-block text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-tight py-2 text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer transform-gpu [font-feature-settings:normal]"
         >
           FRANÇAIS
         </a>
