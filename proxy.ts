@@ -14,15 +14,15 @@ export default function proxy(request: Request) {
     // Handle requests to cv.victorfrangov.com subdomain
     if (host.startsWith("cv.")) {
         if (url.pathname === "/" || url.pathname === "") {
-            return NextResponse.rewrite(new URL("/index.html", request.url))
+            const acceptLang = request.headers.get("accept-language") || ""
+            const isFr = acceptLang.toLowerCase().includes("fr")
+            return NextResponse.rewrite(new URL(isFr ? "/fr/cv" : "/en/cv", request.url))
         }
         if (url.pathname === "/fr" || url.pathname === "/fr/") {
-            url.pathname = "/cv_fr.pdf"
-            return NextResponse.redirect(url)
+            return NextResponse.redirect(new URL("/cv_fr.pdf", request.url))
         }
         if (url.pathname === "/en" || url.pathname === "/en/") {
-            url.pathname = "/cv_en.pdf"
-            return NextResponse.redirect(url)
+            return NextResponse.redirect(new URL("/cv_en.pdf", request.url))
         }
     }
 
