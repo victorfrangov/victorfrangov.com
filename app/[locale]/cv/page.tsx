@@ -19,7 +19,7 @@ export default function CvPage() {
       {/* Top Left Navigation Link */}
       <Link
         href="https://victorfrangov.com"
-        className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20 inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider text-foreground hover:opacity-60 transition-opacity"
+        className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20 inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider text-foreground hover:text-foreground/50 transition-colors duration-100 ease-out cursor-pointer"
         aria-label="Return to victorfrangov.com"
       >
         <svg
@@ -42,7 +42,7 @@ export default function CvPage() {
         {/* English Link */}
         <a
           href="/cv_en.pdf"
-          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:opacity-50 transition-opacity duration-200 select-none"
+          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer"
         >
           <span>English</span>
           <span className="inline-flex items-center justify-center shrink-0 pointer-events-none">
@@ -56,14 +56,14 @@ export default function CvPage() {
         {/* Français Link */}
         <a
           href="/cv_fr.pdf"
-          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:opacity-50 transition-opacity duration-200 select-none"
+          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:text-foreground/35 transition-colors duration-100 ease-out select-none cursor-pointer"
         >
           <span>Français</span>
           <span className="inline-flex items-center justify-center shrink-0 pointer-events-none">
-            <ArrowUpRight
+            {/* <ArrowUpRight
               className="w-[0.6em] h-[0.6em] shrink-0 pointer-events-none"
               strokeWidth={2.8}
-            />
+            /> */}
           </span>
         </a>
       </main>
