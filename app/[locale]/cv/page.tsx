@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
 
 export function generateStaticParams(): { locale: string }[] {
   return [{ locale: "en" }, { locale: "fr" }]
@@ -36,62 +37,25 @@ export default function CvPage() {
         VICTORFRANGOV.COM
       </Link>
 
-      {/* Main Content */}
-      <main className="relative z-10 w-full max-w-[720px] mx-auto my-auto px-6 py-12 flex flex-col items-center text-center">
-        <div className="mb-10 sm:mb-12 flex flex-col items-center gap-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground bg-muted px-3.5 py-1.5 rounded-full border border-border">
-            Victor Frangov
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-foreground leading-tight font-mono">
-            Select Curriculum Vitae
-          </h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-md">
-            Choose your preferred language
-          </p>
-        </div>
+      {/* Main Content: Giant Language Links */}
+      <main className="relative z-10 w-full max-w-7xl mx-auto my-auto px-6 sm:px-12 py-16 flex flex-col items-center justify-center gap-4 sm:gap-8 text-center">
+        {/* English Link */}
+        <a
+          href="/cv_en.pdf"
+          className="group inline-flex items-center justify-center gap-2 sm:gap-4 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:opacity-40 transition-opacity duration-200 select-none"
+        >
+          <span>English</span>
+          <ArrowUpRight className="w-[0.65em] h-[0.65em] transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2" />
+        </a>
 
-        {/* Big Choice Buttons */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full">
-          {/* English Button */}
-          <a
-            href="/cv_en.pdf"
-            className="group relative flex flex-col items-center justify-center gap-5 p-8 sm:p-10 bg-card border border-border rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 hover:border-foreground/50"
-          >
-            <span className="text-4xl sm:text-5xl select-none" role="img" aria-label="English">
-              🇬🇧
-            </span>
-            <span className="text-2xl sm:text-3xl font-bold tracking-tight font-mono text-foreground">
-              English
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full bg-foreground text-background transition-transform duration-200 group-hover:scale-105">
-              View CV
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </span>
-          </a>
-
-          {/* Français Button */}
-          <a
-            href="/cv_fr.pdf"
-            className="group relative flex flex-col items-center justify-center gap-5 p-8 sm:p-10 bg-card border border-border rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 hover:border-foreground/50"
-          >
-            <span className="text-4xl sm:text-5xl select-none" role="img" aria-label="Français">
-              🇫🇷
-            </span>
-            <span className="text-2xl sm:text-3xl font-bold tracking-tight font-mono text-foreground">
-              Français
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full bg-foreground text-background transition-transform duration-200 group-hover:scale-105">
-              Consulter CV
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </span>
-          </a>
-        </div>
+        {/* Français Link */}
+        <a
+          href="/cv_fr.pdf"
+          className="group inline-flex items-center justify-center gap-2 sm:gap-4 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:opacity-40 transition-opacity duration-200 select-none"
+        >
+          <span>Français</span>
+          <ArrowUpRight className="w-[0.65em] h-[0.65em] transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2" />
+        </a>
       </main>
 
       {/* Bottom: Victor Frangov Wordmark (Sized to fit 100% width with zero cutoff) */}
