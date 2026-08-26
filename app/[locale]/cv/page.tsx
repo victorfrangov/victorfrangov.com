@@ -42,19 +42,29 @@ export default function CvPage() {
         {/* English Link */}
         <a
           href="/cv_en.pdf"
-          className="group inline-flex items-center justify-center gap-2 sm:gap-4 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:opacity-40 transition-opacity duration-200 select-none"
+          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:opacity-50 transition-opacity duration-200 select-none"
         >
           <span>English</span>
-          <ArrowUpRight className="w-[0.65em] h-[0.65em] transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2" />
+          <span className="inline-flex items-center justify-center shrink-0 pointer-events-none">
+            <ArrowUpRight
+              className="w-[0.6em] h-[0.6em] shrink-0 pointer-events-none"
+              strokeWidth={2.8}
+            />
+          </span>
         </a>
 
         {/* Français Link */}
         <a
           href="/cv_fr.pdf"
-          className="group inline-flex items-center justify-center gap-2 sm:gap-4 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:opacity-40 transition-opacity duration-200 select-none"
+          className="group inline-flex items-center justify-center gap-3 sm:gap-5 text-[13vw] sm:text-[10vw] lg:text-[8.5vw] font-black tracking-[-0.04em] leading-[0.9] uppercase text-foreground hover:opacity-50 transition-opacity duration-200 select-none"
         >
           <span>Français</span>
-          <ArrowUpRight className="w-[0.65em] h-[0.65em] transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2" />
+          <span className="inline-flex items-center justify-center shrink-0 pointer-events-none">
+            <ArrowUpRight
+              className="w-[0.6em] h-[0.6em] shrink-0 pointer-events-none"
+              strokeWidth={2.8}
+            />
+          </span>
         </a>
       </main>
 
