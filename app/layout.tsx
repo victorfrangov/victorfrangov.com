@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="antialiased bg-background text-foreground selection:bg-foreground selection:text-background">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="system"
           enableSystem
           storageKey="theme"
           disableTransitionOnChange
