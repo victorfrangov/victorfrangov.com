@@ -115,7 +115,7 @@
     "fluidsim": {
       "title": "Simulation de fluide",
       "dates": "Décembre 2023",
-      "description": "Simulation de fluide avec rendu CPU, utilisant les équations de Navier‑Stokes (accélération GPU bientôt!)"
+      "description": "Simulation de fluide avec rendu GPU, utilisant les équations de Navier‑Stokes"
     },
     "portfolio": {
       "title": "Site Portfolio",

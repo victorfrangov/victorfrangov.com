@@ -72,7 +72,10 @@
     }
   },
   "expertise": {
-    "title": { "line1": "TECHNICAL", "line2": "EXPERTISE" },
+    "title": {
+      "line1": "TECHNICAL",
+      "line2": "EXPERTISE"
+    },
     "subtitle": "Technical capabilities across the full engineering stack.",
     "service1": {
       "title": "FRONTEND & UI ARCHITECTURE",
@@ -89,7 +92,10 @@
   },
   "running": {
     "sectionTag": "SELECTED WORKS",
-    "title": { "line1": "Selected", "line2": "works" },
+    "title": {
+      "line1": "Selected",
+      "line2": "works"
+    },
     "filter": {
       "all": "All Projects",
       "web": "Web & Agency",
@@ -115,7 +121,7 @@
     "fluidsim": {
       "title": "Fluid Simulation",
       "dates": "December 2023",
-      "description": "Fluid Simulation with CPU rendering, using Navier-Strokes Equations (GPU acceleration coming soon!)"
+      "description": "Fluid Simulation with GPU rendering, using Navier-Strokes Equations"
     },
     "portfolio": {
       "title": "Portfolio Website",
