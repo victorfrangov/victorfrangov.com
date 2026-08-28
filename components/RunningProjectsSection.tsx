@@ -54,7 +54,7 @@ const PROJECTS: Project[] = [
     slug: "fluidsim",
     category: "systems",
     image: "/projects/fluid-simulation.webm",
-    tags: ["C++", "C", "OpenGL", "SDL3", "Navier-Stokes"],
+    tags: ["C++", "C", "Metal", "SDL3", "Navier-Stokes"],
     links: [
       { key: "sourceCode", href: "https://github.com/victorfrangov/fluid-simulation1" }
     ]
