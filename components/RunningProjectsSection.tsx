@@ -1,16 +1,8 @@
 "use client"
 
 import React from "react"
-import dynamic from "next/dynamic"
 import { useTranslations } from "next-intl"
 import ProjectCard from "./project-card"
-
-const PapagalModel = dynamic(() => import("./3d/PapagalModel"), { ssr: false })
-const Esp32Model = dynamic(() => import("./3d/Esp32Model"), { ssr: false })
-const PongModel = dynamic(() => import("./3d/PongModel"), { ssr: false })
-const FluidSimModel = dynamic(() => import("./3d/FluidSimModel"), { ssr: false })
-const StockChartModel = dynamic(() => import("./3d/StockChartModel"), { ssr: false })
-const SitusModel = dynamic(() => import("./3d/SitusModel"), { ssr: false })
 
 type ProjectLinkKey = "website" | "sourceCode"
 
@@ -116,21 +108,6 @@ export default function RunningProjectsSection() {
             href: link.href,
           }))
 
-          let customComponent: React.ReactNode | undefined
-          if (p.slug === "papagal") {
-            customComponent = <PapagalModel />
-          } else if (p.slug === "agency") {
-            customComponent = <SitusModel />
-          } else if (p.slug === "esp32") {
-            customComponent = <Esp32Model />
-          } else if (p.slug === "pong") {
-            customComponent = <PongModel />
-          } else if (p.slug === "fluidsim") {
-            customComponent = <FluidSimModel />
-          } else if (p.slug === "stock-ai-robot") {
-            customComponent = <StockChartModel />
-          }
-
           return (
             <ProjectCard
               key={p.slug}
@@ -140,7 +117,6 @@ export default function RunningProjectsSection() {
               dates={dates}
               tags={p.tags}
               image={p.image}
-              customComponent={customComponent}
               links={mappedLinks}
             />
           )

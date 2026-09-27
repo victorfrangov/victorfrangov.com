@@ -12,7 +12,6 @@ interface Props {
   dates: string
   tags: readonly string[]
   image?: string
-  customComponent?: React.ReactNode
   links?: readonly {
     icon?: React.ReactNode
     type: string
@@ -27,12 +26,10 @@ export default function ProjectCard({
   dates,
   tags,
   image,
-  customComponent,
   links,
 }: Props) {
   const cardRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isInView, setIsInView] = React.useState(false)
   const [isMobileActive, setIsMobileActive] = React.useState(false)
 
   const isVideo =
@@ -47,7 +44,6 @@ export default function ProjectCard({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsInView(true)
           if (videoRef.current) {
             videoRef.current.play().catch(() => {})
           }
@@ -70,7 +66,7 @@ export default function ProjectCard({
       onClick={() => setIsMobileActive((prev) => !prev)}
       className="group relative w-full h-[50vh] sm:h-[52vh] md:h-[50vh] min-h-[400px] overflow-hidden border-b md:border-r border-foreground/20 bg-background select-none cursor-pointer"
     >
-      {/* 1. Default Visual Canvas (Image / Video + 3D Model with pointer-events-none) */}
+      {/* 1. Default Visual Canvas (Image / Video) */}
       <div className="absolute inset-0 w-full h-full overflow-hidden bg-foreground/[0.02] flex items-center justify-center">
         {image &&
           (isVideo ? (
@@ -102,19 +98,10 @@ export default function ProjectCard({
               width={1200}
               height={800}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className={`w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out ${
-                customComponent ? "opacity-70" : ""
-              }`}
+              className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
               priority={false}
             />
           ))}
-
-        {/* 3D Model: Pointer events disabled so mouse passes directly through, mounted only when in viewport */}
-        {customComponent && isInView && (
-          <div className="absolute inset-0 z-10 pointer-events-none">
-            {customComponent}
-          </div>
-        )}
       </div>
 
       {/* 2. Hover / Tap State: Color Flip & Full Information Overlay */}

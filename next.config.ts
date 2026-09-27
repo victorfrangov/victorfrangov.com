@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   compress: true,
   experimental: {
-    optimizePackageImports: ["lucide-react", "three", "next-intl"],
+    optimizePackageImports: ["lucide-react", "next-intl"],
   },
   async headers() {
     return [
