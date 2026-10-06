@@ -25,6 +25,15 @@ const PROJECTS: Project[] = [
     ]
   },
   {
+    slug: "fratax",
+    category: "systems",
+    image: "/projects/fratax.webp",
+    tags: ["Swift", "SwiftUI", "SwiftData", "Swift Charts", "i18n", "macOS"],
+    links: [
+      { key: "website", href: "https://fratax.app" },
+    ]
+  },
+  {
     slug: "agency",
     category: "web",
     image: "/projects/kollowo-large-white.webp",
@@ -118,6 +127,7 @@ export default function RunningProjectsSection() {
               tags={p.tags}
               image={p.image}
               links={mappedLinks}
+              wide={idx === PROJECTS.length - 1 && PROJECTS.length % 2 === 1}
             />
           )
         })}

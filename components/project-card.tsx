@@ -17,6 +17,7 @@ interface Props {
     type: string
     href: string
   }[]
+  wide?: boolean
 }
 
 export default function ProjectCard({
@@ -27,6 +28,7 @@ export default function ProjectCard({
   tags,
   image,
   links,
+  wide = false,
 }: Props) {
   const cardRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -64,7 +66,9 @@ export default function ProjectCard({
     <article
       ref={cardRef}
       onClick={() => setIsMobileActive((prev) => !prev)}
-      className="group relative w-full h-[50vh] sm:h-[52vh] md:h-[50vh] min-h-[400px] overflow-hidden border-b md:border-r border-foreground/20 bg-background select-none cursor-pointer"
+      className={`group relative w-full h-[50vh] sm:h-[52vh] md:h-[50vh] min-h-[400px] overflow-hidden border-b md:border-r border-foreground/20 bg-background select-none cursor-pointer ${
+        wide ? "md:col-span-2" : ""
+      }`}
     >
       {/* 1. Default Visual Canvas (Image / Video) */}
       <div className="absolute inset-0 w-full h-full overflow-hidden bg-foreground/[0.02] flex items-center justify-center">
@@ -97,7 +101,7 @@ export default function ProjectCard({
               alt={title}
               width={1200}
               height={800}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              sizes={wide ? "100vw" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
               className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
               priority={false}
             />

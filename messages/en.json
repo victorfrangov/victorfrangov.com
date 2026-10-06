@@ -113,6 +113,11 @@
       "dates": "February 2026 – Present",
       "description": "High-performance native macOS database & data viewer engineered with Swift, AppKit, and MetalKit GPU shaders. Sub-50ms cold launch, ~38MB idle memory, and universal viewing for SQLite, Parquet, Excel, CSV, TSV, and JSON."
     },
+    "fratax": {
+      "title": "FraTax",
+      "dates": "September 2026 – Present",
+      "description": "Native macOS tax tracker for Canadian sole proprietors, built with SwiftUI and SwiftData. Logs income, expenses, equipment and stock trades, then gives the T2125 and Schedule 3 amounts line by line. Every province and territory, in English and French."
+    },
     "supervitre": {
       "title": "SuperVitre",
       "dates": "May 2025 - August 2025",

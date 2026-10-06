@@ -107,6 +107,11 @@
       "dates": "Février 2026 – Présent",
       "description": "Visualiseur natif macOS de bases de données haute performance conçu en Swift, AppKit et shaders MetalKit GPU. Démarrage <50ms, empreinte de 38 Mo et prise en charge de SQLite, Parquet, Excel, CSV et JSON."
     },
+    "fratax": {
+      "title": "FraTax",
+      "dates": "Septembre 2026 – Présent",
+      "description": "App macOS native de suivi fiscal pour travailleurs autonomes au Canada, conçue en SwiftUI et SwiftData. Revenus, dépenses, équipement et placements, puis les montants du T2125 et de l’annexe 3 ligne par ligne. Chaque province et territoire, en français et en anglais."
+    },
     "supervitre": {
       "title": "SuperVitre",
       "dates": "Mai 2025 – Août 2025",
