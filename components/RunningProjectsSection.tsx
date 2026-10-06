@@ -34,12 +34,12 @@ const PROJECTS: Project[] = [
     ]
   },
   {
-    slug: "agency",
-    category: "web",
-    image: "/projects/kollowo-large-white.webp",
-    tags: ["Next.js", "TypeScript", "TailwindCSS", "i18n", "SEO Architecture"],
+    slug: "esp32",
+    category: "embedded",
+    image: "/projects/esp32.webp",
+    tags: ["C", "ESP-IDF", "FreeRTOS", "IoT", "Sensors"],
     links: [
-      { key: "website", href: "https://kollowo.com" },
+      { key: "sourceCode", href: "https://github.com/victorfrangov/esp32-humidity" }
     ]
   },
   {
@@ -70,12 +70,12 @@ const PROJECTS: Project[] = [
     ]
   },
   {
-    slug: "esp32",
-    category: "embedded",
-    image: "/projects/esp32.webp",
-    tags: ["C", "ESP-IDF", "FreeRTOS", "IoT", "Sensors"],
+    slug: "agency",
+    category: "web",
+    image: "/projects/kollowo-banner.webp",
+    tags: ["Next.js", "TypeScript", "TailwindCSS", "i18n", "SEO Architecture"],
     links: [
-      { key: "sourceCode", href: "https://github.com/victorfrangov/esp32-humidity" }
+      { key: "website", href: "https://kollowo.com" },
     ]
   }
 ]
