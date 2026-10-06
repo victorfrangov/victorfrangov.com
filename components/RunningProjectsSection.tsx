@@ -27,10 +27,10 @@ const PROJECTS: Project[] = [
   {
     slug: "agency",
     category: "web",
-    image: "/projects/situs-large-white.webp",
+    image: "/projects/kollowo-large-white.webp",
     tags: ["Next.js", "TypeScript", "TailwindCSS", "i18n", "SEO Architecture"],
     links: [
-      { key: "website", href: "https://situsdigital.com" },
+      { key: "website", href: "https://kollowo.com" },
     ]
   },
   {

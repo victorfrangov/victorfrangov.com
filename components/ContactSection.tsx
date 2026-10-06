@@ -168,10 +168,10 @@ export default function ContactSection({ locale }: { locale: string }) {
             </a>
           </div>
 
-          {/* 8. Right: Situs Digital */}
+          {/* 8. Right: Kollowo */}
           <div className="flex justify-end text-right">
             <a
-              href="https://situsdigital.com"
+              href="https://kollowo.com"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-baseline gap-2 text-3xl sm:text-5xl font-extrabold tracking-tight lowercase leading-none text-foreground hover:translate-x-1.5 transition-transform duration-200 whitespace-nowrap"
@@ -179,7 +179,7 @@ export default function ContactSection({ locale }: { locale: string }) {
               <span className="text-foreground/40 text-lg sm:text-2xl font-normal">
                 {locale === "fr" ? "fait par " : "made by "}
               </span>
-              <span>{t("contact.situsDigital")}</span>
+              <span>{t("contact.kollowo")}</span>
               <ArrowUpRight className="w-5 h-5 sm:w-7 sm:h-7 opacity-30 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all self-center shrink-0" />
             </a>
           </div>
@@ -296,9 +296,9 @@ export default function ContactSection({ locale }: { locale: string }) {
                 <ArrowUpRight className="w-9 h-9 opacity-30 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all self-center shrink-0" />
               </a>
 
-              {/* Line 4: Situs Digital */}
+              {/* Line 4: Kollowo */}
               <a
-                href="https://situsdigital.com"
+                href="https://kollowo.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-baseline gap-2 text-[4.2vw] font-bold tracking-tight lowercase leading-none text-foreground hover:translate-x-1.5 transition-transform duration-200 whitespace-nowrap"
@@ -306,7 +306,7 @@ export default function ContactSection({ locale }: { locale: string }) {
                 <span className="text-foreground/40 whitespace-nowrap">
                   {locale === "fr" ? "fait par " : "made by "}
                 </span>
-                <span className="whitespace-nowrap">{t("contact.situsDigital")}</span>
+                <span className="whitespace-nowrap">{t("contact.kollowo")}</span>
                 <ArrowUpRight className="w-9 h-9 opacity-30 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all self-center shrink-0" />
               </a>
             </div>

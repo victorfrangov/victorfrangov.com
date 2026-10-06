@@ -30,12 +30,12 @@ cv:
           - "Winner of a cash prize for an advertising project"
 
     experience:
-      - company: Situs Digital
-        position: Co-Founder & Full Stack Lead
+      - company: Kollowo
+        position: Founder & Full Stack Lead
         location: Montréal, QC / Remote
         date: January 2026 – Present
         highlights:
-          - Co-founded a web agency helping small businesses build high-performance web applications and grow online
+          - Founded a web agency helping small businesses build high-performance web applications and grow online
           - Built custom full-stack web solutions using Next.js, TypeScript, and Tailwind CSS with modern UI/UX principles
           - Oversee client relations, architecture design, deployment, and search engine optimization (SEO)
 

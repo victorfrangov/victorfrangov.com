@@ -123,7 +123,7 @@
       "description": "Site personnel construit avec Next.js, TypeScript et Tailwind CSS."
     },
     "agency": {
-      "title": "Situs Digital",
+      "title": "Kollowo",
       "dates": "Janvier 2026 – Présent",
       "description": "Agence de création web pour aider les petites entreprises à gagner en visibilité et en clients."
     },
@@ -158,8 +158,8 @@
     "github": "github",
     "linkedin": "linkedin",
     "email": "email",
-    "situsDigital": "situs digital",
+    "kollowo": "kollowo",
     "rightsReserved": "Tous Droits Réservés",
-    "madeWithSitus": "fait avec situs digital"
+    "madeWithKollowo": "fait avec kollowo"
   }
 }

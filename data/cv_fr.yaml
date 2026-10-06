@@ -30,12 +30,12 @@ cv:
           - "Gagnant d'un prix en argent d’un projet publicitaire"
 
     Expérience:
-      - company: Situs Digital
-        position: Co-fondateur & Développeur Lead Full-Stack
+      - company: Kollowo
+        position: Fondateur & Développeur Lead Full-Stack
         location: Montréal, QC / À distance
         date: Janvier 2026 – Présent
         highlights:
-          - Co-fondation d'une agence web pour aider les entreprises à concevoir des applications web performantes
+          - Fondation d'une agence web pour aider les entreprises à concevoir des applications web performantes
           - Développement de solutions full-stack sur mesure avec Next.js, TypeScript et Tailwind CSS selon les standards modernes
           - Gestion de la relation client, de l'architecture, du déploiement et de l'optimisation pour les moteurs de recherche (SEO)
 
