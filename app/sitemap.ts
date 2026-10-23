@@ -10,5 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: "weekly",
     priority: 1,
+    alternates: {
+      languages: Object.fromEntries(locales.map((l) => [l, `${base}/${l}`])),
+    },
   }))
 }

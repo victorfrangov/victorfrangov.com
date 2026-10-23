@@ -40,6 +40,11 @@ export default function JsonLd({ locale }: JsonLdProps) {
       "Machine Learning",
     ],
     knowsLanguage: ["en", "fr"],
+    worksFor: {
+      "@type": "Organization",
+      name: "Kollowo",
+      url: "https://kollowo.com",
+    },
   }
 
   const webSiteSchema = {

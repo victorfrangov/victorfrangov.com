@@ -5,10 +5,14 @@ export function generateStaticParams(): { locale: string }[] {
   return [{ locale: "en" }, { locale: "fr" }]
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
   return {
     title: "Victor Frangov — Curriculum Vitae",
     description: "Select and view Victor Frangov's CV in English or Français.",
+    alternates: { canonical: `https://victorfrangov.com/${locale}/cv` },
+    // A two-link picker for the PDFs (also served on cv.victorfrangov.com): keep it out of the index, follow the links
+    robots: { index: false, follow: true },
   }
 }
 
